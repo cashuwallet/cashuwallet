@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:id="@+id/nav_wallet"
+            android:icon="@drawable/ic_menu_wallet"
+            android:title="@string/nav_wallet" />
+        <!-- item
+            android:id="@+id/nav_portfolio"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_portfolio" / -->
+        <!-- item
+            android:id="@+id/nav_converter"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_converter" / -->
+        <!-- item
+            android:id="@+id/nav_markets"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_markets" / -->
+    </group>
+
+    <item android:title="@string/title_drawer_submenu">
+        <menu>
+            <item
+                android:id="@+id/nav_manage"
+                android:icon="@android:drawable/ic_menu_manage"
+                android:title="@string/action_settings" />
+            <!-- item
+                android:id="@+id/nav_share"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="@string/action_share" / -->
+            <!-- item
+                android:id="@+id/nav_about"
+                android:icon="@android:drawable/ic_menu_info_details"
+                android:title="@string/action_about" / -->
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@android:drawable/ic_menu_close_clear_cancel"
+                android:title="@string/action_exit" />
+        </menu>
+    </item>
+
+</menu>

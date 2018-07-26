@@ -4,4 +4,138 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@color/colorBlack</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
+    </style>
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+    <style name="Welcome" parent="AppTheme" />
+
+    <style name="Bitcoin" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/bitcoin</item>
+        <item name="colorPrimaryDark">@color/bitcoin_dark</item>
+        <item name="android:statusBarColor">@color/bitcoin_dark</item>
+        <item name="colorAccent">@color/bitcoin_lite</item>
+    </style>
+    <style name="Bitcoin.Cash" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/bitcoincash</item>
+        <item name="colorPrimaryDark">@color/bitcoincash_dark</item>
+        <item name="android:statusBarColor">@color/bitcoincash_dark</item>
+        <item name="colorAccent">@color/bitcoincash_lite</item>
+    </style>
+    <style name="Bitcoin.Gold" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/bitcoingold</item>
+        <item name="colorPrimaryDark">@color/bitcoingold_dark</item>
+        <item name="android:statusBarColor">@color/bitcoingold_dark</item>
+        <item name="colorAccent">@color/bitcoingold_lite</item>
+    </style>
+    <style name="Dash" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/dash</item>
+        <item name="colorPrimaryDark">@color/dash_dark</item>
+        <item name="android:statusBarColor">@color/dash_dark</item>
+        <item name="colorAccent">@color/dash_lite</item>
+    </style>
+    <style name="Dogecoin" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/dogecoin</item>
+        <item name="colorPrimaryDark">@color/dogecoin_dark</item>
+        <item name="android:statusBarColor">@color/dogecoin_dark</item>
+        <item name="colorAccent">@color/dogecoin_lite</item>
+    </style>
+    <style name="Ethereum" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/ethereum</item>
+        <item name="colorPrimaryDark">@color/ethereum_dark</item>
+        <item name="android:statusBarColor">@color/ethereum_dark</item>
+        <item name="colorAccent">@color/ethereum_lite</item>
+    </style>
+    <style name="Ethereum.Classic" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/ethereumclassic</item>
+        <item name="colorPrimaryDark">@color/ethereumclassic_dark</item>
+        <item name="android:statusBarColor">@color/ethereumclassic_dark</item>
+        <item name="colorAccent">@color/ethereumclassic_lite</item>
+    </style>
+    <style name="Lisk" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lisk</item>
+        <item name="colorPrimaryDark">@color/lisk_dark</item>
+        <item name="android:statusBarColor">@color/lisk_dark</item>
+        <item name="colorAccent">@color/lisk_lite</item>
+    </style>
+    <style name="Litecoin" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/litecoin</item>
+        <item name="colorPrimaryDark">@color/litecoin_dark</item>
+        <item name="android:statusBarColor">@color/litecoin_dark</item>
+        <item name="colorAccent">@color/litecoin_lite</item>
+    </style>
+    <style name="Qtum" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/qtum</item>
+        <item name="colorPrimaryDark">@color/qtum_dark</item>
+        <item name="android:statusBarColor">@color/qtum_dark</item>
+        <item name="colorAccent">@color/qtum_lite</item>
+    </style>
+    <style name="Ripple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/ripple</item>
+        <item name="colorPrimaryDark">@color/ripple_dark</item>
+        <item name="android:statusBarColor">@color/ripple_dark</item>
+        <item name="colorAccent">@color/ripple_lite</item>
+    </style>
+    <style name="Zcash" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/zcash</item>
+        <item name="colorPrimaryDark">@color/zcash_dark</item>
+        <item name="android:statusBarColor">@color/zcash_dark</item>
+        <item name="colorAccent">@color/zcash_lite</item>
+    </style>
+    <style name="_0x" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/_0x</item>
+        <item name="colorPrimaryDark">@color/_0x_dark</item>
+        <item name="android:statusBarColor">@color/_0x_dark</item>
+        <item name="colorAccent">@color/_0x_lite</item>
+    </style>
+    <style name="Augur" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/augur</item>
+        <item name="colorPrimaryDark">@color/augur_dark</item>
+        <item name="android:statusBarColor">@color/augur_dark</item>
+        <item name="colorAccent">@color/augur_lite</item>
+    </style>
+    <style name="Basic.Attention.Token" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/basicattentiontoken</item>
+        <item name="colorPrimaryDark">@color/basicattentiontoken_dark</item>
+        <item name="android:statusBarColor">@color/basicattentiontoken_dark</item>
+        <item name="colorAccent">@color/basicattentiontoken_lite</item>
+    </style>
+    <style name="EOS" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/eos</item>
+        <item name="colorPrimaryDark">@color/eos_dark</item>
+        <item name="android:statusBarColor">@color/eos_dark</item>
+        <item name="colorAccent">@color/eos_lite</item>
+    </style>
+    <style name="Golem" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/golem</item>
+        <item name="colorPrimaryDark">@color/golem_dark</item>
+        <item name="android:statusBarColor">@color/golem_dark</item>
+        <item name="colorAccent">@color/golem_lite</item>
+    </style>
+    <style name="OmiseGO" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/omisego</item>
+        <item name="colorPrimaryDark">@color/omisego_dark</item>
+        <item name="android:statusBarColor">@color/omisego_dark</item>
+        <item name="colorAccent">@color/omisego_lite</item>
+    </style>
+    <style name="Status" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/status</item>
+        <item name="colorPrimaryDark">@color/status_dark</item>
+        <item name="android:statusBarColor">@color/status_dark</item>
+        <item name="colorAccent">@color/status_lite</item>
+    </style>
 </resources>

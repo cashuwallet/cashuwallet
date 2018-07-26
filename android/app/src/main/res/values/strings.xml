@@ -1,3 +1,95 @@
 <resources>
+
     <string name="app_name" translatable="false">Cashu</string>
+    <string name="app_tagline">Mobile crypto wallet</string>
+    <string name="app_version" translatable="false">1.0.0-beta</string>
+    <string name="title_activity_main">Main panel</string>
+    <string name="title_activity_settings" translatable="false">@string/action_settings</string>
+    <string name="title_activity_splash" translatable="false">@string/app_name</string>
+
+    <string name="error_secure_random">There was an error with randomization</string>
+    <string name="error_accessing_wallet">There was an error accessing the wallet</string>
+    <string name="access_wallet_button">Access wallet</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_wallet">Wallet</string>
+    <string name="nav_portfolio">Portfolio</string>
+    <string name="nav_converter">Converter</string>
+    <string name="nav_markets">Markets</string>
+
+    <string name="title_drawer_submenu">Other options</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_share">Share</string>
+    <string name="action_about">About</string>
+    <string name="action_exit">Exit</string>
+
+    <string name="action_exit_confirmation">Are you sure you want to disconnect from the wallet?</string>
+    <string name="shutting_wallet">Disconnecting from the wallet. Please wait.</string>
+
+    <string name="action_copy">Copy</string>
+    <string name="action_paste">Paste</string>
+    <string name="action_capture">Capture</string>
+    <string name="action_generate">Generate</string>
+
+    <string name="address_qrcode">Address QR Code</string>
+
+    <string name="hint_target_address">recipient address</string>
+    <string name="error_empty_target_address">please enter the recipient address</string>
+    <string name="error_invalid_target_address">sorry, this address is invalid or unsupported</string>
+    <string name="error_empty_amount">please enter the payment amount</string>
+    <string name="network_fee">network fee</string>
+    <string name="action_send_payment">Send payment</string>
+    <string name="action_send_payment_confirmation">Please, provide your wallet password to sign and broadcast this transaction:</string>
+
+    <string name="read_with_attention">Read with attention</string>
+    <string name="warning_untested_software">
+        This software is under development and not fully tested. It is provided AS IS and can potentially produce the loss of funds. Do not to transact with significant amounts.
+        \n\nCashu is BIP39/BIP44 compatible. Read our Privacy Policy at https://cashu.cc/privacy/ for a summary on how security works.
+        \n\nPlease report issues to bugs@cashu.cc
+    </string>
+
+    <string name="mnemonic_label">Inform the wallet mnemonic phrase</string>
+    <string name="mnemonic_help">If you are creating a new wallet press the GENERATE button. Take note of the mnemonic phrase, it should be stored in a safe place.</string>
+    <string name="password_label">Inform the wallet password</string>
+    <string name="password_help">Memorize your wallet password, it cannot be changed or recovered.</string>
+
+    <string name="preparing_wallet">Preparing the wallet for its first access. Please wait.</string>
+    <string name="unsuccessful_transaction_creation">There was a problem preparing the transaction. Check if the balance is enough.</string>
+    <string name="broadcasting_transaction">Broadcasting the transaction to the network. Please wait.</string>
+    <string name="successful_broadcast">The transaction was broadcast successfully</string>
+    <string name="unsuccessful_broadcast">There was a problem broadcasting the transaction. Please wait and double check before sending the payment again</string>
+    <string name="password_mismatch">The password provided does not match</string>
+
+    <string name="address_copied_to_clipboard">Address copied to clipboard</string>
+    <string name="clipboard_unavailable">The clipboard is unavailable</string>
+    <string name="empty_clipboard">The clipboard is empty</string>
+    <string name="incompatible_clipboard_type">Incompatible clipboard content</string>
+
+    <string name="network_not_available">Network is not available</string>
+
+    <string name="camera_not_available">No camera available</string>
+    <string name="camera_permission_denied">Permission to access the camera was denied</string>
+    <string name="camera_initialization_error">There was an error initializing the camera</string>
+
+    <string name="no_recorded_transactions">There are no recorded transactions</string>
+    <string name="transaction_url_not_available">There is no known public service available to visualize this transaction.</string>
+    <string name="failure_open_url_activity">No application can handle this request. Please install a web browser.</string>
+
+    <string name="pref_title_testnet_mode">Enable Testnet mode</string>
+    <string name="pref_description_testnet_mode">Use your wallet in test mode where all transactions and balances have no value.</string>
+
+    <string name="splash_content" translatable="false">@string/app_name</string>
+    <string name="title_activity_detail" translatable="false">@string/app_name</string>
+
+    <string name="tab_text_1">Add funds</string>
+    <string name="tab_text_2">Use funds</string>
+    <string name="tab_text_3">Activity</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="dismiss">Dismiss</string>
+
 </resources>

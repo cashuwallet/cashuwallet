@@ -1,0 +1,89 @@
+<resources>
+
+    <string name="app_tagline">Carteira de criptomoedas</string>
+
+    <string name="title_activity_main">Painel principal</string>
+
+    <string name="error_secure_random">Houve um erro na randomização</string>
+    <string name="error_accessing_wallet">Houve um erro no acesso à carteira</string>
+    <string name="access_wallet_button">Acessa a carteira</string>
+
+    <string name="navigation_drawer_open">Abrir gaveta de navegação</string>
+    <string name="navigation_drawer_close">Fechar gaveta de navegação</string>
+
+    <string name="nav_wallet">Carteira</string>
+    <string name="nav_portfolio">Portfólio</string>
+    <string name="nav_converter">Conversor</string>
+    <string name="nav_markets">Mercados</string>
+
+    <string name="title_drawer_submenu">Outras opções</string>
+
+    <string name="action_settings">Configurações</string>
+    <string name="action_share">Compartilhar</string>
+    <string name="action_about">Sobre</string>
+    <string name="action_exit">Sair</string>
+
+    <string name="action_exit_confirmation">Deseja realmente desconectar-se da carteira?</string>
+    <string name="shutting_wallet">Desconectando da carteira. Por favor aguarde.</string>
+
+    <string name="action_copy">Copiar</string>
+    <string name="action_paste">Colar</string>
+    <string name="action_capture">Capturar</string>
+    <string name="action_generate">Gerar</string>
+
+    <string name="address_qrcode">Código QR do endereço</string>
+
+    <string name="hint_target_address">endereço do destinatário</string>
+    <string name="error_empty_target_address">é necessário informar o endereço do destinatário</string>
+    <string name="error_invalid_target_address">desculpe, este endereço não é válido ou suportado</string>
+    <string name="error_empty_amount">é necessário informar o valor do pagamento</string>
+    <string name="network_fee">taxa da rede</string>
+    <string name="action_send_payment">Enviar pagamento</string>
+    <string name="action_send_payment_confirmation">Por favor, informe a senha de sua carteira para assinar e transmitir essa transação:</string>
+
+    <string name="read_with_attention">Leia com atenção</string>
+    <string name="warning_untested_software">
+        Este software está em desenvolvimento e não foi testado completamente. Ele pode potencialmente produzir a perda de fundos. Não opere com valores significativos.
+        \n\nCashu é compatível com os BIP39/BIP44. Leia nossa Política de Privacidade em https://cashu.cc/privacy/ para um resumo sobre segurança.
+        \n\nPor favor relate os problemas que encontrar através do e-mail bugs@cashu.cc
+    </string>
+
+    <string name="mnemonic_label">Informe a frase mnemônica da carteira</string>
+    <string name="mnemonic_help">Se você está criando uma nova carteira pressione o botão GERAR. Anote a frase mnemônica, ela deve ser guardada em um local seguro.</string>
+    <string name="password_label">Informe a senha da carteira</string>
+    <string name="password_help">Memorize a senha de sua carteira, ela não poderá ser alterada ou recuperada.</string>
+
+    <string name="preparing_wallet">Preparando a carteira para o primeiro acesso. Por favor aguarde.</string>
+    <string name="unsuccessful_transaction_creation">Houve um problema no preparo da transação. Verifique se o saldo é suficiente.</string>
+    <string name="broadcasting_transaction">Transmitindo a transação para a rede. Por favor aguarde.</string>
+    <string name="successful_broadcast">A transação foi transmitida com sucesso</string>
+    <string name="unsuccessful_broadcast">Houve um problema na transmissão da transação. Por favor aguarde e verifique antes de enviar o pagamento novamente</string>
+    <string name="password_mismatch">A senha fornecida não confere</string>
+
+    <string name="address_copied_to_clipboard">Endereço copiado para a área de transferência</string>
+    <string name="clipboard_unavailable">A área de transferência não está disponível</string>
+    <string name="empty_clipboard">A área de transferência está vazia</string>
+    <string name="incompatible_clipboard_type">Conteúdo da área de transferência incompatível</string>
+
+    <string name="network_not_available">A conexão com a rede não está disponível</string>
+
+    <string name="camera_not_available">Não há uma câmera disponível</string>
+    <string name="camera_permission_denied">Permissão para acessar a câmera negada</string>
+    <string name="camera_initialization_error">Houve um erro na inicialização da câmera</string>
+
+    <string name="no_recorded_transactions">Nenhuma transação registrada</string>
+    <string name="transaction_url_not_available">Não há nenhum serviço público disponível para visualizar esta transação.</string>
+    <string name="failure_open_url_activity">Nenhuma aplicação pode satisfazer esta solicitação. Por favor instale um navegador da web.</string>
+
+    <string name="pref_title_testnet_mode">Habilitar modo Testnet</string>
+    <string name="pref_description_testnet_mode">Utilizar sua carteira em modo de teste onde as transações e saldos não possuem valor.</string>
+
+    <string name="tab_text_1">Adicionar</string>
+    <string name="tab_text_2">Utilizar</string>
+    <string name="tab_text_3">Atividade</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="dismiss">Dispensar</string>
+
+</resources>

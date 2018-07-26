@@ -1,0 +1,9 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="testnet_mode"
+        android:summary="@string/pref_description_testnet_mode"
+        android:title="@string/pref_title_testnet_mode" />
+
+</PreferenceScreen>
