@@ -402,9 +402,10 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "http://mordenexplorer.ethertrack.io/" + hash;
+                // TODO use https when available
+                return "http://mordenexplorer.ethertrack.io/addr/" + hash;
             } else {
-                return "http://etherhub.io/tx/" + hash;
+                return "https://etherhub.io/tx/" + hash;
             }
         }
     }
