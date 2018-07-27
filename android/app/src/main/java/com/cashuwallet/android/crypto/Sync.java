@@ -194,13 +194,15 @@ public class Sync {
         return new Object[]{ rawtxn, hdcontext, data };
     }
 
-    public Object[] signTransaction(Multiwallet multiwallet, Object[] txn, Object secret) {
+    public Object[] signTransaction(Multiwallet multiwallet, Object[] txn, Object _secrets) {
+        Map<String, Object[]> secrets = (Map<String, Object[]>) _secrets;
         Coin coin = multiwallet.getCoin();
         String label = coin.getLabel();
+        String curve = coins.attr("ecc.curve", label, testnet);
         byte[] rawtxn = (byte[]) txn[0];
         Lambda<String, Object> hdcontext = (Lambda<String, Object>) txn[1];
         Object data = txn[2];
-        Object[] t = (Object[]) secret;
+        Object[] t = secrets.get(curve);
         BigInteger[] k = (BigInteger[]) t[0];
         byte depth = (byte) t[1];
         int fingerprint = (int) t[2];
@@ -309,17 +311,23 @@ public class Sync {
 
     private boolean derive(String words, String password, Object[] result) {
         BigInteger seed = mnemonic.seed(words, password);
-        // TODO use different derivation for ed25519
-        String xprivatekey = hdwallet.xprivatekey_master(seed, "bitcoin", testnet);
-        Object[] t = hdwallet.xprivatekey_decode(xprivatekey, "bitcoin", testnet);
-        result[0] = t;
+        Map<String, Object[]> secrets = new HashMap<>();
+        // secp256k1
+        String xprivatekey0 = hdwallet.xprivatekey_master(seed, "bitcoin", testnet);
+        Object[] t0 = hdwallet.xprivatekey_decode(xprivatekey0, "bitcoin", testnet);
+        secrets.put("secp256k1", t0);
+        // ed25519
+        String xprivatekey1 = hdwallet.xprivatekey_master(seed, "lisk", testnet);
+        Object[] t1 = hdwallet.xprivatekey_decode(xprivatekey1, "lisk", testnet);
+        secrets.put("ed25519", t1);
+        result[0] = secrets;
         result[1] = binint.b2n(hashing.blake2b(binint.n2b(seed), 16));
         return true;
     }
 
-    private boolean bootstrap(Object secret) {
+    private boolean bootstrap(Object secrets) {
         bootstrapChains();
-        bootstrapAccount(secret, 0);
+        bootstrapAccount(secrets, 0);
         return true;
     }
 
@@ -330,7 +338,8 @@ public class Sync {
         }
     }
 
-    private void bootstrapAccount(Object secret, int account) {
+    private void bootstrapAccount(Object _secrets, int account) {
+        Map<String, Object[]> secrets = (Map<String, Object[]>) _secrets;
         Map<String, String> cache = new HashMap<>();
         List<Chain> chains = dao.findChains();
         for (Chain chain : chains) {
@@ -338,11 +347,12 @@ public class Sync {
             if (multiwallet == null) {
                 Coin coin = chain.getCoin();
                 String label = coin.getLabel();
+                String curve = coins.attr("ecc.curve", label, testnet);
                 String path = hdwallet.path(account, label, testnet);
                 String key = label + ":" + path;
                 String xpublickey = cache.get(key);
                 if (xpublickey == null) {
-                    Object[] t = (Object[]) secret;
+                    Object[] t = secrets.get(curve);
                     BigInteger[] k = (BigInteger[]) t[0];
                     byte depth = (byte) t[1];
                     int fingerprint = (int) t[2];

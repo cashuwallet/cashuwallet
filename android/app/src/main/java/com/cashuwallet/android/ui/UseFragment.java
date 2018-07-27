@@ -234,9 +234,9 @@ public class UseFragment extends Fragment {
                     String[] wordlist = getResources().getStringArray(R.array.mnemonic_english);
                     String password = passwordView.getText().toString();
                     ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.broadcasting_transaction), true);
-                    MainApplication.app().authenticate(wordlist, password, (secret) -> {
-                        if (secret != null) {
-                            Object[] signedTxn = sync.signTransaction(multiwallet, txn, secret);
+                    MainApplication.app().authenticate(wordlist, password, (secrets) -> {
+                        if (secrets != null) {
+                            Object[] signedTxn = sync.signTransaction(multiwallet, txn, secrets);
                             boolean[] success = { false };
                             sync.broadcastTransaction(multiwallet, signedTxn, success, () -> {
                                 if (success[0]) {

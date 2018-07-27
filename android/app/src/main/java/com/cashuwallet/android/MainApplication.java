@@ -148,7 +148,7 @@ public final class MainApplication extends Application {
         int entropySize = t.r;
         Object[] result = new Object[2];
         mainnetSync.derive(words, password, result, () -> {
-            Object secret = result[0];
+            Object secrets = result[0];
             BigInteger identity = (BigInteger) result[1];
             Session session = new Session(entropy, entropySize, identity);
             String plain = session.toString();
@@ -157,7 +157,7 @@ public final class MainApplication extends Application {
                     cont.cont(false);
                     return;
                 }
-                mainnetSync.bootstrap(secret, () -> testnetSync.bootstrap(secret, () -> {
+                mainnetSync.bootstrap(secrets, () -> testnetSync.bootstrap(secrets, () -> {
                     SharedPreferences preferences = getPreferences();
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("encrypted_session", encrypted);
@@ -203,13 +203,13 @@ public final class MainApplication extends Application {
             String words = mnemonic.mnemonic(session.getEntropy(), session.getEntropySize(), wordlist);
             Object[] result = new Object[2];
             mainnetSync.derive(words, password, result, () -> {
-                Object secret = result[0];
+                Object secrets = result[0];
                 BigInteger identity = (BigInteger) result[1];
                 if (!identity.equals(session.getIdentity())) {
                     cont.cont(null);
                     return;
                 }
-                cont.cont(secret);
+                cont.cont(secrets);
             });
         });
     }
