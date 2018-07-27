@@ -57,8 +57,8 @@ public class Sync {
 
     /* public bootstrap routine */
 
-    public void derive(String words, String password, Object[] result, Runnable cont) {
-        BackgroundTask.run(exec, () -> derive(words, password, result), (Boolean success) -> cont.run(), false);
+    public void derive(String words, String password, List<Coin> coins, Object[] result, Runnable cont) {
+        BackgroundTask.run(exec, () -> derive(words, password, coins, result), (Boolean success) -> cont.run(), false);
     }
 
     public void bootstrap(Object secret, Runnable cont) {
@@ -309,17 +309,20 @@ public class Sync {
 
     /* internal discovery routines */
 
-    private boolean derive(String words, String password, Object[] result) {
+    private boolean derive(String words, String password, List<Coin> _coins, Object[] result) {
         BigInteger seed = mnemonic.seed(words, password);
         Map<String, Object[]> secrets = new HashMap<>();
-        // secp256k1
-        String xprivatekey0 = hdwallet.xprivatekey_master(seed, "bitcoin", testnet);
-        Object[] t0 = hdwallet.xprivatekey_decode(xprivatekey0, "bitcoin", testnet);
-        secrets.put("secp256k1", t0);
-        // ed25519
-        String xprivatekey1 = hdwallet.xprivatekey_master(seed, "lisk", testnet);
-        Object[] t1 = hdwallet.xprivatekey_decode(xprivatekey1, "lisk", testnet);
-        secrets.put("ed25519", t1);
+        Iterator<Coin> i = _coins != null ? _coins.iterator() : Coins.list();
+        while (i.hasNext()) {
+            Coin coin = i.next();
+            String label = coin.getLabel();
+            String curve = coins.attr("ecc.curve", label, testnet);
+            if (!secrets.containsKey(curve)) {
+                String xprivatekey = hdwallet.xprivatekey_master(seed, label, testnet);
+                Object[] parts = hdwallet.xprivatekey_decode(xprivatekey, label, testnet);
+                secrets.put(curve, parts);
+            }
+        }
         result[0] = secrets;
         result[1] = binint.b2n(hashing.blake2b(binint.n2b(seed), 16));
         return true;

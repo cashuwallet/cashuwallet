@@ -8,13 +8,16 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 
+import com.cashuwallet.android.crypto.Coin;
 import com.raugfer.crypto.mnemonic;
 import com.raugfer.crypto.pair;
 import com.cashuwallet.android.crypto.Sync;
 import com.cashuwallet.android.db.AppDatabase;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -147,7 +150,7 @@ public final class MainApplication extends Application {
         BigInteger entropy = t.l;
         int entropySize = t.r;
         Object[] result = new Object[2];
-        mainnetSync.derive(words, password, result, () -> {
+        mainnetSync.derive(words, password, null, result, () -> {
             Object secrets = result[0];
             BigInteger identity = (BigInteger) result[1];
             Session session = new Session(entropy, entropySize, identity);
@@ -187,7 +190,7 @@ public final class MainApplication extends Application {
         });
     }
 
-    public void authenticate(String[] wordlist, String password, Continuation<Object> cont, Locker.UserAuthenticationHandler handler) {
+    public void authenticate(String[] wordlist, String password, Coin coin, Continuation<Object> cont, Locker.UserAuthenticationHandler handler) {
         SharedPreferences preferences = getPreferences();
         String encrypted = preferences.getString("encrypted_session", "");
         locker.decrypt(encrypted, handler, (String plain) -> {
@@ -201,8 +204,10 @@ public final class MainApplication extends Application {
                 return;
             }
             String words = mnemonic.mnemonic(session.getEntropy(), session.getEntropySize(), wordlist);
+            List<Coin> coins = new ArrayList<>();
+            coins.add(coin);
             Object[] result = new Object[2];
-            mainnetSync.derive(words, password, result, () -> {
+            mainnetSync.derive(words, password, coins, result, () -> {
                 Object secrets = result[0];
                 BigInteger identity = (BigInteger) result[1];
                 if (!identity.equals(session.getIdentity())) {
