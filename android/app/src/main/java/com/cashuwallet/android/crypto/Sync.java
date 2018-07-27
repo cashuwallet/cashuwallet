@@ -352,7 +352,7 @@ public class Sync {
                 String label = coin.getLabel();
                 String curve = coins.attr("ecc.curve", label, testnet);
                 String path = hdwallet.path(account, label, testnet);
-                String key = label + ":" + path;
+                String key = (testnet ? label : "") + ":" + path;
                 String xpublickey = cache.get(key);
                 if (xpublickey == null) {
                     Object[] t = secrets.get(curve);
