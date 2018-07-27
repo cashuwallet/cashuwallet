@@ -28,7 +28,7 @@ public class SochainAPI implements Service {
 
     private String urlFetch(String url, String content) throws IOException {
         try {
-            return Network.urlFetch(url, content);
+            return content == null ? Network.urlFetch(url) : Network.urlFetch(url, content);
         } catch (FileNotFoundException e) {
         }
         try {
