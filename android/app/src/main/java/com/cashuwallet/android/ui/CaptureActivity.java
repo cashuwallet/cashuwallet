@@ -27,6 +27,7 @@ import com.cashuwallet.android.R;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.List;
 
 public class CaptureActivity extends AppCompatActivity {
 
@@ -146,8 +147,11 @@ public class CaptureActivity extends AppCompatActivity {
         Camera camera = getCamera();
         if (camera != null) {
             Camera.Parameters params = camera.getParameters();
-            params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-            camera.setParameters(params);
+            List<String> modes = params.getSupportedFocusModes();
+            if (modes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
+                params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+                camera.setParameters(params);
+            }
         }
     }
 
