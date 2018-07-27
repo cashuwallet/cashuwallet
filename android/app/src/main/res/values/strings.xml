@@ -2,7 +2,6 @@
 
     <string name="app_name" translatable="false">Cashu</string>
     <string name="app_tagline">Mobile crypto wallet</string>
-    <string name="app_version" translatable="false">1.0.0-beta</string>
     <string name="title_activity_main">Main panel</string>
     <string name="title_activity_settings" translatable="false">@string/action_settings</string>
     <string name="title_activity_splash" translatable="false">@string/app_name</string>

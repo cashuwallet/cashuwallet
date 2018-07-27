@@ -23,6 +23,9 @@ android {
     lintOptions {
         abortOnError false
     }
+    applicationVariants.all { variant ->
+        variant.resValue "string", "app_version", variant.versionName
+    }
 }
 
 dependencies {
