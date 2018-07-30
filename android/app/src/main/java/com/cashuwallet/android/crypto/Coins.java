@@ -672,7 +672,7 @@ public final class Coins {
         }
     }
 
-    private static abstract class ERC20Token extends Ethereum {
+    public static abstract class ERC20Token extends Ethereum {
         @Override
         public Coin getFeeCoin() {
             return findCoin("ETH");

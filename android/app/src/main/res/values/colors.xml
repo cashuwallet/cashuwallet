@@ -10,6 +10,8 @@
     <color name="splash_background">#0099cc</color>
     <color name="welcome_background">#ffffff</color>
 
+    <color name="colorTag">#80ee572f</color>
+
     <color name="status_offline">#d3d3d3</color>
     <color name="status_pending">#f7b500</color>
     <color name="status_confirmed">#8fcf4c</color>

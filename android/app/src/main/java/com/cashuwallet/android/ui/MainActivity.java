@@ -33,6 +33,7 @@ import android.widget.TextView;
 import com.cashuwallet.android.MainApplication;
 import com.cashuwallet.android.R;
 import com.cashuwallet.android.crypto.Coin;
+import com.cashuwallet.android.crypto.Coins;
 import com.cashuwallet.android.crypto.Sync;
 import com.cashuwallet.android.db.Multiwallet;
 
@@ -237,6 +238,7 @@ public class MainActivity extends AppCompatActivity
 
             vh.image.setImageResource(res);
             vh.name.setText(coin.getName() + (sync.isTestnet() ? " Testnet": ""));
+            vh.tag.setText(coin instanceof Coins.ERC20Token ? "ERC-20" : "");
             vh.balance.setText(formatAmount(coin, multiwallet.getBalance()));
             vh.status.setTextColor(color);
             vh.itemView.setOnClickListener((View view) -> {
@@ -268,12 +270,14 @@ public class MainActivity extends AppCompatActivity
         Multiwallet multiwallet;
         ImageView image;
         TextView name;
+        TextView tag;
         TextView balance;
         TextView status;
         ViewHolder(View view) {
             super(view);
             image = view.findViewById(R.id.image);
             name = view.findViewById(R.id.name);
+            tag = view.findViewById(R.id.tag);
             balance = view.findViewById(R.id.balance);
             status = view.findViewById(R.id.status);
         }
