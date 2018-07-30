@@ -59,6 +59,10 @@
     <color name="ripple_dark">#00689c</color>
     <color name="ripple_lite">#00689c</color>
 
+    <color name="stellar">#067fa0</color>
+    <color name="stellar_dark">#056680</color>
+    <color name="stellar_lite">#cef0fa</color>
+
     <color name="zcash">#cd8421</color>
     <color name="zcash_dark">#a56a1b</color>
     <color name="zcash_lite">#ffd25c</color>

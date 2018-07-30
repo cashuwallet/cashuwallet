@@ -273,6 +273,18 @@ public class Sync {
             }
 
             @Override
+            public BigInteger get_balance(String address, String label, boolean testnet) {
+                if (testnet != Sync.this.testnet) throw new IllegalStateException();
+                Coin coin = findCoin(label);
+                Wallet wallet = dao.findWallet(coin.getCode(), address);
+                if (wallet != null) return wallet.getBalance();
+                Service service = coin.getService(testnet);
+                BigInteger balance = service.getBalance(address);
+                if (balance == null) throw new IllegalArgumentException("Cannot get balance");
+                return balance;
+            }
+
+            @Override
             public Map<String, Object>[] get_utxos(String address, String label, boolean testnet) {
                 if (testnet != Sync.this.testnet) throw new IllegalStateException();
                 Coin coin = findCoin(label);
@@ -295,7 +307,11 @@ public class Sync {
                 if (testnet != Sync.this.testnet) throw new IllegalStateException();
                 Coin coin = findCoin(label);
                 Wallet wallet = dao.findWallet(coin.getCode(), address);
-                return BigInteger.valueOf(wallet.sequence);
+                if (wallet != null) return BigInteger.valueOf(wallet.sequence);
+                Service service = coin.getService(testnet);
+                long sequence = service.getSequence(address);
+                if (sequence == -1) throw new IllegalArgumentException("Cannot get sequence");
+                return BigInteger.valueOf(sequence);
             }
 
             @Override
@@ -758,6 +774,7 @@ public class Sync {
             dao.createWallet(new Wallet("LTC", "mjwp1hAVuX7UCcQydk4RXEsTLjg48di5No", 0, false, 0));
             dao.createWallet(new Wallet("QTUM", "qeKn9hTqktwBRNGthi7YTfr8W7VKvZSgU2", 0, false, 0));
             dao.createWallet(new Wallet("XRP", "r3qVZNhPRhoLwHdbiVZS5W31uxb6R7HCZK", 0, false, 0));
+            dao.createWallet(new Wallet("XLM", "GCTS32RGWRH6RJM62UVZ4UT5ZN5L6B2D3LPGO6Z2NM2EOGVQA7TA6SKO", 0, false, 0));
             dao.createWallet(new Wallet("ZEC", "tmE9D3oz4TUyKAPBhXLCugoRoLPMFVjSwaw", 0, false, 0));
             dao.createWallet(new Wallet("ZRX", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
             dao.createWallet(new Wallet("REP", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
@@ -779,6 +796,7 @@ public class Sync {
             dao.createWallet(new Wallet("LTC", "LLMRAtr3qBje2ySEa3CnZ55LA4TQMWnRY3", 0, false, 0));
             dao.createWallet(new Wallet("QTUM", "QNbKAqD7RCjqdR3wq77XvhVYovn8L3beA7", 0, false, 0));
             dao.createWallet(new Wallet("XRP", "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59", 0, false, 0));
+            dao.createWallet(new Wallet("XLM", "GCNSGHUCG5VMGLT5RIYYZSO7VQULQKAJ62QA33DBC5PPBSO57LFWVV6P", 0, false, 0));
             dao.createWallet(new Wallet("ZEC", "t1VpYecBW4UudbGcy4ufh61eWxQCoFaUrPs", 0, false, 0));
             dao.createWallet(new Wallet("ZRX", "0x4fE60acf0df115B0c40897bC09841E18955EdEC5", 0, false, 0));
             dao.createWallet(new Wallet("REP", "0x7a096befba0f83ae475b65c27e78d5fa2b83a186", 0, false, 0));

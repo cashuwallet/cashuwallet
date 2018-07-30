@@ -93,6 +93,12 @@
         <item name="android:statusBarColor">@color/ripple_dark</item>
         <item name="colorAccent">@color/ripple_lite</item>
     </style>
+    <style name="Stellar" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/stellar</item>
+        <item name="colorPrimaryDark">@color/stellar_dark</item>
+        <item name="android:statusBarColor">@color/stellar_dark</item>
+        <item name="colorAccent">@color/stellar_lite</item>
+    </style>
     <style name="Zcash" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/zcash</item>
         <item name="colorPrimaryDark">@color/zcash_dark</item>

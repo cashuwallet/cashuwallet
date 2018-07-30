@@ -239,8 +239,8 @@ public class UseFragment extends Fragment {
                             Object[] signedTxn = sync.signTransaction(multiwallet, txn, secrets);
                             boolean[] success = { false };
                             sync.broadcastTransaction(multiwallet, signedTxn, success, () -> {
+                                progressDialog.dismiss();
                                 if (success[0]) {
-                                    progressDialog.dismiss();
                                     activity.refreshPending = true;
                                     ViewPager viewPager = activity.findViewById(R.id.container);
                                     viewPager.setCurrentItem(2);

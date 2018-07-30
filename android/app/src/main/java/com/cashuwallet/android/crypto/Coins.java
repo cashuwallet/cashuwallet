@@ -19,6 +19,7 @@ public final class Coins {
     private static final Coin litecoin = new Litecoin();
     private static final Coin qtum = new Qtum();
     private static final Coin ripple = new Ripple();
+    private static final Coin stellar = new Stellar();
     private static final Coin zcash = new Zcash();
     private static final Coin _0x = new _0x();
     private static final Coin augur = new Augur();
@@ -42,6 +43,7 @@ public final class Coins {
         registry.put(litecoin.getCode(), litecoin);
         registry.put(qtum.getCode(), qtum);
         registry.put(ripple.getCode(), ripple);
+        registry.put(stellar.getCode(), stellar);
         registry.put(zcash.getCode(), zcash);
         registry.put(_0x.getCode(), _0x);
         registry.put(augur.getCode(), augur);
@@ -582,6 +584,46 @@ public final class Coins {
                 return null; // no known public service available
             } else {
                 return "https://xrpcharts.ripple.com/#/transactions/" + hash;
+            }
+        }
+    }
+
+    private static class Stellar extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Stellar";
+        }
+
+        @Override
+        public String getLabel() {
+            return "stellar";
+        }
+
+        @Override
+        public String getCode() {
+            return "XLM";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new HorizonAPI("https://horizon-testnet.stellar.org/");
+            } else {
+                return new HorizonAPI("https://horizon.stellar.org/");
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return "http://testnet.stellarchain.io/tx/" + hash;
+            } else {
+                return "https://stellarchain.io/tx/" + hash;
             }
         }
     }

@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class BlockcypherAPI implements Service {
 
@@ -95,6 +96,7 @@ public class BlockcypherAPI implements Service {
                 JSONObject data = new JSONObject(urlFetch(url));
                 List<HistoryItem> list = new ArrayList<>();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+                dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
                 JSONArray items = data.optJSONArray("txs");
                 if (items != null) {
                     for (int i = 0; i < items.length(); i++) {

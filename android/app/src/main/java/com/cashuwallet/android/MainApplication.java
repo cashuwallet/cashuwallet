@@ -60,6 +60,7 @@ public final class MainApplication extends Application {
         themes.put("LTC", R.style.Litecoin);
         themes.put("QTUM", R.style.Qtum);
         themes.put("XRP", R.style.Ripple);
+        themes.put("XLM", R.style.Stellar);
         themes.put("ZEC", R.style.Zcash);
         themes.put("ZRX", R.style._0x);
         themes.put("REP", R.style.Augur);
@@ -80,6 +81,7 @@ public final class MainApplication extends Application {
         drawable.put("LTC", R.drawable.litecoin);
         drawable.put("QTUM", R.drawable.qtum);
         drawable.put("XRP", R.drawable.ripple);
+        drawable.put("XLM", R.drawable.stellar);
         drawable.put("ZEC", R.drawable.zcash);
         drawable.put("ZRX", R.drawable._0x);
         drawable.put("REP", R.drawable.augur);
@@ -104,6 +106,10 @@ public final class MainApplication extends Application {
 
     private SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+    public ExecutorService getExec() {
+        return exec;
     }
 
     public Sync getMainnetSync() {

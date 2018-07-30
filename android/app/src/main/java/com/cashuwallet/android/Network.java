@@ -1,11 +1,16 @@
 package com.cashuwallet.android;
 
+import android.os.AsyncTask;
+import android.os.NetworkOnMainThreadException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 
 public class Network {
 
@@ -22,6 +27,41 @@ public class Network {
     }
 
     public static String urlFetch(String url, String method, String content, String contentType) throws IOException {
+        try {
+            return _urlFetch(url, method, content, contentType);
+        } catch (NetworkOnMainThreadException e) {
+            ExecutorService exec = MainApplication.app().getExec();
+            AsyncUrlFetch async = new AsyncUrlFetch();
+            String s;
+            try {
+                s = async.executeOnExecutor(exec, url, method, content, contentType).get();
+            } catch (InterruptedException|ExecutionException ue) {
+                throw new IOException(ue.getMessage());
+            }
+            if (async.exception != null) throw async.exception;
+            return s;
+        }
+    }
+
+    private static class AsyncUrlFetch extends AsyncTask<String, Void, String> {
+        private IOException exception;
+
+        @Override
+        protected String doInBackground(String... objects) {
+            String url = objects[0];
+            String method = objects[1];
+            String content = objects[2];
+            String contentType = objects[3];
+            try {
+                return _urlFetch(url, method, content, contentType);
+            } catch (IOException e) {
+                exception = e;
+                return null;
+            }
+        }
+    };
+
+    private static String _urlFetch(String url, String method, String content, String contentType) throws IOException {
         if (MainApplication.app().shuttingDown()) throw new IOException("App shutting down");
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setDoInput(true);
