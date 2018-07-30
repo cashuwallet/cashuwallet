@@ -2,7 +2,9 @@ package com.cashuwallet.android.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -109,9 +111,11 @@ public class WelcomeActivity extends AppCompatActivity {
             rootView.setVisibility(View.GONE);
             String words = mnemonicView.getText().toString().trim().replaceAll(" +", " ").toLowerCase();
             String password = passwordView.getText().toString();
+            setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             ProgressDialog progressDialog = ProgressDialog.show(WelcomeActivity.this, "", getResources().getString(R.string.preparing_wallet), true);
             MainApplication.app().signup(wordlist, words, password, (success) -> {
                 progressDialog.dismiss();
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 if (success) {
                     startActivity(new Intent(this, MainActivity.class));
                     finish();

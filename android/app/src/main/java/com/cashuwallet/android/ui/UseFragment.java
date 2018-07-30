@@ -6,7 +6,9 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -233,6 +235,7 @@ public class UseFragment extends Fragment {
                 .setPositiveButton(R.string.ok, (DialogInterface dialog, int which) -> {
                     String[] wordlist = getResources().getStringArray(R.array.mnemonic_english);
                     String password = passwordView.getText().toString();
+                    getActivity().setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                     ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.broadcasting_transaction), true);
                     MainApplication.app().authenticate(wordlist, password, coin, (secrets) -> {
                         if (secrets != null) {
@@ -240,6 +243,7 @@ public class UseFragment extends Fragment {
                             boolean[] success = { false };
                             sync.broadcastTransaction(multiwallet, signedTxn, success, () -> {
                                 progressDialog.dismiss();
+                                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                                 if (success[0]) {
                                     activity.refreshPending = true;
                                     ViewPager viewPager = activity.findViewById(R.id.container);
@@ -253,6 +257,7 @@ public class UseFragment extends Fragment {
                             });
                         } else {
                             progressDialog.dismiss();
+                            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                             Snackbar snackbar = Snackbar.make(rootView, R.string.password_mismatch, Snackbar.LENGTH_INDEFINITE);
                             snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
                         }

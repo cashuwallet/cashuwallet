@@ -3,6 +3,8 @@ package com.cashuwallet.android.ui;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -159,10 +161,12 @@ public class MainActivity extends AppCompatActivity
                     .setMessage(R.string.action_exit_confirmation)
                     .setNegativeButton(R.string.cancel, null)
                     .setPositiveButton(R.string.ok, (DialogInterface dialog, int which) -> {
+                        setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         ProgressDialog progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.shutting_wallet), true);
                         new Handler().postDelayed(() -> {
                             MainApplication.app().logout();
                             progressDialog.dismiss();
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                             finishAndRemoveTask();
                         }, 500);
                     })
