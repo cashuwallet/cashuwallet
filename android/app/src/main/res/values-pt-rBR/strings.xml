@@ -6,7 +6,7 @@
 
     <string name="error_secure_random">Houve um erro na randomização</string>
     <string name="error_accessing_wallet">Houve um erro no acesso à carteira</string>
-    <string name="access_wallet_button">Acessa a carteira</string>
+    <string name="access_wallet_button">Acessar a carteira</string>
 
     <string name="navigation_drawer_open">Abrir gaveta de navegação</string>
     <string name="navigation_drawer_close">Fechar gaveta de navegação</string>
