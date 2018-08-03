@@ -109,7 +109,6 @@ public class DetailActivity extends AppCompatActivity {
                 return null;
             }
         });
-        viewPager.setCurrentItem(2);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
 
@@ -131,6 +130,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         */
+        viewPager.setCurrentItem(2);
 
         int res = MainApplication.app().findDrawable(multiwallet.coin);
         ImageView imageView = findViewById(R.id.icon);
