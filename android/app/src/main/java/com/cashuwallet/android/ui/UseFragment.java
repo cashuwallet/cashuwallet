@@ -127,8 +127,8 @@ public class UseFragment extends Fragment {
             startActivityForResult(intent, CAPTURE_SCREEN_REQUEST_CODE);
         });
 
-        TextView textView = rootView.findViewById(R.id.currency_symbol);
-        textView.setText(coin.getSymbol());
+        //TextView textView = rootView.findViewById(R.id.currency_symbol);
+        //textView.setText(coin.getSymbol());
 
         TextView feeView = rootView.findViewById(R.id.network_fee_value);
 
