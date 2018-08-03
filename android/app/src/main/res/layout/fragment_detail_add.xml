@@ -16,6 +16,7 @@
             android:contentDescription="@string/address_qrcode"
             android:padding="3dp"
             android:id="@+id/qrcode"
+            android:adjustViewBounds="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
             android:layout_width="wrap_content"
