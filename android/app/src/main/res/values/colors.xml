@@ -53,6 +53,10 @@
     <color name="litecoin_dark">#999999</color>
     <color name="litecoin_lite">#999999</color>
 
+    <color name="nano">#0f1121</color>
+    <color name="nano_dark">#0c0e1b</color>
+    <color name="nano_lite">#3b74b5</color>
+
     <color name="qtum">#2e9ad0</color>
     <color name="qtum_dark">#257ca7</color>
     <color name="qtum_lite">#257ca7</color>

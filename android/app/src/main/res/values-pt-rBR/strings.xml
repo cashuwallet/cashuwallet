@@ -55,6 +55,8 @@
 
     <string name="preparing_wallet">Preparando a carteira para o primeiro acesso. Por favor aguarde.</string>
     <string name="unsuccessful_transaction_creation">Houve um problema no preparo da transação. Verifique se o saldo é suficiente.</string>
+    <string name="creating_transaction">Preparando a transação de pagamento. Por favor aguarde.</string>
+    <string name="signing_transaction">Assinando digitalmente a transação. Por favor aguarde.</string>
     <string name="broadcasting_transaction">Transmitindo a transação para a rede. Por favor aguarde.</string>
     <string name="successful_broadcast">A transação foi transmitida com sucesso</string>
     <string name="unsuccessful_broadcast">Houve um problema na transmissão da transação. Por favor aguarde e verifique antes de enviar o pagamento novamente</string>

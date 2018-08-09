@@ -12,6 +12,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -217,53 +218,63 @@ public class UseFragment extends Fragment {
                 return;
             }
             feeView.setText(activity.formatAmount(coin, fee));
-            Object[] txn;
-            try {
-                txn = sync.createTransaction(multiwallet, address, amt, fee);
-            } catch (Exception e) {
-                Snackbar.make(rootView, R.string.unsuccessful_transaction_creation, Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            LayoutInflater li = LayoutInflater.from(getActivity());
-            View dialogView = li.inflate(R.layout.dialog_password, null);
-            AppCompatEditText passwordView = dialogView.findViewById(R.id.password);
-            new AlertDialog.Builder(getActivity())
-                //.setTitle(R.string.action_send_payment)
-                .setView(dialogView)
-                .setMessage(R.string.action_send_payment_confirmation)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.ok, (DialogInterface dialog, int which) -> {
-                    String[] wordlist = getResources().getStringArray(R.array.mnemonic_english);
-                    String password = passwordView.getText().toString();
-                    getActivity().setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                    ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.broadcasting_transaction), true);
-                    MainApplication.app().authenticate(wordlist, password, coin, (secrets) -> {
-                        if (secrets != null) {
-                            Object[] signedTxn = sync.signTransaction(multiwallet, txn, secrets);
-                            boolean[] success = { false };
-                            sync.broadcastTransaction(multiwallet, signedTxn, success, () -> {
-                                progressDialog.dismiss();
-                                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                                if (success[0]) {
-                                    activity.refreshPending = true;
-                                    ViewPager viewPager = activity.findViewById(R.id.container);
-                                    viewPager.setCurrentItem(2);
-                                    Snackbar snackbar = Snackbar.make(rootView, R.string.successful_broadcast, Snackbar.LENGTH_INDEFINITE);
-                                    snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
+            getActivity().setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            ProgressDialog creatingDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.creating_transaction), true);
+            new Handler().postDelayed(() -> {
+                Object[] txn;
+                try {
+                    txn = sync.createTransaction(multiwallet, address, amt, fee);
+                } catch (Exception e) {
+                    creatingDialog.dismiss();
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                    Snackbar.make(rootView, R.string.unsuccessful_transaction_creation, Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                creatingDialog.dismiss();
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                LayoutInflater li = LayoutInflater.from(getActivity());
+                View dialogView = li.inflate(R.layout.dialog_password, null);
+                AppCompatEditText passwordView = dialogView.findViewById(R.id.password);
+                new AlertDialog.Builder(getActivity())
+                        //.setTitle(R.string.action_send_payment)
+                        .setView(dialogView)
+                        .setMessage(R.string.action_send_payment_confirmation)
+                        .setNegativeButton(R.string.cancel, null)
+                        .setPositiveButton(R.string.ok, (DialogInterface dialog, int which) -> {
+                            String[] wordlist = getResources().getStringArray(R.array.mnemonic_english);
+                            String password = passwordView.getText().toString();
+                            getActivity().setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                            ProgressDialog signingDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.signing_transaction), true);
+                            MainApplication.app().authenticate(wordlist, password, coin, (secrets) -> {
+                                if (secrets != null) {
+                                    Object[] signedTxn = sync.signTransaction(multiwallet, txn, secrets);
+                                    signingDialog.dismiss();
+                                    ProgressDialog broadcastDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.broadcasting_transaction), true);
+                                    boolean[] success = { false };
+                                    sync.broadcastTransaction(multiwallet, signedTxn, success, () -> {
+                                        broadcastDialog.dismiss();
+                                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                                        if (success[0]) {
+                                            activity.refreshPending = true;
+                                            ViewPager viewPager = activity.findViewById(R.id.container);
+                                            viewPager.setCurrentItem(2);
+                                            Snackbar snackbar = Snackbar.make(rootView, R.string.successful_broadcast, Snackbar.LENGTH_INDEFINITE);
+                                            snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
+                                        } else {
+                                            Snackbar snackbar = Snackbar.make(rootView, R.string.unsuccessful_broadcast, Snackbar.LENGTH_INDEFINITE);
+                                            snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
+                                        }
+                                    });
                                 } else {
-                                    Snackbar snackbar = Snackbar.make(rootView, R.string.unsuccessful_broadcast, Snackbar.LENGTH_INDEFINITE);
+                                    signingDialog.dismiss();
+                                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                                    Snackbar snackbar = Snackbar.make(rootView, R.string.password_mismatch, Snackbar.LENGTH_INDEFINITE);
                                     snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
                                 }
-                            });
-                        } else {
-                            progressDialog.dismiss();
-                            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                            Snackbar snackbar = Snackbar.make(rootView, R.string.password_mismatch, Snackbar.LENGTH_INDEFINITE);
-                            snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
-                        }
-                    }, handler);
-                })
-                .show();
+                            }, handler);
+                        })
+                        .show();
+            }, 500);
         });
 
         return rootView;

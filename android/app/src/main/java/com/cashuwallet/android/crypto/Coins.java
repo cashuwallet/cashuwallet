@@ -17,6 +17,7 @@ public final class Coins {
     private static final Coin ethereumclassic = new EthereumClassic();
     private static final Coin lisk = new Lisk();
     private static final Coin litecoin = new Litecoin();
+    private static final Coin nano = new Nano();
     private static final Coin qtum = new Qtum();
     private static final Coin ripple = new Ripple();
     private static final Coin stellar = new Stellar();
@@ -41,6 +42,7 @@ public final class Coins {
         registry.put(ethereumclassic.getCode(), ethereumclassic);
         registry.put(lisk.getCode(), lisk);
         registry.put(litecoin.getCode(), litecoin);
+        registry.put(nano.getCode(), nano);
         registry.put(qtum.getCode(), qtum);
         registry.put(ripple.getCode(), ripple);
         registry.put(stellar.getCode(), stellar);
@@ -504,6 +506,51 @@ public final class Coins {
                 return "https://testnet.litecore.io/tx/" + hash;
             } else {
                 return "https://insight.litecore.io/tx/" + hash;
+            }
+        }
+    }
+
+    private static class Nano extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Nano";
+        }
+
+        @Override
+        public String getLabel() {
+            return "nano";
+        }
+
+        @Override
+        public String getCode() {
+            return "NANO";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new Service.Multi(new Service[]{
+                    // TODO implement an API for the beta testnet
+                });
+            } else {
+                return new Service.Multi(new Service[]{
+                    new NanodeAPI("https://www.nanode.co/api/"),
+                    new NanorpcAPI("https://nano.cashu.cc/rpc", false),
+                });
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return "https://beta.nano.org/block/index.php?h=" + hash;
+            } else {
+                return "https://raiblocks.net/block/index.php?h=" + hash;
             }
         }
     }

@@ -178,4 +178,9 @@ public class HorizonAPI implements Service {
         }
     }
 
+    @Override
+    public Object custom(String name, Object arg) {
+        return null;
+    }
+
 }

@@ -181,8 +181,8 @@ public class Sync {
         }
         Wallet wallet = findDepositWallet(multiwallet, true);
         String change_address = wallet == null ? null : wallet.address;
-        pair<byte[], service.context> r = service.create_rawtxn(source_addresses, address, amount, fee, change_address, label, testnet, cb());
-        byte[] rawtxn = r.l;
+        pair<byte[][], service.context> r = service.create_rawtxn(source_addresses, address, amount, fee, change_address, label, testnet, cb());
+        byte[][] txns = r.l;
         service.context context = r.r;
         Lambda<String, Object> hdcontext = xrootprivatekey -> context.call(source_address -> {
             String path = paths.get(source_address);
@@ -191,7 +191,7 @@ public class Sync {
             return privatekey;
         });
         Object data = context.call(source_address -> source_address);
-        return new Object[]{ rawtxn, hdcontext, data };
+        return new Object[]{ txns, hdcontext, data };
     }
 
     public Object[] signTransaction(Multiwallet multiwallet, Object[] txn, Object _secrets) {
@@ -199,7 +199,7 @@ public class Sync {
         Coin coin = multiwallet.getCoin();
         String label = coin.getLabel();
         String curve = coins.attr("ecc.curve", label, testnet);
-        byte[] rawtxn = (byte[]) txn[0];
+        byte[][] txns = (byte[][]) txn[0];
         Lambda<String, Object> hdcontext = (Lambda<String, Object>) txn[1];
         Object data = txn[2];
         Object[] t = secrets.get(curve);
@@ -209,18 +209,32 @@ public class Sync {
         int child = (int) t[3];
         String xprivatekeyroot = hdwallet.xprivatekey_encode(k, (byte)depth, fingerprint, child, label, testnet);
         Object params = hdcontext.apply(xprivatekeyroot);
-        byte[] signed_rawtxn = service.sign_rawtxn(rawtxn, params, label, testnet);
-        return new Object[]{ signed_rawtxn, data };
+        for (int i = 0; i < txns.length; i++) {
+            byte[] rawtxn = txns[i];
+            byte[] signed_rawtxn = service.sign_rawtxn(rawtxn, params, label, testnet);
+            txns[i] = signed_rawtxn;
+        }
+        return new Object[]{ txns, data };
     }
 
     private boolean broadcastTransaction(Multiwallet multiwallet, Object[] txn, boolean[] success) {
         Coin coin = multiwallet.getCoin();
         Service service = coin.getService(testnet);
-        byte[] rawtxn = (byte[]) txn[0];
+        byte[][] txns = (byte[][]) txn[0];
         Object data = txn[1];
-        String txnid = service.broadcast(binint.b2h(rawtxn));
-        success[0] = txnid != null;
-        if (success[0]) {
+        for (int i = 0; i < txns.length; i++) {
+            if (i > 0) {
+                try {
+                    Thread.sleep(60*1000);
+                } catch (InterruptedException e) {
+                    success[0] = false;
+                    break;
+                }
+            }
+            byte[] rawtxn = txns[i];
+            String txnid = service.broadcast(binint.b2h(rawtxn));
+            success[0] = txnid != null;
+            if (!success[0]) break;
             int time = time();
             // TODO fix the fee
             BigInteger fee = BigInteger.ZERO;
@@ -319,6 +333,13 @@ public class Sync {
                 Coin coin = findCoin(label);
                 Service service = coin.getService(testnet);
                 return service.broadcast(binint.b2h(txn));
+            }
+
+            @Override
+            public Object custom_call(String name, Object arg, String label, boolean testnet) {
+                Coin coin = findCoin(label);
+                Service service = coin.getService(testnet);
+                return service.custom(name, arg);
             }
         };
     }
@@ -772,6 +793,7 @@ public class Sync {
             dao.createWallet(new Wallet("ETC", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
             dao.createWallet(new Wallet("LSK", "3897910504949673529L", 0, false, 0));
             dao.createWallet(new Wallet("LTC", "mjwp1hAVuX7UCcQydk4RXEsTLjg48di5No", 0, false, 0));
+            dao.createWallet(new Wallet("NANO", "xrb_1distrseo9yp7nzq48ktywx7yme9txsgmjjorubau69rddonkmxpm68rgkco", 0, false, 0));
             dao.createWallet(new Wallet("QTUM", "qeKn9hTqktwBRNGthi7YTfr8W7VKvZSgU2", 0, false, 0));
             dao.createWallet(new Wallet("XRP", "r3qVZNhPRhoLwHdbiVZS5W31uxb6R7HCZK", 0, false, 0));
             dao.createWallet(new Wallet("XLM", "GCTS32RGWRH6RJM62UVZ4UT5ZN5L6B2D3LPGO6Z2NM2EOGVQA7TA6SKO", 0, false, 0));
@@ -794,6 +816,7 @@ public class Sync {
             dao.createWallet(new Wallet("ETC", "0xD399099fb8843b1010686005993c7Ed15E205E35", 0, false, 0));
             dao.createWallet(new Wallet("LSK", "2797034409072178585L", 0, false, 0));
             dao.createWallet(new Wallet("LTC", "LLMRAtr3qBje2ySEa3CnZ55LA4TQMWnRY3", 0, false, 0));
+            dao.createWallet(new Wallet("NANO", "xrb_1tig1rio7iskejqgy6ap75rima35f9mexjazdqqquthmyu48118jiewny7zo", 0, false, 0));
             dao.createWallet(new Wallet("QTUM", "QNbKAqD7RCjqdR3wq77XvhVYovn8L3beA7", 0, false, 0));
             dao.createWallet(new Wallet("XRP", "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59", 0, false, 0));
             dao.createWallet(new Wallet("XLM", "GCNSGHUCG5VMGLT5RIYYZSO7VQULQKAJ62QA33DBC5PPBSO57LFWVV6P", 0, false, 0));

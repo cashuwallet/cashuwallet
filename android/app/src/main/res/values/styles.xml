@@ -81,6 +81,12 @@
         <item name="android:statusBarColor">@color/litecoin_dark</item>
         <item name="colorAccent">@color/litecoin_lite</item>
     </style>
+    <style name="Nano" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/nano</item>
+        <item name="colorPrimaryDark">@color/nano_dark</item>
+        <item name="android:statusBarColor">@color/nano_dark</item>
+        <item name="colorAccent">@color/nano_lite</item>
+    </style>
     <style name="Qtum" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/qtum</item>
         <item name="colorPrimaryDark">@color/qtum_dark</item>

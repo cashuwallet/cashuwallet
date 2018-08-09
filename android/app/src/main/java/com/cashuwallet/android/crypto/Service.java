@@ -12,6 +12,7 @@ public interface Service {
     List<UTXO> getUTXOs(String address);
     long getSequence(String address);
     String broadcast(String transaction);
+    Object custom(String name, Object arg);
 
     public final class HistoryItem {
         public String hash;
@@ -94,6 +95,15 @@ public interface Service {
             for (Service service : services) {
                 String id = service.broadcast(transaction);
                 if (id != null) return id;
+            }
+            return null;
+        }
+
+        @Override
+        public Object custom(String name, Object arg) {
+            for (Service service : services) {
+                Object ret = service.custom(name, arg);
+                if (ret != null) return ret;
             }
             return null;
         }

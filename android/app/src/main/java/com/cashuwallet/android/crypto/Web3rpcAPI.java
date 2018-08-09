@@ -90,4 +90,9 @@ public class Web3rpcAPI implements Service {
         }
     }
 
+    @Override
+    public Object custom(String name, Object arg) {
+        return null;
+    }
+
 }

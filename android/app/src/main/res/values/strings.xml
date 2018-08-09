@@ -57,6 +57,8 @@
 
     <string name="preparing_wallet">Preparing the wallet for its first access. Please wait.</string>
     <string name="unsuccessful_transaction_creation">There was a problem preparing the transaction. Check if the balance is enough.</string>
+    <string name="creating_transaction">Preparing the payment transaction. Please wait.</string>
+    <string name="signing_transaction">Digitally signing the transaction. Please wait.</string>
     <string name="broadcasting_transaction">Broadcasting the transaction to the network. Please wait.</string>
     <string name="successful_broadcast">The transaction was broadcast successfully</string>
     <string name="unsuccessful_broadcast">There was a problem broadcasting the transaction. Please wait and double check before sending the payment again</string>

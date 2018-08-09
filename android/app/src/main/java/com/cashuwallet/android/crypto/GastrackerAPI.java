@@ -102,4 +102,9 @@ public class GastrackerAPI implements Service {
         return null;
     }
 
+    @Override
+    public Object custom(String name, Object arg) {
+        return null;
+    }
+
 }

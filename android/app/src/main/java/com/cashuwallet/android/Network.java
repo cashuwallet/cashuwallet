@@ -65,8 +65,8 @@ public class Network {
         if (MainApplication.app().shuttingDown()) throw new IOException("App shutting down");
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setDoInput(true);
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(5000);
+        connection.setConnectTimeout(60*1000);
+        connection.setReadTimeout(60*1000);
         connection.setRequestMethod(method);
         if (content != null) {
             connection.setDoOutput(true);
