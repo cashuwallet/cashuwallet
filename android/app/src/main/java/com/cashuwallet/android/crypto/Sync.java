@@ -387,9 +387,11 @@ public class Sync {
             if (multiwallet == null) {
                 Coin coin = chain.getCoin();
                 String label = coin.getLabel();
+                Coin feeCoin = coin.getFeeCoin();
+                String feeLabel = feeCoin.getLabel();
                 String curve = coins.attr("ecc.curve", label, testnet);
                 String path = hdwallet.path(account, label, testnet);
-                String key = (testnet ? label : "") + ":" + path;
+                String key = (testnet ? feeLabel : "") + ":" + path;
                 String xpublickey = cache.get(key);
                 if (xpublickey == null) {
                     Object[] t = secrets.get(curve);
