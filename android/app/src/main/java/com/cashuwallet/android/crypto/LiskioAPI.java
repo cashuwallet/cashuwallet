@@ -1,6 +1,7 @@
 package com.cashuwallet.android.crypto;
 
 import com.raugfer.crypto.binint;
+import com.raugfer.crypto.dict;
 import com.raugfer.crypto.transaction;
 import com.cashuwallet.android.Network;
 
@@ -10,7 +11,6 @@ import org.json.JSONObject;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LiskioAPI implements Service {
 
@@ -204,12 +204,12 @@ public class LiskioAPI implements Service {
         try {
             byte[] txn = binint.h2b(_transaction);
             String txnid = transaction.txnid(txn, "lisk", testnet);
-            Map<String, Object> fields = transaction.transaction_decode(txn, "lisk", testnet);
-            BigInteger timestamp = (BigInteger) fields.get("timestamp");
-            String publickey = (String) fields.get("publickey");
-            String recipient = (String) fields.get("recipient");
-            BigInteger amount = (BigInteger) fields.get("amount");
-            String signature = binint.b2h((byte[]) fields.get("signature"));
+            dict fields = transaction.transaction_decode(txn, "lisk", testnet);
+            BigInteger timestamp = fields.get("timestamp");
+            String publickey = fields.get("publickey");
+            String recipient = fields.get("recipient");
+            BigInteger amount = fields.get("amount");
+            String signature = binint.b2h(fields.get("signature"));
             boolean success;
             if (version.equals("0.9")) {
                 String url = baseUrl + "transactions";

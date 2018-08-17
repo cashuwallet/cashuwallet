@@ -2,6 +2,7 @@ package com.cashuwallet.android.crypto;
 
 import com.raugfer.crypto.binint;
 import com.raugfer.crypto.coins;
+import com.raugfer.crypto.dict;
 import com.raugfer.crypto.hashing;
 import com.raugfer.crypto.hdwallet;
 import com.raugfer.crypto.mnemonic;
@@ -299,14 +300,14 @@ public class Sync {
             }
 
             @Override
-            public Map<String, Object>[] get_utxos(String address, String label, boolean testnet) {
+            public dict[] get_utxos(String address, String label, boolean testnet) {
                 if (testnet != Sync.this.testnet) throw new IllegalStateException();
                 Coin coin = findCoin(label);
                 List<Unspent> unspents = dao.findUnspents(coin.getCode(), address);
-                Map<String, Object>[] utxos = new Map[unspents.size()];
+                dict[] utxos = new dict[unspents.size()];
                 for (int i = 0; i < utxos.length; i++) {
                     Unspent unspent = unspents.get(i);
-                    Map<String, Object> utxo = new HashMap<>();
+                    dict utxo = new dict();
                     utxo.put("address", address);
                     utxo.put("txnid", unspent.hash);
                     utxo.put("index", BigInteger.valueOf(unspent.index & 0xffffffffL));
@@ -796,6 +797,7 @@ public class Sync {
             dao.createWallet(new Wallet("LSK", "3897910504949673529L", 0, false, 0));
             dao.createWallet(new Wallet("LTC", "mjwp1hAVuX7UCcQydk4RXEsTLjg48di5No", 0, false, 0));
             dao.createWallet(new Wallet("NANO", "xrb_1distrseo9yp7nzq48ktywx7yme9txsgmjjorubau69rddonkmxpm68rgkco", 0, false, 0));
+            dao.createWallet(new Wallet("NEO", "AaVahEQ8TD5gugUYMZpWrnLUpssaJdKHzv", 0, false, 0));
             dao.createWallet(new Wallet("QTUM", "qeKn9hTqktwBRNGthi7YTfr8W7VKvZSgU2", 0, false, 0));
             dao.createWallet(new Wallet("XRP", "r3qVZNhPRhoLwHdbiVZS5W31uxb6R7HCZK", 0, false, 0));
             dao.createWallet(new Wallet("XLM", "GCTS32RGWRH6RJM62UVZ4UT5ZN5L6B2D3LPGO6Z2NM2EOGVQA7TA6SKO", 0, false, 0));
@@ -819,6 +821,7 @@ public class Sync {
             dao.createWallet(new Wallet("LSK", "2797034409072178585L", 0, false, 0));
             dao.createWallet(new Wallet("LTC", "LLMRAtr3qBje2ySEa3CnZ55LA4TQMWnRY3", 0, false, 0));
             dao.createWallet(new Wallet("NANO", "xrb_1tig1rio7iskejqgy6ap75rima35f9mexjazdqqquthmyu48118jiewny7zo", 0, false, 0));
+            dao.createWallet(new Wallet("NEO", "AYmQHgGV4BA3UVqJBKfA75ngggqnCTdTvb", 0, false, 0));
             dao.createWallet(new Wallet("QTUM", "QNbKAqD7RCjqdR3wq77XvhVYovn8L3beA7", 0, false, 0));
             dao.createWallet(new Wallet("XRP", "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59", 0, false, 0));
             dao.createWallet(new Wallet("XLM", "GCNSGHUCG5VMGLT5RIYYZSO7VQULQKAJ62QA33DBC5PPBSO57LFWVV6P", 0, false, 0));

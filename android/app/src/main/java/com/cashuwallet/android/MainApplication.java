@@ -59,6 +59,7 @@ public final class MainApplication extends Application {
         themes.put("LSK", R.style.Lisk);
         themes.put("LTC", R.style.Litecoin);
         themes.put("NANO", R.style.Nano);
+        themes.put("NEO", R.style.Neo);
         themes.put("QTUM", R.style.Qtum);
         themes.put("XRP", R.style.Ripple);
         themes.put("XLM", R.style.Stellar);
@@ -81,6 +82,7 @@ public final class MainApplication extends Application {
         drawable.put("LSK", R.drawable.lisk);
         drawable.put("LTC", R.drawable.litecoin);
         drawable.put("NANO", R.drawable.nano);
+        drawable.put("NEO", R.drawable.neo);
         drawable.put("QTUM", R.drawable.qtum);
         drawable.put("XRP", R.drawable.ripple);
         drawable.put("XLM", R.drawable.stellar);

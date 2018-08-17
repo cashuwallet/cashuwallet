@@ -18,6 +18,7 @@ public final class Coins {
     private static final Coin lisk = new Lisk();
     private static final Coin litecoin = new Litecoin();
     private static final Coin nano = new Nano();
+    private static final Coin neo = new Neo();
     private static final Coin qtum = new Qtum();
     private static final Coin ripple = new Ripple();
     private static final Coin stellar = new Stellar();
@@ -43,6 +44,7 @@ public final class Coins {
         registry.put(lisk.getCode(), lisk);
         registry.put(litecoin.getCode(), litecoin);
         registry.put(nano.getCode(), nano);
+        registry.put(neo.getCode(), neo);
         registry.put(qtum.getCode(), qtum);
         registry.put(ripple.getCode(), ripple);
         registry.put(stellar.getCode(), stellar);
@@ -551,6 +553,48 @@ public final class Coins {
                 return "https://beta.nano.org/block/index.php?h=" + hash;
             } else {
                 return "https://raiblocks.net/block/index.php?h=" + hash;
+            }
+        }
+    }
+
+    private static class Neo extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Neo";
+        }
+
+        @Override
+        public String getLabel() {
+            return "neo";
+        }
+
+        @Override
+        public String getCode() {
+            return "NEO";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                //return new NeoscanAPI("https://neoscan-testnet.io/api/test_net/v1/", true);
+                return new NeoscanAPI("https://coz.neoscan-testnet.io/api/test_net/v1/", true);
+            } else {
+                return new NeoscanAPI("https://api.neoscan.io/api/main_net/v1/", false);
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                //return "https://neoscan-testnet.io/transaction/" + hash;
+                return "https://coz.neoscan-testnet.io/transaction/" + hash;
+            } else {
+                return "https://neoscan.io/transaction/" + hash;
             }
         }
     }

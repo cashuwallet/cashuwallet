@@ -2,13 +2,13 @@ package com.cashuwallet.android.crypto;
 
 import com.cashuwallet.android.Network;
 import com.raugfer.crypto.binint;
+import com.raugfer.crypto.dict;
 import com.raugfer.crypto.transaction;
 
 import org.json.JSONObject;
 
 import java.math.BigInteger;
 import java.util.List;
-import java.util.Map;
 
 public class NanorpcAPI  implements Service {
 
@@ -58,14 +58,14 @@ public class NanorpcAPI  implements Service {
     public String broadcast(String _transaction) {
         try {
             byte[] txn = binint.h2b(_transaction);
-            Map<String, Object> fields = transaction.transaction_decode(txn, "nano", testnet);
-            String account = (String) fields.get("account");
-            String previous = (String) fields.get("previous");
-            String representative = (String) fields.get("representative");
-            BigInteger balance = (BigInteger) fields.get("balance");
-            String link = (String) fields.get("link");
-            byte[] signature = (byte[]) fields.get("signature");
-            byte[] work = (byte[]) fields.get("work");
+            dict fields = transaction.transaction_decode(txn, "nano", testnet);
+            String account = fields.get("account");
+            String previous = fields.get("previous");
+            String representative = fields.get("representative");
+            BigInteger balance = fields.get("balance");
+            String link = fields.get("link");
+            byte[] signature = fields.get("signature");
+            byte[] work = fields.get("work");
             String url = baseUrl;
             String block = "{" +
                 "\"account\": \"" + account + "\"," +

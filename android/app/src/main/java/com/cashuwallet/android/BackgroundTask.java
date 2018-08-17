@@ -2,8 +2,6 @@ package com.cashuwallet.android;
 
 import android.os.AsyncTask;
 
-import com.cashuwallet.android.ui.MainActivity;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
