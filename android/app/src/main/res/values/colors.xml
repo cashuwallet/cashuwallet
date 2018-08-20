@@ -61,6 +61,10 @@
     <color name="neo_dark">#008523</color>
     <color name="neo_lite">#beeb00</color>
 
+    <color name="neogas">#00a62c</color>
+    <color name="neogas_dark">#008523</color>
+    <color name="neogas_lite">#beeb00</color>
+
     <color name="qtum">#2e9ad0</color>
     <color name="qtum_dark">#257ca7</color>
     <color name="qtum_lite">#257ca7</color>

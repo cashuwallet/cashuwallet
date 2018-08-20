@@ -93,6 +93,12 @@
         <item name="android:statusBarColor">@color/neo_dark</item>
         <item name="colorAccent">@color/neo_lite</item>
     </style>
+    <style name="NeoGas" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/neogas</item>
+        <item name="colorPrimaryDark">@color/neogas_dark</item>
+        <item name="android:statusBarColor">@color/neogas_dark</item>
+        <item name="colorAccent">@color/neogas_lite</item>
+    </style>
     <style name="Qtum" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/qtum</item>
         <item name="colorPrimaryDark">@color/qtum_dark</item>

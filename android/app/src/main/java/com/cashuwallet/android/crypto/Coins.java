@@ -19,6 +19,7 @@ public final class Coins {
     private static final Coin litecoin = new Litecoin();
     private static final Coin nano = new Nano();
     private static final Coin neo = new Neo();
+    private static final Coin neogas = new NeoGas();
     private static final Coin qtum = new Qtum();
     private static final Coin ripple = new Ripple();
     private static final Coin stellar = new Stellar();
@@ -45,6 +46,7 @@ public final class Coins {
         registry.put(litecoin.getCode(), litecoin);
         registry.put(nano.getCode(), nano);
         registry.put(neo.getCode(), neo);
+        registry.put(neogas.getCode(), neogas);
         registry.put(qtum.getCode(), qtum);
         registry.put(ripple.getCode(), ripple);
         registry.put(stellar.getCode(), stellar);
@@ -579,12 +581,59 @@ public final class Coins {
         }
 
         @Override
+        public Coin getFeeCoin() {
+            return findCoin("GAS");
+        }
+
+        @Override
         public Service getService(boolean testnet) {
             if (testnet) {
                 //return new NeoscanAPI("https://neoscan-testnet.io/api/test_net/v1/", true);
-                return new NeoscanAPI("https://coz.neoscan-testnet.io/api/test_net/v1/", true);
+                return new NeoscanAPI("https://coz.neoscan-testnet.io/api/test_net/v1/", "NEO", "neo", true);
             } else {
-                return new NeoscanAPI("https://api.neoscan.io/api/main_net/v1/", false);
+                return new NeoscanAPI("https://api.neoscan.io/api/main_net/v1/", "NEO", "neo", false);
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                //return "https://neoscan-testnet.io/transaction/" + hash;
+                return "https://coz.neoscan-testnet.io/transaction/" + hash;
+            } else {
+                return "https://neoscan.io/transaction/" + hash;
+            }
+        }
+    }
+
+    private static class NeoGas extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Neo Gas";
+        }
+
+        @Override
+        public String getLabel() {
+            return "neogas";
+        }
+
+        @Override
+        public String getCode() {
+            return "GAS";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                //return new NeoscanAPI("https://neoscan-testnet.io/api/test_net/v1/", true);
+                return new NeoscanAPI("https://coz.neoscan-testnet.io/api/test_net/v1/", "GAS", "neogas", true);
+            } else {
+                return new NeoscanAPI("https://api.neoscan.io/api/main_net/v1/", "GAS", "neogas", false);
             }
         }
 
