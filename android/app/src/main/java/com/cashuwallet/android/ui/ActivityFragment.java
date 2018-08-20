@@ -199,7 +199,7 @@ public class ActivityFragment extends Fragment {
         }
 
         private String formatAmount(Coin coin, BigInteger amount) {
-            String symbol = coin.getSymbol();
+            //String symbol = coin.getSymbol();
             String code = coin.getCode();
             int decimals = coin.getDecimals();
 
@@ -211,7 +211,7 @@ public class ActivityFragment extends Fragment {
             BigDecimal decimal = new BigDecimal(amount);
             decimal = decimal.divide(BigDecimal.TEN.pow(decimals));
             String value = format.format(decimal);
-            return (symbol == null ? "" : symbol + " ") + value + " " + code;
+            return /*(symbol == null ? "" : symbol + " ") +*/ value + " " + code;
         }
 
     }
