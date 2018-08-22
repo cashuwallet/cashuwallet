@@ -25,8 +25,10 @@ public final class Coins {
     private static final Coin stellar = new Stellar();
     private static final Coin zcash = new Zcash();
     private static final Coin _0x = new _0x();
+    private static final Coin aeternity = new Aeternity();
     private static final Coin augur = new Augur();
     private static final Coin basicattentiontoken = new BasicAttentionToken();
+    private static final Coin binancecoin = new BinanceCoin();
     private static final Coin eos = new EOS();
     private static final Coin golem = new Golem();
     private static final Coin omisego = new OmiseGO();
@@ -52,8 +54,10 @@ public final class Coins {
         registry.put(stellar.getCode(), stellar);
         registry.put(zcash.getCode(), zcash);
         registry.put(_0x.getCode(), _0x);
+        registry.put(aeternity.getCode(), aeternity);
         registry.put(augur.getCode(), augur);
         registry.put(basicattentiontoken.getCode(), basicattentiontoken);
+        registry.put(binancecoin.getCode(), binancecoin);
         registry.put(eos.getCode(), eos);
         registry.put(golem.getCode(), golem);
         registry.put(omisego.getCode(), omisego);
@@ -851,6 +855,28 @@ public final class Coins {
         }
     }
 
+    private static class Aeternity extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Aeternity";
+        }
+
+        @Override
+        public String getLabel() {
+            return "aeternity";
+        }
+
+        @Override
+        public String getCode() {
+            return "AE";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
     private static class Augur extends ERC20Token {
         @Override
         public String getName() {
@@ -887,6 +913,28 @@ public final class Coins {
         @Override
         public String getCode() {
             return "BAT";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BinanceCoin extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Binance Coin";
+        }
+
+        @Override
+        public String getLabel() {
+            return "binancecoin";
+        }
+
+        @Override
+        public String getCode() {
+            return "BNB";
         }
 
         @Override

@@ -85,6 +85,10 @@
     <color name="_0x_dark">#000000</color>
     <color name="_0x_lite">#b7b7b7</color>
 
+    <color name="aeternity">#f7296e</color>
+    <color name="aeternity_dark">#c62158</color>
+    <color name="aeternity_lite">#636c72</color>
+
     <color name="augur">#412467</color>
     <color name="augur_dark">#341d53</color>
     <color name="augur_lite">#f7931a</color>
@@ -92,6 +96,10 @@
     <color name="basicattentiontoken">#ff5000</color>
     <color name="basicattentiontoken_dark">#cd4000</color>
     <color name="basicattentiontoken_lite">#662d91</color>
+
+    <color name="binancecoin">#f3ba2f</color>
+    <color name="binancecoin_dark">#c39526</color>
+    <color name="binancecoin_lite">#666666</color>
 
     <color name="eos">#443f54</color>
     <color name="eos_dark">#373343</color>

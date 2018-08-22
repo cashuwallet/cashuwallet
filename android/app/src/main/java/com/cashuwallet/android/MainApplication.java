@@ -66,8 +66,10 @@ public final class MainApplication extends Application {
         themes.put("XLM", R.style.Stellar);
         themes.put("ZEC", R.style.Zcash);
         themes.put("ZRX", R.style._0x);
+        themes.put("AE", R.style.Aeternity);
         themes.put("REP", R.style.Augur);
         themes.put("BAT", R.style.Basic_Attention_Token);
+        themes.put("BNB", R.style.Binance_Coin);
         themes.put("EOS", R.style.EOS);
         themes.put("GNT", R.style.Golem);
         themes.put("OMG", R.style.OmiseGO);
@@ -90,8 +92,10 @@ public final class MainApplication extends Application {
         drawable.put("XLM", R.drawable.stellar);
         drawable.put("ZEC", R.drawable.zcash);
         drawable.put("ZRX", R.drawable._0x);
+        drawable.put("AE", R.drawable.aeternity);
         drawable.put("REP", R.drawable.augur);
         drawable.put("BAT", R.drawable.basicattentiontoken);
+        drawable.put("BNB", R.drawable.binancecoin);
         drawable.put("EOS", R.drawable.eos);
         drawable.put("GNT", R.drawable.golem);
         drawable.put("OMG", R.drawable.omisego);

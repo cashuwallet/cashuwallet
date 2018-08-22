@@ -129,6 +129,12 @@
         <item name="android:statusBarColor">@color/_0x_dark</item>
         <item name="colorAccent">@color/_0x_lite</item>
     </style>
+    <style name="Aeternity" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/aeternity</item>
+        <item name="colorPrimaryDark">@color/aeternity_dark</item>
+        <item name="android:statusBarColor">@color/aeternity_dark</item>
+        <item name="colorAccent">@color/aeternity_lite</item>
+    </style>
     <style name="Augur" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/augur</item>
         <item name="colorPrimaryDark">@color/augur_dark</item>
@@ -140,6 +146,12 @@
         <item name="colorPrimaryDark">@color/basicattentiontoken_dark</item>
         <item name="android:statusBarColor">@color/basicattentiontoken_dark</item>
         <item name="colorAccent">@color/basicattentiontoken_lite</item>
+    </style>
+    <style name="Binance.Coin" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/binancecoin</item>
+        <item name="colorPrimaryDark">@color/binancecoin_dark</item>
+        <item name="android:statusBarColor">@color/binancecoin_dark</item>
+        <item name="colorAccent">@color/binancecoin_lite</item>
     </style>
     <style name="EOS" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/eos</item>
