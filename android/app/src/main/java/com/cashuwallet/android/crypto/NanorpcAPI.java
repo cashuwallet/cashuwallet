@@ -90,7 +90,7 @@ public class NanorpcAPI  implements Service {
             try {
                 String url = baseUrl;
                 String content = "{\"action\":\"work_generate\",\"hash\":\"" + arg + "\"}";
-                JSONObject data = new JSONObject(Network.urlFetch(url, content));
+                JSONObject data = new JSONObject(Network.urlFetch(url, content, 60));
                 return binint.h2b(data.getString("work"));
             } catch (Exception e) {
                 return null;

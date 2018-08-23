@@ -15,26 +15,42 @@ import java.util.concurrent.ExecutorService;
 public class Network {
 
     public static String urlFetch(String url) throws IOException {
-        return urlFetch(url, "GET", null, "application/json");
+        return urlFetch(url, "GET", null);
+    }
+
+    public static String urlFetch(String url, int timeout) throws IOException {
+        return urlFetch(url, "GET", null, timeout);
     }
 
     public static String urlFetch(String url, String content) throws IOException {
-        return urlFetch(url, "POST", content, "application/json");
+        return urlFetch(url, "POST", content);
+    }
+
+    public static String urlFetch(String url, String content, int timeout) throws IOException {
+        return urlFetch(url, "POST", content, timeout);
     }
 
     public static String urlFetch(String url, String method, String content) throws IOException {
         return urlFetch(url, method, content, "application/json");
     }
 
+    public static String urlFetch(String url, String method, String content, int timeout) throws IOException {
+        return urlFetch(url, method, content, "application/json", timeout);
+    }
+
     public static String urlFetch(String url, String method, String content, String contentType) throws IOException {
+        return urlFetch(url, method, content, contentType, 5);
+    }
+
+    public static String urlFetch(String url, String method, String content, String contentType, int timeout) throws IOException {
         try {
-            return _urlFetch(url, method, content, contentType);
+            return _urlFetch(url, method, content, contentType, timeout);
         } catch (NetworkOnMainThreadException e) {
             ExecutorService exec = MainApplication.app().getExec();
             AsyncUrlFetch async = new AsyncUrlFetch();
             String s;
             try {
-                s = async.executeOnExecutor(exec, url, method, content, contentType).get();
+                s = async.executeOnExecutor(exec, url, method, content, contentType, Integer.toString(timeout)).get();
             } catch (InterruptedException|ExecutionException ue) {
                 throw new IOException(ue.getMessage());
             }
@@ -52,8 +68,9 @@ public class Network {
             String method = objects[1];
             String content = objects[2];
             String contentType = objects[3];
+            int timeout = Integer.parseInt(objects[4]);
             try {
-                return _urlFetch(url, method, content, contentType);
+                return _urlFetch(url, method, content, contentType, timeout);
             } catch (IOException e) {
                 exception = e;
                 return null;
@@ -61,12 +78,12 @@ public class Network {
         }
     };
 
-    private static String _urlFetch(String url, String method, String content, String contentType) throws IOException {
+    private static String _urlFetch(String url, String method, String content, String contentType, int timeout) throws IOException {
         if (MainApplication.app().shuttingDown()) throw new IOException("App shutting down");
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setDoInput(true);
-        connection.setConnectTimeout(60*1000);
-        connection.setReadTimeout(60*1000);
+        connection.setConnectTimeout(timeout*1000);
+        connection.setReadTimeout(timeout*1000);
         connection.setRequestMethod(method);
         if (content != null) {
             connection.setDoOutput(true);
