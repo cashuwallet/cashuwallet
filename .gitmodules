@@ -1,0 +1,3 @@
+[submodule "android/crypto-java/src/main/java"]
+	path = android/crypto-java/src/main/java
+	url = git@github.com:raugfer/crypto-java.git

@@ -42,4 +42,5 @@ dependencies {
     androidTestImplementation 'android.arch.persistence.room:testing:1.1.1'
     implementation 'com.google.zxing:core:3.3.2'
     implementation 'com.google.android.gms:play-services-vision:15.0.2'
+    implementation project(':crypto-java')
 }
