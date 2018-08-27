@@ -130,17 +130,17 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://test-insight.bitpay.com/api/", getMinConf()),
-                    new InsightAPI("https://testnet.blockexplorer.com/api/", getMinConf()),
-                    new InsightAPI("https://tbtc.blockdozer.com/insight-api/", getMinConf()),
+                    new InsightAPI("https://test-insight.bitpay.com/api/", getMinConf(), "bitcoin", true),
+                    new InsightAPI("https://testnet.blockexplorer.com/api/", getMinConf(), "bitcoin", true),
+                    new InsightAPI("https://tbtc.blockdozer.com/insight-api/", getMinConf(), "bitcoin", true),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/btc/test3", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/BTCTEST"),
                 });
             } else {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://insight.bitpay.com/api/", getMinConf()),
-                    new InsightAPI("https://blockexplorer.com/api/", getMinConf()),
-                    new InsightAPI("https://btc.blockdozer.com/insight-api/", getMinConf()),
+                    new InsightAPI("https://insight.bitpay.com/api/", getMinConf(), "bitcoin", false),
+                    new InsightAPI("https://blockexplorer.com/api/", getMinConf(), "bitcoin", false),
+                    new InsightAPI("https://btc.blockdozer.com/insight-api/", getMinConf(), "bitcoin", false),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/btc/main", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/BTC"),
                 });
@@ -182,14 +182,14 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://tbch.blockdozer.com/insight-api/", getMinConf()),
-                    new InsightAPI("https://test-bch-insight.bitpay.com/api/", getMinConf()),
+                    new InsightAPI("https://tbch.blockdozer.com/insight-api/", getMinConf(), "bitcoincash", true),
+                    new InsightAPI("https://test-bch-insight.bitpay.com/api/", getMinConf(), "bitcoincash", true),
                 });
             } else {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://bch.blockdozer.com/insight-api/", getMinConf()),
-                    new InsightAPI("https://bitcoincash.blockexplorer.com/api/", getMinConf()),
-                    new InsightAPI("https://bch-insight.bitpay.com/api/", getMinConf()),
+                    new InsightAPI("https://bch.blockdozer.com/insight-api/", getMinConf(), "bitcoincash", false),
+                    new InsightAPI("https://bitcoincash.blockexplorer.com/api/", getMinConf(), "bitcoincash", false),
+                    new InsightAPI("https://bch-insight.bitpay.com/api/", getMinConf(), "bitcoincash", false),
                 });
             }
         }
@@ -228,9 +228,9 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new InsightAPI("https://test-explorer.bitcoingold.org/insight-api/", getMinConf());
+                return new InsightAPI("https://test-explorer.bitcoingold.org/insight-api/", getMinConf(), "bitcoingold", true);
             } else {
-                return new InsightAPI("https://explorer.bitcoingold.org/insight-api/", getMinConf());
+                return new InsightAPI("https://explorer.bitcoingold.org/insight-api/", getMinConf(), "bitcoingold", false);
             }
         }
 
@@ -269,12 +269,12 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://testnet-insight.dashevo.org/insight-api-dash/", getMinConf()),
+                    new InsightAPI("https://testnet-insight.dashevo.org/insight-api-dash/", getMinConf(), "dash", true),
                     new SochainAPI("https://chain.so/api/v2/*/DASHTEST"),
                 });
             } else {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://insight.dash.org/insight-api-dash/", getMinConf()),
+                    new InsightAPI("https://insight.dash.org/insight-api-dash/", getMinConf(), "dash", false),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/dash/main", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/DASH"),
                 });
@@ -496,12 +496,12 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://testnet.litecore.io/api/", getMinConf()),
+                    new InsightAPI("https://testnet.litecore.io/api/", getMinConf(), "litecoin", true),
                     new SochainAPI("https://chain.so/api/v2/*/LTCTEST"),
                 });
             } else {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://insight.litecore.io/api/", getMinConf()),
+                    new InsightAPI("https://insight.litecore.io/api/", getMinConf(), "litecoin", false),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/ltc/main", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/LTC"),
                 });
@@ -676,9 +676,9 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new InsightAPI("https://testnet.qtum.org/insight-api/", getMinConf());
+                return new InsightAPI("https://testnet.qtum.org/insight-api/", getMinConf(), "qtum", true);
             } else {
-                return new InsightAPI("https://explorer.qtum.org/insight-api/", getMinConf());
+                return new InsightAPI("https://explorer.qtum.org/insight-api/", getMinConf(), "qtum", false);
             }
         }
 
@@ -796,12 +796,12 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new InsightAPI("https://explorer.testnet.z.cash/api/", getMinConf());
+                return new InsightAPI("https://explorer.testnet.z.cash/api/", getMinConf(), "zcash", true);
             } else {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://zcash.blockexplorer.com/api/", getMinConf()),
-                    new InsightAPI("https://zcashnetwork.info/api/", getMinConf()),
-                    new InsightAPI("https://explorer.zcashfr.io/insight-api-zcash/", getMinConf()),
+                    new InsightAPI("https://zcash.blockexplorer.com/api/", getMinConf(), "zcash", false),
+                    new InsightAPI("https://zcashnetwork.info/api/", getMinConf(), "zcash", false),
+                    new InsightAPI("https://explorer.zcashfr.io/insight-api-zcash/", getMinConf(), "zcash", false),
                 });
             }
         }

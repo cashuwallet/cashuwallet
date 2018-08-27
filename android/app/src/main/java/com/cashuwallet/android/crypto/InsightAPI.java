@@ -1,6 +1,7 @@
 package com.cashuwallet.android.crypto;
 
 import com.cashuwallet.android.Network;
+import com.raugfer.crypto.coins;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,10 +15,14 @@ public class InsightAPI implements Service {
 
     private final String baseUrl;
     private final int confirmations;
+    private final String label;
+    private final boolean testnet;
 
-    public InsightAPI(String baseUrl, int confirmations) {
+    public InsightAPI(String baseUrl, int confirmations, String label, boolean testnet) {
         this.baseUrl = baseUrl;
         this.confirmations = confirmations;
+        this.label = label;
+        this.testnet = testnet;
     }
 
     @Override
@@ -38,8 +43,12 @@ public class InsightAPI implements Service {
         try {
             String url = baseUrl + "utils/estimatefee?nbBlocks=" + confirmations;
             JSONObject data = new JSONObject(Network.urlFetch(url));
-            BigInteger fee = new BigDecimal(data.getString(""+confirmations)).multiply(BigDecimal.TEN.pow(8)).toBigInteger();
-            return fee.max(BigInteger.valueOf(1024));
+            BigInteger fee = BigInteger.valueOf(coins.attr("default_fee", 0, label, testnet));
+            BigDecimal value = new BigDecimal(data.getString(""+confirmations));
+            if (value.compareTo(BigDecimal.ZERO) >= 0) {
+                fee = value.multiply(BigDecimal.TEN.pow(8)).toBigInteger();
+            }
+            return fee;
         } catch (Exception e) {
             return null;
         }
