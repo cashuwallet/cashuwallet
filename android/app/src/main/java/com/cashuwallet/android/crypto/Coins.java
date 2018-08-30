@@ -23,6 +23,7 @@ public final class Coins {
     private static final Coin qtum = new Qtum();
     private static final Coin ripple = new Ripple();
     private static final Coin stellar = new Stellar();
+    private static final Coin waves = new Waves();
     private static final Coin zcash = new Zcash();
     private static final Coin _0x = new _0x();
     private static final Coin aeternity = new Aeternity();
@@ -52,6 +53,7 @@ public final class Coins {
         registry.put(qtum.getCode(), qtum);
         registry.put(ripple.getCode(), ripple);
         registry.put(stellar.getCode(), stellar);
+        registry.put(waves.getCode(), waves);
         registry.put(zcash.getCode(), zcash);
         registry.put(_0x.getCode(), _0x);
         registry.put(aeternity.getCode(), aeternity);
@@ -768,6 +770,46 @@ public final class Coins {
                 return "http://testnet.stellarchain.io/tx/" + hash;
             } else {
                 return "https://stellarchain.io/tx/" + hash;
+            }
+        }
+    }
+
+    private static class Waves extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Waves";
+        }
+
+        @Override
+        public String getLabel() {
+            return "waves";
+        }
+
+        @Override
+        public String getCode() {
+            return "WAVES";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new WavesnodesAPI("https://pool.testnet.wavesnodes.com/", true);
+            } else {
+                return new WavesnodesAPI("https://nodes.wavesnodes.com/", false);
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return "https://testnet.wavesexplorer.com/tx/" + hash;
+            } else {
+                return "https://wavesexplorer.com/tx/" + hash;
             }
         }
     }

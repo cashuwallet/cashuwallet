@@ -117,6 +117,12 @@
         <item name="android:statusBarColor">@color/stellar_dark</item>
         <item name="colorAccent">@color/stellar_lite</item>
     </style>
+    <style name="Waves" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/waves</item>
+        <item name="colorPrimaryDark">@color/waves_dark</item>
+        <item name="android:statusBarColor">@color/waves_dark</item>
+        <item name="colorAccent">@color/waves_lite</item>
+    </style>
     <style name="Zcash" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/zcash</item>
         <item name="colorPrimaryDark">@color/zcash_dark</item>
