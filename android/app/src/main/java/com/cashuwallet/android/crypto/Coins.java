@@ -451,14 +451,14 @@ public final class Coins {
                 return new LiskioAPI("https://testnet.lisk.io/api/", "1.0", true);
             } else {
                 return new Service.Multi(new Service[]{
-                    new LiskioAPI("https://node08.lisk.io/api/", "0.9", false),
-                    new LiskioAPI("https://node07.lisk.io/api/", "0.9", false),
-                    new LiskioAPI("https://node06.lisk.io/api/", "0.9", false),
-                    new LiskioAPI("https://node05.lisk.io/api/", "0.9", false),
-                    new LiskioAPI("https://node04.lisk.io/api/", "0.9", false),
-                    new LiskioAPI("https://node03.lisk.io/api/", "0.9", false),
-                    new LiskioAPI("https://node02.lisk.io/api/", "0.9", false),
-                    new LiskioAPI("https://node01.lisk.io/api/", "0.9", false),
+                    new LiskioAPI("https://node08.lisk.io/api/", "1.0", false),
+                    new LiskioAPI("https://node07.lisk.io/api/", "1.0", false),
+                    new LiskioAPI("https://node06.lisk.io/api/", "1.0", false),
+                    new LiskioAPI("https://node05.lisk.io/api/", "1.0", false),
+                    new LiskioAPI("https://node04.lisk.io/api/", "1.0", false),
+                    new LiskioAPI("https://node03.lisk.io/api/", "1.0", false),
+                    new LiskioAPI("https://node02.lisk.io/api/", "1.0", false),
+                    new LiskioAPI("https://node01.lisk.io/api/", "1.0", false),
                 });
             }
         }
