@@ -12,6 +12,7 @@ public final class Coins {
     private static final Coin bitcoincash = new BitcoinCash();
     private static final Coin bitcoingold = new BitcoinGold();
     private static final Coin dash = new Dash();
+    private static final Coin digibyte = new Digibyte();
     private static final Coin dogecoin = new Dogecoin();
     private static final Coin ethereum = new Ethereum();
     private static final Coin ethereumclassic = new EthereumClassic();
@@ -42,6 +43,7 @@ public final class Coins {
         registry.put(bitcoincash.getCode(), bitcoincash);
         registry.put(bitcoingold.getCode(), bitcoingold);
         registry.put(dash.getCode(), dash);
+        registry.put(digibyte.getCode(), digibyte);
         registry.put(dogecoin.getCode(), dogecoin);
         registry.put(ethereum.getCode(), ethereum);
         registry.put(ethereumclassic.getCode(), ethereumclassic);
@@ -289,6 +291,49 @@ public final class Coins {
                 return "https://testnet-insight.dashevo.org/insight/tx/" + hash;
             } else {
                 return "https://insight.dash.org/insight/tx/" + hash;
+            }
+        }
+    }
+
+    private static class Digibyte extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Digibyte";
+        }
+
+        @Override
+        public String getLabel() {
+            return "digibyte";
+        }
+
+        @Override
+        public String getCode() {
+            return "DGB";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new Service.Multi(new Service[]{
+                });
+            } else {
+                return new Service.Multi(new Service[]{
+                    new InsightAPI("https://digiexplorer.info/api/", 0/*getMinConf()*/, "digibyte", false),
+                });
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return null;
+            } else {
+                return "https://digiexplorer.info/tx/" + hash;
             }
         }
     }

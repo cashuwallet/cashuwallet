@@ -31,8 +31,7 @@ public class InsightAPI implements Service {
             String url = baseUrl + "status?q=getInfo";
             JSONObject data = new JSONObject(Network.urlFetch(url));
             data = data.getJSONObject("info");
-            long height = data.getLong("blocks");
-            return height;
+            return data.getLong("blocks");
         } catch (Exception e) {
             return -1;
         }
@@ -41,12 +40,14 @@ public class InsightAPI implements Service {
     @Override
     public BigInteger getFeeEstimate() {
         try {
-            String url = baseUrl + "utils/estimatefee?nbBlocks=" + confirmations;
-            JSONObject data = new JSONObject(Network.urlFetch(url));
             BigInteger fee = BigInteger.valueOf(coins.attr("default_fee", 0, label, testnet));
-            BigDecimal value = new BigDecimal(data.getString(""+confirmations));
-            if (value.compareTo(BigDecimal.ZERO) >= 0) {
-                fee = value.multiply(BigDecimal.TEN.pow(8)).toBigInteger();
+            if (confirmations > 0) {
+                String url = baseUrl + "utils/estimatefee?nbBlocks=" + confirmations;
+                JSONObject data = new JSONObject(Network.urlFetch(url));
+                BigDecimal value = new BigDecimal(data.getString("" + confirmations));
+                if (value.compareTo(BigDecimal.ZERO) >= 0) {
+                    fee = value.multiply(BigDecimal.TEN.pow(8)).toBigInteger();
+                }
             }
             return fee;
         } catch (Exception e) {

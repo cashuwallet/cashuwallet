@@ -53,6 +53,7 @@ public final class MainApplication extends Application {
         themes.put("BCH", R.style.Bitcoin_Cash);
         themes.put("BTG", R.style.Bitcoin_Gold);
         themes.put("DASH", R.style.Dash);
+        themes.put("DGB", R.style.Digibyte);
         themes.put("DOGE", R.style.Dogecoin);
         themes.put("ETH", R.style.Ethereum);
         themes.put("ETC", R.style.Ethereum_Classic);
@@ -80,6 +81,7 @@ public final class MainApplication extends Application {
         drawable.put("BCH", R.drawable.bitcoincash);
         drawable.put("BTG", R.drawable.bitcoingold);
         drawable.put("DASH", R.drawable.dash);
+        drawable.put("DGB", R.drawable.digibyte);
         drawable.put("DOGE", R.drawable.dogecoin);
         drawable.put("ETH", R.drawable.ethereum);
         drawable.put("ETC", R.drawable.ethereumclassic);
