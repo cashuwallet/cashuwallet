@@ -138,7 +138,12 @@ public class InsightAPI implements Service {
                 JSONObject item = items.getJSONObject(i);
                 String hash = item.getString("txid");
                 int index = (int)item.getLong("vout");
-                BigInteger amount = BigInteger.valueOf(item.getLong("satoshis"));
+                BigInteger amount;
+                if (item.has("satoshis")) {
+                    amount = BigInteger.valueOf(item.getLong("satoshis"));
+                } else {
+                    amount = new BigDecimal(item.getDouble("amount")).multiply(BigDecimal.TEN.pow(8)).toBigInteger();
+                }
                 UTXO o = new UTXO();
                 o.hash = hash;
                 o.index = index;
