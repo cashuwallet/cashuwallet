@@ -195,4 +195,10 @@
         <item name="android:statusBarColor">@color/status_dark</item>
         <item name="colorAccent">@color/status_lite</item>
     </style>
+    <style name="Zilliqa" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/zilliqa</item>
+        <item name="colorPrimaryDark">@color/zilliqa_dark</item>
+        <item name="android:statusBarColor">@color/zilliqa_dark</item>
+        <item name="colorAccent">@color/zilliqa_lite</item>
+    </style>
 </resources>

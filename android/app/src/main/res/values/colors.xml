@@ -128,4 +128,8 @@
     <color name="status">#505db7</color>
     <color name="status_dark">#404b93</color>
     <color name="status_lite">#7dc4b0</color>
+
+    <color name="zilliqa">#02172d</color>
+    <color name="zilliqa_dark">#021224</color>
+    <color name="zilliqa_lite">#23a5a8</color>
 </resources>

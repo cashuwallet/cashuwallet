@@ -36,6 +36,7 @@ public final class Coins {
     private static final Coin golem = new Golem();
     private static final Coin omisego = new OmiseGO();
     private static final Coin status = new Status();
+    private static final Coin zilliqa = new Zilliqa();
 
     private static final Map<String, Coin> registry = new HashMap<>();
 
@@ -68,6 +69,7 @@ public final class Coins {
         registry.put(golem.getCode(), golem);
         registry.put(omisego.getCode(), omisego);
         registry.put(status.getCode(), status);
+        registry.put(zilliqa.getCode(), zilliqa);
     }
 
     public static Coin findCoin(String code) {
@@ -1152,6 +1154,28 @@ public final class Coins {
         @Override
         public String getCode() {
             return "SNT";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class Zilliqa extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Zilliqa";
+        }
+
+        @Override
+        public String getLabel() {
+            return "zilliqa";
+        }
+
+        @Override
+        public String getCode() {
+            return "ZIL";
         }
 
         @Override

@@ -77,6 +77,7 @@ public final class MainApplication extends Application {
         themes.put("GNT", R.style.Golem);
         themes.put("OMG", R.style.OmiseGO);
         themes.put("SNT", R.style.Status);
+        themes.put("ZIL", R.style.Zilliqa);
 
         drawable.put("BTC", R.drawable.bitcoin);
         drawable.put("BCH", R.drawable.bitcoincash);
@@ -106,6 +107,7 @@ public final class MainApplication extends Application {
         drawable.put("GNT", R.drawable.golem);
         drawable.put("OMG", R.drawable.omisego);
         drawable.put("SNT", R.drawable.status);
+        drawable.put("ZIL", R.drawable.zilliqa);
 
         exec = createExec();
         mainnetSync = new Sync(exec, mainnetdb.appDao(), false);
