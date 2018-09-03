@@ -79,8 +79,8 @@ public class InsightAPI implements Service {
                 JSONObject item = items.getJSONObject(i);
                 String hash = item.getString("txid");
                 long block = item.optLong("blockheight", Long.MAX_VALUE);
-                if (block == -1) block = Long.MAX_VALUE;
-                int time = item.optInt("time", 0);
+                if (block <= 0) block = Long.MAX_VALUE;
+                int time = item.optInt("time", (int) (System.currentTimeMillis() / 1000));
                 BigInteger fee = new BigDecimal(item.optDouble("fees", 0)).multiply(BigDecimal.TEN.pow(8)).toBigInteger();
                 BigInteger amount = BigInteger.ZERO;
                 JSONArray inputs = item.optJSONArray("vin");

@@ -33,6 +33,10 @@
     <color name="dash_dark">#1e5c9c</color>
     <color name="dash_lite">#224b76</color>
 
+    <color name="decred">#0c1e3e</color>
+    <color name="decred_dark">#0a1832</color>
+    <color name="decred_lite">#3268fb</color>
+
     <color name="digibyte">#002352</color>
     <color name="digibyte_dark">#001c42</color>
     <color name="digibyte_lite">#0066cc</color>

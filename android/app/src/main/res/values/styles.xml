@@ -51,6 +51,12 @@
         <item name="android:statusBarColor">@color/dash_dark</item>
         <item name="colorAccent">@color/dash_lite</item>
     </style>
+    <style name="Decred" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/decred</item>
+        <item name="colorPrimaryDark">@color/decred_dark</item>
+        <item name="android:statusBarColor">@color/decred_dark</item>
+        <item name="colorAccent">@color/decred_lite</item>
+    </style>
     <style name="Digibyte" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/digibyte</item>
         <item name="colorPrimaryDark">@color/digibyte_dark</item>

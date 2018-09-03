@@ -12,6 +12,7 @@ public final class Coins {
     private static final Coin bitcoincash = new BitcoinCash();
     private static final Coin bitcoingold = new BitcoinGold();
     private static final Coin dash = new Dash();
+    private static final Coin decred = new Decred();
     private static final Coin digibyte = new Digibyte();
     private static final Coin dogecoin = new Dogecoin();
     private static final Coin ethereum = new Ethereum();
@@ -43,6 +44,7 @@ public final class Coins {
         registry.put(bitcoincash.getCode(), bitcoincash);
         registry.put(bitcoingold.getCode(), bitcoingold);
         registry.put(dash.getCode(), dash);
+        registry.put(decred.getCode(), decred);
         registry.put(digibyte.getCode(), digibyte);
         registry.put(dogecoin.getCode(), dogecoin);
         registry.put(ethereum.getCode(), ethereum);
@@ -291,6 +293,46 @@ public final class Coins {
                 return "https://testnet-insight.dashevo.org/insight/tx/" + hash;
             } else {
                 return "https://insight.dash.org/insight/tx/" + hash;
+            }
+        }
+    }
+
+    private static class Decred extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Decred";
+        }
+
+        @Override
+        public String getLabel() {
+            return "decred";
+        }
+
+        @Override
+        public String getCode() {
+            return "DCR";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new InsightAPI("https://testnet.decred.org/api/", getMinConf(), "decred", true);
+            } else {
+                return new InsightAPI("https://mainnet.decred.org/api/", getMinConf(), "decred", false);
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return "https://testnet.decred.org/tx/" + hash;
+            } else {
+                return "https://mainnet.decred.org/tx/" + hash;
             }
         }
     }
