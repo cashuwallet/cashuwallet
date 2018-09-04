@@ -13,6 +13,7 @@ import android.util.Base64;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -156,13 +157,17 @@ public class UserAuthenticationLocker extends Locker {
     private SecretKey getSecretKey() {
         KeyStore keyStore = getKeyStore();
         if (keyStore == null) return createSecretKey();
-        SecretKey secretKey;
+        Key key;
         try {
-            secretKey = (SecretKey) keyStore.getKey(keyName, null);
+            key = keyStore.getKey(keyName, null);
         } catch (KeyStoreException|NoSuchAlgorithmException|UnrecoverableKeyException e) {
-            secretKey = null;
+            key = null;
         }
-        if (secretKey == null) return createSecretKey();
+        SecretKey secretKey = key instanceof SecretKey ? (SecretKey) key: null;
+        if (secretKey == null) {
+            if (key != null) deleteSecretKey();
+            return createSecretKey();
+        }
         return secretKey;
     }
 

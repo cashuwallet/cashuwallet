@@ -7,6 +7,7 @@ import android.util.Base64;
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
@@ -92,8 +93,8 @@ public class InternalLocker extends Locker {
 
     private Cipher getCipher() {
         try {
-            return Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidOpenSSL");
-        } catch (NoSuchAlgorithmException|NoSuchPaddingException|NoSuchProviderException e) {
+            return Cipher.getInstance("RSA/ECB/PKCS1Padding");
+        } catch (NoSuchAlgorithmException|NoSuchPaddingException e) {
             return null;
         }
     }
@@ -101,14 +102,18 @@ public class InternalLocker extends Locker {
     private KeyPair getSecretKeyPair() {
         KeyStore keyStore = getKeyStore();
         if (keyStore == null) return createSecretKeyPair();
-        KeyStore.PrivateKeyEntry entry;
+        KeyStore.Entry entry;
         try {
-            entry = (KeyStore.PrivateKeyEntry) keyStore.getEntry(keyName, null);
+            entry = keyStore.getEntry(keyName, null);
         } catch (KeyStoreException|NoSuchAlgorithmException|UnrecoverableEntryException e) {
             entry = null;
         }
-        if (entry == null) return createSecretKeyPair();
-        return new KeyPair(entry.getCertificate().getPublicKey(), entry.getPrivateKey());
+        KeyStore.PrivateKeyEntry secretEntry = entry instanceof KeyStore.PrivateKeyEntry ? (KeyStore.PrivateKeyEntry) entry : null;
+        if (secretEntry == null) {
+            if (entry != null) deleteSecretKeyPair();
+            return createSecretKeyPair();
+        }
+        return new KeyPair(secretEntry.getCertificate().getPublicKey(), secretEntry.getPrivateKey());
     }
 
     private KeyPair createSecretKeyPair() {

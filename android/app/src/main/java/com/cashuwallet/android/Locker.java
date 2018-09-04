@@ -1,5 +1,6 @@
 package com.cashuwallet.android;
 
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.Build;
 
@@ -18,11 +19,13 @@ public abstract class Locker {
     public static final String KEY_STORE_NAME = "AndroidKeyStore";
 
     public static Locker create(String keyName, Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return new UserAuthenticationLocker(keyName, context);
-        } else {
-            return new InternalLocker(keyName, context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
+            if (keyguardManager != null && keyguardManager.isDeviceSecure()) {
+                return new UserAuthenticationLocker(keyName, context);
+            }
         }
+        return new InternalLocker(keyName, context);
     }
 
     protected final String keyName;
