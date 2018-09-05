@@ -50,6 +50,12 @@
         \n\nPlease report issues to bugs@cashu.cc
     </string>
 
+    <string name="new_version_installed">New version installed</string>
+    <string name="info_newcoins_reset">
+        You have upgraded Cashu and new coins are available.
+        Please disconnect and reconnect your wallet in order to enable them.
+    </string>
+
     <string name="mnemonic_label">Inform the wallet mnemonic phrase</string>
     <string name="mnemonic_help">If you are creating a new wallet press the GENERATE button. Take note of the mnemonic phrase, it should be stored in a safe place.</string>
     <string name="password_label">Inform the wallet password</string>

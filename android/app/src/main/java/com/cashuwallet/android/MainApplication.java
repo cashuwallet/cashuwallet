@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 
 import com.cashuwallet.android.crypto.Coin;
+import com.cashuwallet.android.crypto.Coins;
 import com.raugfer.crypto.mnemonic;
 import com.raugfer.crypto.pair;
 import com.cashuwallet.android.crypto.Sync;
@@ -262,6 +263,16 @@ public final class MainApplication extends Application {
         exec = createExec();
         mainnetSync = new Sync(exec, mainnetdb.appDao(), false);
         testnetSync = new Sync(exec, testnetdb.appDao(), true);
+    }
+
+    public boolean requiresReconnect() {
+        int coin_count = Coins.count();
+        SharedPreferences preferences = getPreferences();
+        SharedPreferences.Editor editor = preferences.edit();
+        int supported_coin_count = preferences.getInt("supported_coin_count", coin_count);
+        editor.putInt("supported_coin_count", coin_count);
+        editor.apply();
+        return supported_coin_count < coin_count;
     }
 
     private static class Session {

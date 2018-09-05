@@ -95,6 +95,15 @@ public class MainActivity extends AppCompatActivity
             swipeRefreshLayout.setRefreshing(false);
         });
         swipeRefreshLayout.post(() -> adapter.refresh());
+
+        if (MainApplication.app().requiresReconnect()) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.new_version_installed)
+                    .setCancelable(true)
+                    .setMessage(R.string.info_newcoins_reset)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
+        }
     }
 
     @Override

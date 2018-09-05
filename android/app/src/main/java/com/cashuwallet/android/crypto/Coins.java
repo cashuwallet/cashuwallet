@@ -80,6 +80,10 @@ public final class Coins {
         return registry.values().iterator();
     }
 
+    public static int count() {
+        return registry.size();
+    }
+
     private static abstract class AbstractCoin implements Coin {
 
         @Override

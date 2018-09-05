@@ -48,6 +48,12 @@
         \n\nPor favor relate os problemas que encontrar através do e-mail bugs@cashu.cc
     </string>
 
+    <string name="new_version_installed">Nova versão instalada</string>
+    <string name="info_newcoins_reset">
+        Você atualizou a Cashu e novas moedas estão disponíveis.
+        Por favor desconecte e reconecte sua carteira para que possa habilitá-las.
+    </string>
+
     <string name="mnemonic_label">Informe a frase mnemônica da carteira</string>
     <string name="mnemonic_help">Se você está criando uma nova carteira pressione o botão GERAR. Anote a frase mnemônica, ela deve ser guardada em um local seguro.</string>
     <string name="password_label">Informe a senha da carteira</string>
