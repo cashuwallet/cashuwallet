@@ -9,7 +9,6 @@ import android.preference.PreferenceActivity;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 import android.view.WindowManager;
 
 import com.cashuwallet.android.R;
@@ -58,7 +57,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             if (!super.onMenuItemSelected(featureId, item)) {
-                NavUtils.navigateUpFromSameTask(this);
+                //NavUtils.navigateUpFromSameTask(this);
+                super.onBackPressed();
             }
             return true;
         }

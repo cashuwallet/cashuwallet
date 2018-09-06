@@ -51,6 +51,8 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int SETTINGS_SCREEN_REQUEST_CODE = 1;
+
     private Sync sync;
     private Adapter adapter;
 
@@ -116,6 +118,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SETTINGS_SCREEN_REQUEST_CODE) {
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -159,7 +171,7 @@ public class MainActivity extends AppCompatActivity
             //    this.setTitle(item.getTitle());
             //    return true;
             case R.id.nav_manage:
-                startActivity(new Intent(this, SettingsActivity.class));
+                startActivityForResult(new Intent(this, SettingsActivity.class), SETTINGS_SCREEN_REQUEST_CODE);
                 return true;
             //case R.id.nav_share:
             //    return true;
