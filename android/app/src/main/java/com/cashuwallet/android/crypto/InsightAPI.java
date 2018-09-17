@@ -71,6 +71,7 @@ public class InsightAPI implements Service {
     @Override
     public List<HistoryItem> getHistory(String address, long height) {
         try {
+            long chain_height = -1;
             String url = baseUrl + "addrs/" + address + "/txs?from=0&to=20&noAsm=1&noSpent=1&noScriptSig=1";
             JSONObject data = new JSONObject(Network.urlFetch(url));
             JSONArray items = data.getJSONArray("items");
@@ -78,8 +79,19 @@ public class InsightAPI implements Service {
             for (int i = 0; i < items.length(); i++) {
                 JSONObject item = items.getJSONObject(i);
                 String hash = item.getString("txid");
-                long block = item.optLong("blockheight", Long.MAX_VALUE);
-                if (block <= 0) block = Long.MAX_VALUE;
+                long block = item.optLong("blockheight", -1);
+                if (block <= 0) {
+                    block = Long.MAX_VALUE;
+                    if (item.has("confirmations")) {
+                        long tx_confirmations = item.getLong("confirmations");
+                        if (tx_confirmations > 0) {
+                            if (chain_height == -1) chain_height = getHeight();
+                            if (chain_height > tx_confirmations) {
+                                block = chain_height - tx_confirmations;
+                            }
+                        }
+                    }
+                }
                 int time = item.optInt("time", (int) (System.currentTimeMillis() / 1000));
                 BigInteger fee = new BigDecimal(item.optDouble("fees", 0)).multiply(BigDecimal.TEN.pow(8)).toBigInteger();
                 BigInteger amount = BigInteger.ZERO;

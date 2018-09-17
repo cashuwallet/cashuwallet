@@ -111,6 +111,7 @@ public class WavesnodesAPI implements Service {
         try {
             byte[] txn = binint.h2b(_transaction);
             dict fields = transaction.transaction_decode(txn, "waves", testnet);
+            BigInteger version = fields.get("version");
             String signature = base58.encode(fields.get("signature"));
             String publickey = fields.get("publickey");
             String asset = fields.get("asset", "");
@@ -122,7 +123,7 @@ public class WavesnodesAPI implements Service {
             String attachment = fields.get("attachment", "");
             String url = baseUrl + "transactions/broadcast";
             String content = "{" +
-                "\"version\": 2," +
+                "\"version\": " + version + "," +
                 "\"type\": 4," +
                 "\"signature\": \"" + signature + "\"," +
                 "\"proofs\": [\"" + signature + "\"]," +
