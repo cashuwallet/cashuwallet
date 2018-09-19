@@ -16,11 +16,21 @@ import java.util.List;
 public class WavesnodesAPI implements Service {
 
     private final String baseUrl;
+    private final String assetId;
     private final boolean testnet;
 
     public WavesnodesAPI(String baseUrl, boolean testnet) {
+        this(baseUrl, null, testnet);
+    }
+
+    public WavesnodesAPI(String baseUrl, String assetId, boolean testnet) {
         this.baseUrl = baseUrl;
+        this.assetId = assetId;
         this.testnet = testnet;
+    }
+
+    private static boolean assetEquals(String asset1, String asset2) {
+        return asset1 == null ? asset2 == null : asset1.equals(asset2);
     }
 
     @Override
@@ -42,10 +52,17 @@ public class WavesnodesAPI implements Service {
     @Override
     public BigInteger getBalance(String address) {
         try {
-            String url = baseUrl + "addresses/balance/details/" + address;
-            JSONObject data = new JSONObject(Network.urlFetch(url));
-            long available = data.getLong("available");
-            return BigInteger.valueOf(available);
+            if (assetId == null) {
+                String url = baseUrl + "addresses/balance/details/" + address;
+                JSONObject data = new JSONObject(Network.urlFetch(url));
+                long available = data.getLong("available");
+                return BigInteger.valueOf(available);
+            } else {
+                String url = baseUrl + "assets/balance/" + address + "/" + assetId;
+                JSONObject data = new JSONObject(Network.urlFetch(url));
+                long balance = data.getLong("balance");
+                return BigInteger.valueOf(balance);
+            }
         } catch (Exception e) {
             return null;
         }
@@ -62,24 +79,37 @@ public class WavesnodesAPI implements Service {
                 JSONObject item = items.getJSONObject(i);
                 String asset = item.isNull("assetId") ? null : item.getString("assetId");
                 String fee_asset = item.isNull("feeAssetId") ? null : item.getString("feeAssetId");
-                if (asset == null || fee_asset == null) {
+                if (assetEquals(asset, assetId) || assetEquals(fee_asset, assetId)) {
                     String hash = item.getString("id");
                     long block = item.optLong("height", Long.MAX_VALUE);
                     if (block == -1) block = Long.MAX_VALUE;
                     int time = (int)(item.optLong("timestamp", 0) / 1000);
-                    String source = item.getString("sender");
-                    String target = item.getString("recipient");
-                    BigInteger value = BigInteger.valueOf(item.getLong("amount"));
-                    BigInteger fee_value = BigInteger.valueOf(item.getLong("fee"));
-                    BigInteger fee = BigInteger.ZERO;
-                    if (fee_asset == null) fee = fee.add(fee_value);
                     BigInteger amount = BigInteger.ZERO;
-                    if (address.equals(source)) {
-                        if (fee_asset == null) amount = amount.subtract(fee_value);
-                        if (asset == null) amount = amount.subtract(value);
+                    BigInteger fee = BigInteger.ZERO;
+                    String source = item.getString("sender");
+                    if (assetEquals(asset, assetId)) {
+                        if (item.has("recipient")) {
+                            String target = item.getString("recipient");
+                            BigInteger value = BigInteger.valueOf(item.getLong("amount"));
+                            if (address.equals(target)) amount = amount.add(value);
+                            if (address.equals(source)) amount = amount.subtract(value);
+                        }
+                        if (item.has("transfers")) {
+                            JSONArray transfers = item.getJSONArray("transfers");
+                            for (int j = 0; j < transfers.length(); j++) {
+                                JSONObject transfer = transfers.getJSONObject(j);
+                                String target = transfer.getString("recipient");
+                                BigInteger value = BigInteger.valueOf(transfer.getLong("amount"));
+                                if (address.equals(target)) amount = amount.add(value);
+                            }
+                            BigInteger value = BigInteger.valueOf(item.getLong("totalAmount"));
+                            if (address.equals(source)) amount = amount.subtract(value);
+                        }
                     }
-                    if (address.equals(target)) {
-                        if (asset == null) amount = amount.add(value);
+                    if (assetEquals(fee_asset, assetId)) {
+                        BigInteger fee_value = BigInteger.valueOf(item.getLong("fee"));
+                        fee = fee.add(fee_value);
+                        if (address.equals(source)) amount = amount.subtract(fee_value);
                     }
                     HistoryItem o = new HistoryItem();
                     o.hash = hash;

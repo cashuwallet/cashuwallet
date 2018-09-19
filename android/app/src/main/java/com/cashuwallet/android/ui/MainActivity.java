@@ -257,9 +257,13 @@ public class MainActivity extends AppCompatActivity
 
             if (refreshing.contains(multiwallet)) color = Color.LTGRAY;
 
+            String tag = "";
+            if (coin instanceof Coins.ERC20Token) tag = "ERC-20";
+            if (coin instanceof Coins.WavesToken) tag = "Waves";
+
             vh.image.setImageResource(res);
             vh.name.setText(coin.getName() + (sync.isTestnet() ? " Testnet": ""));
-            vh.tag.setText(coin instanceof Coins.ERC20Token ? "ERC-20" : "");
+            vh.tag.setText(tag);
             vh.balance.setText(formatAmount(coin, multiwallet.getBalance()));
             vh.status.setTextColor(color);
             vh.itemView.setOnClickListener((View view) -> {

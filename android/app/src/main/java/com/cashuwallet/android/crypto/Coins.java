@@ -1188,4 +1188,21 @@ public final class Coins {
         }
     }
 
+    public static abstract class WavesToken extends Waves {
+        @Override
+        public Coin getFeeCoin() {
+            return findCoin("WAVES");
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            String assetId = coins.attr("asset.id", getLabel(), testnet);
+            if (testnet) {
+                return new WavesnodesAPI("https://pool.testnet.wavesnodes.com/", assetId, true);
+            } else {
+                return new WavesnodesAPI("https://nodes.wavesnodes.com/", assetId, false);
+            }
+        }
+    }
+
 }
