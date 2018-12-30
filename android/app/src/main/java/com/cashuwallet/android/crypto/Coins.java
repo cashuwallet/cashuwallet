@@ -164,9 +164,9 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://testnet.blockchain.info/tx/" + hash;
+                return "https://test-insight.bitpay.com/tx/" + hash;
             } else {
-                return "https://blockchain.info/tx/" + hash;
+                return "https://insight.bitpay.com/tx/" + hash;
             }
         }
     }
