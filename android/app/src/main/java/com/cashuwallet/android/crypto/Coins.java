@@ -11,6 +11,7 @@ public final class Coins {
     private static final Coin bitcoin = new Bitcoin();
     private static final Coin bitcoincash = new BitcoinCash();
     private static final Coin bitcoingold = new BitcoinGold();
+    private static final Coin bitcoinsv = new BitcoinSV();
     private static final Coin dash = new Dash();
     private static final Coin decred = new Decred();
     private static final Coin digibyte = new Digibyte();
@@ -44,6 +45,7 @@ public final class Coins {
         registry.put(bitcoin.getCode(), bitcoin);
         registry.put(bitcoincash.getCode(), bitcoincash);
         registry.put(bitcoingold.getCode(), bitcoingold);
+        registry.put(bitcoinsv.getCode(), bitcoinsv);
         registry.put(dash.getCode(), dash);
         registry.put(decred.getCode(), decred);
         registry.put(digibyte.getCode(), digibyte);
@@ -252,6 +254,49 @@ public final class Coins {
                 return "https://test-explorer.bitcoingold.org/insight/tx/" + hash;
             } else {
                 return "https://explorer.bitcoingold.org/insight/tx/" + hash;
+            }
+        }
+    }
+
+    private static class BitcoinSV extends BitcoinCash {
+        @Override
+        public String getName() {
+            return "Bitcoin SV";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bitcoinsv";
+        }
+
+        @Override
+        public String getCode() {
+            return "BSV";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new Service.Multi(new Service[]{
+                });
+            } else {
+                return new Service.Multi(new Service[]{
+                    new InsightAPI("https://bchsvexplorer.com/api/", getMinConf(), "bitcoinsv", false),
+                });
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return null;
+            } else {
+                return "https://bchsvexplorer.com/tx/" + hash;
             }
         }
     }

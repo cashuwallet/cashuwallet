@@ -45,6 +45,12 @@
         <item name="android:statusBarColor">@color/bitcoingold_dark</item>
         <item name="colorAccent">@color/bitcoingold_lite</item>
     </style>
+    <style name="Bitcoin.SV" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/bitcoinsv</item>
+        <item name="colorPrimaryDark">@color/bitcoinsv_dark</item>
+        <item name="android:statusBarColor">@color/bitcoinsv_dark</item>
+        <item name="colorAccent">@color/bitcoinsv_lite</item>
+    </style>
     <style name="Dash" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/dash</item>
         <item name="colorPrimaryDark">@color/dash_dark</item>
