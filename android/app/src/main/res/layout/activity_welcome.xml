@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine|textNoSuggestions"
+                android:inputType="textMultiLine|textNoSuggestions|textVisiblePassword"
                 android:selectAllOnFocus="true"
                 android:singleLine="false" />
 
