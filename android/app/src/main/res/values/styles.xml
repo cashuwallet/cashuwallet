@@ -51,6 +51,12 @@
         <item name="android:statusBarColor">@color/bitcoinsv_dark</item>
         <item name="colorAccent">@color/bitcoinsv_lite</item>
     </style>
+    <style name="Cardano" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/cardano</item>
+        <item name="colorPrimaryDark">@color/cardano_dark</item>
+        <item name="android:statusBarColor">@color/cardano_dark</item>
+        <item name="colorAccent">@color/cardano_lite</item>
+    </style>
     <style name="Dash" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/dash</item>
         <item name="colorPrimaryDark">@color/dash_dark</item>

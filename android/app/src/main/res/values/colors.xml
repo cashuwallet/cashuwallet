@@ -33,6 +33,10 @@
     <color name="bitcoinsv_dark">#dca800</color>
     <color name="bitcoinsv_lite">#c8102e</color>
 
+    <color name="cardano">#004060</color>
+    <color name="cardano_dark">#00334d</color>
+    <color name="cardano_lite">#3cc8c8</color>
+
     <color name="dash">#2573c2</color>
     <color name="dash_dark">#1e5c9c</color>
     <color name="dash_lite">#224b76</color>

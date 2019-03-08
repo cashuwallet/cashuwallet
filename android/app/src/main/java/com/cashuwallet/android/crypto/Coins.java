@@ -12,6 +12,7 @@ public final class Coins {
     private static final Coin bitcoincash = new BitcoinCash();
     private static final Coin bitcoingold = new BitcoinGold();
     private static final Coin bitcoinsv = new BitcoinSV();
+    private static final Coin cardano = new Cardano();
     private static final Coin dash = new Dash();
     private static final Coin decred = new Decred();
     private static final Coin digibyte = new Digibyte();
@@ -46,6 +47,7 @@ public final class Coins {
         registry.put(bitcoincash.getCode(), bitcoincash);
         registry.put(bitcoingold.getCode(), bitcoingold);
         registry.put(bitcoinsv.getCode(), bitcoinsv);
+        registry.put(cardano.getCode(), cardano);
         registry.put(dash.getCode(), dash);
         registry.put(decred.getCode(), decred);
         registry.put(digibyte.getCode(), digibyte);
@@ -297,6 +299,53 @@ public final class Coins {
                 return null;
             } else {
                 return "https://bchsvexplorer.com/tx/" + hash;
+            }
+        }
+    }
+
+    private static class Cardano extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Cardano";
+        }
+
+        @Override
+        public String getLabel() {
+            return "cardano";
+        }
+
+        @Override
+        public String getCode() {
+            return "ADA";
+        }
+
+        @Override
+        public String getSymbol() {
+            return "₳";
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new Service.Multi(new Service[]{
+                    new CardanoExplorerAPI("https://cardano-explorer.cardano-testnet.iohkdev.io/api/", "cardano", true),
+                });
+            } else {
+                return new Service.Multi(new Service[]{
+                    new CardanoExplorerAPI("https://explorer.adalite.io/api/", "cardano", false),
+                    new CardanoExplorerAPI("https://explorer2.adalite.io/api/", "cardano", false),
+                    new CardanoExplorerAPI("https://iohk-mainnet.yoroiwallet.com/api/", "cardano", false),
+                    new CardanoExplorerAPI("https://cardanoexplorer.com/api/", "cardano", false),
+                });
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return "https://cardano-explorer.cardano-testnet.iohkdev.io/tx/" + hash;
+            } else {
+                return "https://cardanoexplorer.com/tx/" + hash;
             }
         }
     }
