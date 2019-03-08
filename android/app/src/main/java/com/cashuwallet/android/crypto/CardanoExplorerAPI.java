@@ -145,7 +145,7 @@ public class CardanoExplorerAPI implements Service {
             String txnid = transaction.txnid(txn, label, testnet);
             String url = baseUrl + "v2/txs/signed";
             String content = "{\"signedTx\":\"" + Base64.encodeToString(txn, Base64.DEFAULT) + "\"}";
-            JSONObject data = new JSONObject(Network.urlFetch(url, content));
+            JSONArray data = new JSONArray(Network.urlFetch(url, content));
             return txnid;
         } catch (Exception e) {
             return null;

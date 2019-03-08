@@ -1,7 +1,10 @@
 package com.cashuwallet.android.crypto;
 
+import com.raugfer.crypto.base58;
 import com.raugfer.crypto.binint;
+import com.raugfer.crypto.cbor;
 import com.raugfer.crypto.coins;
+import com.raugfer.crypto.crc32;
 import com.raugfer.crypto.dict;
 import com.raugfer.crypto.hashing;
 import com.raugfer.crypto.hdwallet;
@@ -100,6 +103,22 @@ public class Sync {
         String label = coin.getLabel();
         try {
             wallet.address_decode(address, label, testnet);
+        } catch (IllegalArgumentException e) {
+            if (coin.getLabel().equals("cardano")) return validateCardanoAddress(address);
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean validateCardanoAddress(String address) {
+        try {
+            Object[] struct = (Object[]) cbor.loads(base58.decode(address));
+            if (struct.length != 2) throw new IllegalArgumentException("Invalid input");
+            cbor.Tag obj = (cbor.Tag) struct[0];
+            BigInteger checksum = (BigInteger) struct[1];
+            if (obj.tag.compareTo(BigInteger.valueOf(24)) != 0) throw new IllegalArgumentException("Unknown tag");
+            BigInteger expected_checksum = binint.b2n(crc32.crc32xmodem((byte[]) obj.value));
+            if (checksum.compareTo(expected_checksum) != 0) throw new IllegalArgumentException("Inconsistent checksum");
         } catch (IllegalArgumentException e) {
             return false;
         }
