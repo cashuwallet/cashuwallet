@@ -595,6 +595,7 @@ public final class Coins {
             } else {
                 return new Service.Multi(new Service[]{
                     new GastrackerAPI("https://api.gastracker.io/v1/"),
+                    new Web3rpcAPI("https://etc-geth.0xinfra.com/"),
                     new Web3rpcAPI("https://web3.gastracker.io/"),
                 });
             }
@@ -603,8 +604,7 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                // TODO use https when available
-                return "http://mordenexplorer.ethertrack.io/addr/" + hash;
+                return "https://mordenexplorer.ethertrack.io/addr/" + hash;
             } else {
                 return "https://etherhub.io/tx/" + hash;
             }
