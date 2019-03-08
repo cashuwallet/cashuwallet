@@ -328,14 +328,14 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
-                    new CardanoExplorerAPI("https://cardano-explorer.cardano-testnet.iohkdev.io/api/", "cardano", true),
+                    new CardanoslAPI("https://cardano-explorer.cardano-testnet.iohkdev.io/api/", "cardano", true),
                 });
             } else {
                 return new Service.Multi(new Service[]{
-                    new CardanoExplorerAPI("https://explorer.adalite.io/api/", "cardano", false),
-                    new CardanoExplorerAPI("https://explorer2.adalite.io/api/", "cardano", false),
-                    new CardanoExplorerAPI("https://iohk-mainnet.yoroiwallet.com/api/", "cardano", false),
-                    new CardanoExplorerAPI("https://cardanoexplorer.com/api/", "cardano", false),
+                    new CardanoslAPI("https://explorer.adalite.io/api/", "cardano", false),
+                    new CardanoslAPI("https://explorer2.adalite.io/api/", "cardano", false),
+                    new CardanoslAPI("https://iohk-mainnet.yoroiwallet.com/api/", "cardano", false),
+                    new CardanoslAPI("https://cardanoexplorer.com/api/", "cardano", false),
                 });
             }
         }

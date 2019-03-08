@@ -13,13 +13,13 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardanoExplorerAPI implements Service {
+public class CardanoslAPI implements Service {
 
     private final String baseUrl;
     private final String label;
     private final boolean testnet;
 
-    public CardanoExplorerAPI(String baseUrl, String label, boolean testnet) {
+    public CardanoslAPI(String baseUrl, String label, boolean testnet) {
         this.baseUrl = baseUrl;
         this.label = label;
         this.testnet = testnet;
@@ -144,7 +144,7 @@ public class CardanoExplorerAPI implements Service {
             byte[] txn = binint.h2b(_transaction);
             String txnid = transaction.txnid(txn, label, testnet);
             String url = baseUrl + "v2/txs/signed";
-            String content = "{\"signedTx\":\"" + Base64.encodeToString(txn, Base64.DEFAULT) + "\"}";
+            String content = "{\"signedTx\":\"" + Base64.encodeToString(txn, Base64.NO_WRAP) + "\"}";
             JSONArray data = new JSONArray(Network.urlFetch(url, content));
             return txnid;
         } catch (Exception e) {
