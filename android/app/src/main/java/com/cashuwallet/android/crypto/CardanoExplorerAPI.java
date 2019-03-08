@@ -1,7 +1,6 @@
 package com.cashuwallet.android.crypto;
 
 import android.util.Base64;
-import android.util.Log;
 
 import com.cashuwallet.android.Network;
 import com.raugfer.crypto.binint;
@@ -149,7 +148,6 @@ public class CardanoExplorerAPI implements Service {
             JSONObject data = new JSONObject(Network.urlFetch(url, content));
             return txnid;
         } catch (Exception e) {
-            Log.d(">>>>>", "broadcast", e);
             return null;
         }
     }
