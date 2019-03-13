@@ -27,6 +27,7 @@ public final class Coins {
     private static final Coin qtum = new Qtum();
     private static final Coin ripple = new Ripple();
     private static final Coin stellar = new Stellar();
+    private static final Coin tron = new Tron();
     private static final Coin waves = new Waves();
     private static final Coin zcash = new Zcash();
     private static final Coin _0x = new _0x();
@@ -62,6 +63,7 @@ public final class Coins {
         registry.put(qtum.getCode(), qtum);
         registry.put(ripple.getCode(), ripple);
         registry.put(stellar.getCode(), stellar);
+        registry.put(tron.getCode(), tron);
         registry.put(waves.getCode(), waves);
         registry.put(zcash.getCode(), zcash);
         registry.put(_0x.getCode(), _0x);
@@ -957,6 +959,46 @@ public final class Coins {
                 return "http://testnet.stellarchain.io/tx/" + hash;
             } else {
                 return "https://stellarchain.io/tx/" + hash;
+            }
+        }
+    }
+
+    private static class Tron extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Tron";
+        }
+
+        @Override
+        public String getLabel() {
+            return "tron";
+        }
+
+        @Override
+        public String getCode() {
+            return "TRX";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new TronscanAPI("https://api.shasta.tronscan.org/api/");
+            } else {
+                return new TronscanAPI("https://api.tronscan.org/api/");
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return "https://shasta.tronscan.org/#/transaction/" + hash;
+            } else {
+                return "https://tronscan.org/#/transaction/" + hash;
             }
         }
     }

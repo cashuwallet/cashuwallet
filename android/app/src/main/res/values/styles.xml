@@ -141,6 +141,12 @@
         <item name="android:statusBarColor">@color/stellar_dark</item>
         <item name="colorAccent">@color/stellar_lite</item>
     </style>
+    <style name="Tron" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/tron</item>
+        <item name="colorPrimaryDark">@color/tron_dark</item>
+        <item name="android:statusBarColor">@color/tron_dark</item>
+        <item name="colorAccent">@color/tron_lite</item>
+    </style>
     <style name="Waves" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/waves</item>
         <item name="colorPrimaryDark">@color/waves_dark</item>

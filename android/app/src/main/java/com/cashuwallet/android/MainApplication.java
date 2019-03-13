@@ -69,6 +69,7 @@ public final class MainApplication extends Application {
         themes.put("QTUM", R.style.Qtum);
         themes.put("XRP", R.style.Ripple);
         themes.put("XLM", R.style.Stellar);
+        themes.put("TRX", R.style.Tron);
         themes.put("WAVES", R.style.Waves);
         themes.put("ZEC", R.style.Zcash);
         themes.put("ZRX", R.style._0x);
@@ -101,6 +102,7 @@ public final class MainApplication extends Application {
         drawable.put("QTUM", R.drawable.qtum);
         drawable.put("XRP", R.drawable.ripple);
         drawable.put("XLM", R.drawable.stellar);
+        drawable.put("TRX", R.drawable.tron);
         drawable.put("WAVES", R.drawable.waves);
         drawable.put("ZEC", R.drawable.zcash);
         drawable.put("ZRX", R.drawable._0x);
