@@ -987,9 +987,9 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new TronscanAPI("https://api.shasta.tronscan.org/api/");
+                return new TronscanAPI("https://api.shasta.tronscan.org/api/", true);
             } else {
-                return new TronscanAPI("https://api.tronscan.org/api/");
+                return new TronscanAPI("https://api.tronscan.org/api/", false);
             }
         }
 

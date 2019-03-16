@@ -1,6 +1,9 @@
 package com.cashuwallet.android.crypto;
 
 import com.cashuwallet.android.Network;
+import com.raugfer.crypto.binint;
+import com.raugfer.crypto.dict;
+import com.raugfer.crypto.transaction;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,9 +15,11 @@ import java.util.List;
 public class TronscanAPI implements Service {
 
     private final String baseUrl;
+    private final boolean testnet;
 
-    public TronscanAPI(String baseUrl) {
+    public TronscanAPI(String baseUrl, boolean testnet) {
         this.baseUrl = baseUrl;
+        this.testnet = testnet;
     }
 
     @Override
@@ -81,7 +86,6 @@ public class TronscanAPI implements Service {
 
     @Override
     public List<UTXO> getUTXOs(String address) {
-        // TODO implement
         return new ArrayList<>();
     }
 
@@ -91,13 +95,16 @@ public class TronscanAPI implements Service {
     }
 
     @Override
-    public String broadcast(String transaction) {
+    public String broadcast(String _transaction) {
         try {
             String url = baseUrl + "broadcast";
-            String content = "{\"transaction\":\"" + transaction + "\"}";
+            String content = "{\"transaction\":\"" + _transaction + "\"}";
             JSONObject data = new JSONObject(Network.urlFetch(url, content));
-            // TODO implement
-            return null;
+            boolean success = data.optBoolean("success", false);
+            if (!success) throw new IllegalArgumentException(data.getString("message"));
+            byte[] txn = binint.h2b(_transaction);
+            String txnid = transaction.txnid(txn, "tron", testnet);
+            return txnid;
         } catch (Exception e) {
             return null;
         }
@@ -105,6 +112,19 @@ public class TronscanAPI implements Service {
 
     @Override
     public Object custom(String name, Object arg) {
+        if (name.equals("block")) {
+            try {
+                String url = baseUrl + "block/latest";
+                JSONObject data = new JSONObject(Network.urlFetch(url));
+                dict fields = new dict();
+                fields.put("hash", data.getString("hash"));
+                fields.put("height", BigInteger.valueOf(data.getLong("number")));
+                fields.put("timestamp", BigInteger.valueOf(data.getLong("timestamp")));
+                return fields;
+            } catch (Exception e) {
+                return null;
+            }
+        }
         return null;
     }
 
