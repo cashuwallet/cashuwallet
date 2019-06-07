@@ -5,9 +5,9 @@
     android:width="512dp"
     android:height="512dp">
     <path
-        android:pathData="M512 256A256 256 0 0 1 256 512 256 256 0 0 1 0 256 256 256 0 0 1 256 0 256 256 0 0 1 512 256Z"
-        android:fillColor="#ffffff" />
+        android:pathData="M512 256A256 256 0 0 1 0 256A256 256 0 0 1 512 256Z"
+        android:fillColor="#0055FF" />
     <path
-        android:pathData="M76 256.00316L255.99686 76.00003 436 255.99685 256.00314 436.00003Z"
-        android:fillColor="#0055ff" />
+        android:pathData="M123 256.00232L255.99768 123 389 255.99765 256.00232 389Z"
+        android:fillColor="#FFFFFF" />
 </vector>

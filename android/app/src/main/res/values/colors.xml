@@ -97,8 +97,8 @@
     <color name="tron_dark">#93231d</color>
     <color name="tron_lite">#8c8c8c</color>
 
-    <color name="waves">#0055ff</color>
-    <color name="waves_dark">#0044cd</color>
+    <color name="waves">#000000</color>
+    <color name="waves_dark">#000000</color>
     <color name="waves_lite">#d6e0fc</color>
 
     <color name="zcash">#cd8421</color>
