@@ -89,8 +89,8 @@
     <color name="ripple_dark">#000000</color>
     <color name="ripple_lite">#cccccc</color>
 
-    <color name="stellar">#067fa0</color>
-    <color name="stellar_dark">#056680</color>
+    <color name="stellar">#000000</color>
+    <color name="stellar_dark">#000000</color>
     <color name="stellar_lite">#cef0fa</color>
 
     <color name="tron">#c53027</color>
