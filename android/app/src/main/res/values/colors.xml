@@ -85,9 +85,9 @@
     <color name="qtum_dark">#257ca7</color>
     <color name="qtum_lite">#257ca7</color>
 
-    <color name="ripple">#0081c2</color>
-    <color name="ripple_dark">#00689c</color>
-    <color name="ripple_lite">#00689c</color>
+    <color name="ripple">#000000</color>
+    <color name="ripple_dark">#000000</color>
+    <color name="ripple_lite">#cccccc</color>
 
     <color name="stellar">#067fa0</color>
     <color name="stellar_dark">#056680</color>
