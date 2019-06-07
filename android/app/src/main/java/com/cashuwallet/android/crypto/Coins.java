@@ -463,19 +463,16 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new Service.Multi(new Service[]{
-                });
+                return new InsightAPI("https://testnet.digiexplorer.info/api/", 0/*getMinConf()*/, "digibyte", true);
             } else {
-                return new Service.Multi(new Service[]{
-                    new InsightAPI("https://digiexplorer.info/api/", 0/*getMinConf()*/, "digibyte", false),
-                });
+                return new InsightAPI("https://digiexplorer.info/api/", 0/*getMinConf()*/, "digibyte", false);
             }
         }
 
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return null;
+                return "https://testnet.digiexplorer.info/tx/" + hash;
             } else {
                 return "https://digiexplorer.info/tx/" + hash;
             }
