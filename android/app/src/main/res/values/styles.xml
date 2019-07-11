@@ -189,6 +189,12 @@
         <item name="android:statusBarColor">@color/binancecoin_dark</item>
         <item name="colorAccent">@color/binancecoin_lite</item>
     </style>
+    <style name="Dai" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/dai</item>
+        <item name="colorPrimaryDark">@color/dai_dark</item>
+        <item name="android:statusBarColor">@color/dai_dark</item>
+        <item name="colorAccent">@color/dai_lite</item>
+    </style>
     <style name="EOS" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/eos</item>
         <item name="colorPrimaryDark">@color/eos_dark</item>
@@ -200,6 +206,12 @@
         <item name="colorPrimaryDark">@color/golem_dark</item>
         <item name="android:statusBarColor">@color/golem_dark</item>
         <item name="colorAccent">@color/golem_lite</item>
+    </style>
+    <style name="Maker" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/maker</item>
+        <item name="colorPrimaryDark">@color/maker_dark</item>
+        <item name="android:statusBarColor">@color/maker_dark</item>
+        <item name="colorAccent">@color/maker_lite</item>
     </style>
     <style name="OmiseGO" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/omisego</item>

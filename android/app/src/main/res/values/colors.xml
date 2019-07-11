@@ -125,6 +125,10 @@
     <color name="binancecoin_dark">#c39526</color>
     <color name="binancecoin_lite">#666666</color>
 
+    <color name="dai">#febe44</color>
+    <color name="dai_dark">#d9a547</color>
+    <color name="dai_lite">#30bd9f</color>
+
     <color name="eos">#443f54</color>
     <color name="eos_dark">#373343</color>
     <color name="eos_lite">#bcd1cc</color>
@@ -132,6 +136,10 @@
     <color name="golem">#002d64</color>
     <color name="golem_dark">#002450</color>
     <color name="golem_lite">#b0ec00</color>
+
+    <color name="maker">#393939</color>
+    <color name="maker_dark">#292929</color>
+    <color name="maker_lite">#1bbc9a</color>
 
     <color name="omisego">#1a53f0</color>
     <color name="omisego_dark">#1543c1</color>

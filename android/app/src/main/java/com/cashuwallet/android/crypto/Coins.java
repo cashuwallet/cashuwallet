@@ -35,8 +35,10 @@ public final class Coins {
     private static final Coin augur = new Augur();
     private static final Coin basicattentiontoken = new BasicAttentionToken();
     private static final Coin binancecoin = new BinanceCoin();
+    private static final Coin dai = new Dai();
     private static final Coin eos = new EOS();
     private static final Coin golem = new Golem();
+    private static final Coin maker = new Maker();
     private static final Coin omisego = new OmiseGO();
     private static final Coin status = new Status();
     private static final Coin zilliqa = new Zilliqa();
@@ -71,8 +73,10 @@ public final class Coins {
         registry.put(augur.getCode(), augur);
         registry.put(basicattentiontoken.getCode(), basicattentiontoken);
         registry.put(binancecoin.getCode(), binancecoin);
+        registry.put(dai.getCode(), dai);
         registry.put(eos.getCode(), eos);
         registry.put(golem.getCode(), golem);
+        registry.put(maker.getCode(), maker);
         registry.put(omisego.getCode(), omisego);
         registry.put(status.getCode(), status);
         registry.put(zilliqa.getCode(), zilliqa);
@@ -1211,6 +1215,28 @@ public final class Coins {
         }
     }
 
+    private static class Dai extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Dai";
+        }
+
+        @Override
+        public String getLabel() {
+            return "dai";
+        }
+
+        @Override
+        public String getCode() {
+            return "DAI";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
     private static class EOS extends ERC20Token {
         @Override
         public String getName() {
@@ -1247,6 +1273,28 @@ public final class Coins {
         @Override
         public String getCode() {
             return "GNT";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class Maker extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Maker";
+        }
+
+        @Override
+        public String getLabel() {
+            return "maker";
+        }
+
+        @Override
+        public String getCode() {
+            return "MKR";
         }
 
         @Override
