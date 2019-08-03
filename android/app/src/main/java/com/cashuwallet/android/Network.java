@@ -2,6 +2,7 @@ package com.cashuwallet.android;
 
 import android.os.AsyncTask;
 import android.os.NetworkOnMainThreadException;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -91,6 +92,18 @@ public class Network {
             OutputStream out = connection.getOutputStream();
             out.write(content.getBytes());
             out.close();
+        }
+        int status = connection.getResponseCode();
+        if (status < 200 || status >= 300) {
+            StringBuilder sb = new StringBuilder();
+            BufferedReader err = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            try {
+                String line;
+                while ((line = err.readLine()) != null) sb.append(line).append('\n');
+            } finally {
+                err.close();
+            }
+            throw new IOException(sb.toString());
         }
         StringBuilder sb = new StringBuilder();
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
