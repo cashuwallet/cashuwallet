@@ -38,6 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private View rootView;
     private Runnable cont;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,9 +116,9 @@ public class WelcomeActivity extends AppCompatActivity {
             String words = mnemonicView.getText().toString().trim().replaceAll(" +", " ").toLowerCase();
             String password = passwordView.getText().toString();
             setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            ProgressDialog progressDialog = ProgressDialog.show(WelcomeActivity.this, "", getResources().getString(R.string.preparing_wallet), true);
+            progressDialog = ProgressDialog.show(WelcomeActivity.this, "", getResources().getString(R.string.preparing_wallet), true);
             MainApplication.app().signup(wordlist, words, password, (success) -> {
-                progressDialog.dismiss();
+                if (progressDialog.isShowing()) progressDialog.dismiss();
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 if (success) {
                     startActivity(new Intent(this, MainActivity.class));
@@ -154,6 +155,8 @@ public class WelcomeActivity extends AppCompatActivity {
             }
             else
             {
+                if (progressDialog.isShowing()) progressDialog.dismiss();
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 rootView.setVisibility(View.VISIBLE);
             }
         }

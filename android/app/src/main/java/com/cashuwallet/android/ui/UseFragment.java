@@ -51,8 +51,8 @@ public class UseFragment extends Fragment {
 
     private Sync sync;
     private View rootView;
-
     private Runnable cont;
+    private ProgressDialog signingDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -226,13 +226,12 @@ public class UseFragment extends Fragment {
                 try {
                     txn = sync.createTransaction(multiwallet, address, amt, fee);
                 } catch (Exception e) {
-                    creatingDialog.dismiss();
+                    if (creatingDialog.isShowing()) creatingDialog.dismiss();
                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                     Snackbar.make(rootView, R.string.unsuccessful_transaction_creation, Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                creatingDialog.dismiss();
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                if (creatingDialog.isShowing()) creatingDialog.dismiss();
                 LayoutInflater li = LayoutInflater.from(getActivity());
                 View dialogView = li.inflate(R.layout.dialog_password, null);
                 AppCompatEditText passwordView = dialogView.findViewById(R.id.password);
@@ -240,20 +239,23 @@ public class UseFragment extends Fragment {
                         //.setTitle(R.string.action_send_payment)
                         .setView(dialogView)
                         .setMessage(R.string.action_send_payment_confirmation)
-                        .setNegativeButton(R.string.cancel, null)
+                        .setNegativeButton(R.string.cancel, (DialogInterface dialog, int which) -> {
+                            ((DetailActivity) getActivity()).hideKeyboard();
+                            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                        })
                         .setPositiveButton(R.string.ok, (DialogInterface dialog, int which) -> {
+                            ((DetailActivity) getActivity()).hideKeyboard();
                             String[] wordlist = getResources().getStringArray(R.array.mnemonic_english);
                             String password = passwordView.getText().toString();
-                            getActivity().setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                            ProgressDialog signingDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.signing_transaction), true);
+                            signingDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.signing_transaction), true);
                             MainApplication.app().authenticate(wordlist, password, coin, (secrets) -> {
                                 if (secrets != null) {
                                     Object[] signedTxn = sync.signTransaction(multiwallet, txn, secrets);
-                                    signingDialog.dismiss();
+                                    if (signingDialog.isShowing()) signingDialog.dismiss();
                                     ProgressDialog broadcastDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.broadcasting_transaction), true);
                                     boolean[] success = { false };
                                     sync.broadcastTransaction(multiwallet, signedTxn, success, () -> {
-                                        broadcastDialog.dismiss();
+                                        if (broadcastDialog.isShowing()) broadcastDialog.dismiss();
                                         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                                         if (success[0]) {
                                             activity.refreshPending = true;
@@ -267,7 +269,7 @@ public class UseFragment extends Fragment {
                                         }
                                     });
                                 } else {
-                                    signingDialog.dismiss();
+                                    if (signingDialog.isShowing()) signingDialog.dismiss();
                                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                                     Snackbar snackbar = Snackbar.make(rootView, R.string.password_mismatch, Snackbar.LENGTH_INDEFINITE);
                                     snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
@@ -291,7 +293,8 @@ public class UseFragment extends Fragment {
             }
             else
             {
-                // do nothing
+                if (signingDialog.isShowing()) signingDialog.dismiss();
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
             }
         }
         if (requestCode == CAPTURE_SCREEN_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
