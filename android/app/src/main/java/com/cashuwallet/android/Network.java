@@ -2,7 +2,6 @@ package com.cashuwallet.android;
 
 import android.os.AsyncTask;
 import android.os.NetworkOnMainThreadException;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -94,25 +93,28 @@ public class Network {
             out.close();
         }
         int status = connection.getResponseCode();
-        if (status < 200 || status >= 300) {
-            StringBuilder sb = new StringBuilder();
-            BufferedReader err = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-            try {
-                String line;
-                while ((line = err.readLine()) != null) sb.append(line).append('\n');
-            } finally {
-                err.close();
+        if (status == 429) {
+            String header = connection.getHeaderField("Retry-After");
+            if (header.matches("\\d+")) {
+                int retryAfter = Integer.parseInt(header);
+                try {
+                    Thread.sleep(retryAfter * 1000);
+                } catch (InterruptedException e) {
+                    throw new IOException(e.getMessage());
+                }
+                return _urlFetch(url, method, content, contentType, timeout);
             }
-            throw new IOException(sb.toString());
         }
+        boolean error = status < 200 || status >= 300;
         StringBuilder sb = new StringBuilder();
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(error ? connection.getErrorStream() : connection.getInputStream()));
         try {
             String line;
             while ((line = in.readLine()) != null) sb.append(line).append('\n');
         } finally {
             in.close();
         }
+        if (error) throw new IOException(sb.toString());
         return sb.toString();
     }
 
