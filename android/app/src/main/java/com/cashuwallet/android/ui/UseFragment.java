@@ -186,6 +186,7 @@ public class UseFragment extends Fragment {
         buttonSendPayment.setTextColor(0xffffffff);
         buttonSendPayment.setBackgroundColor(colorPrimary);
         buttonSendPayment.setOnClickListener((View v) -> {
+            ((DetailActivity) getActivity()).hideKeyboard();
             boolean hasErrors = false;
             String address = targetAddressEdit.getText().toString();
             if (address.length() == 0) {

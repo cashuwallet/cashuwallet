@@ -23,6 +23,7 @@ import android.view.MenuItem;
 
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -114,22 +115,20 @@ public class DetailActivity extends AppCompatActivity {
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
-        /*
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                appBarLayout.setExpanded(false);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                hideKeyboard();
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-        */
         viewPager.setCurrentItem(2);
 
         int res = MainApplication.app().findDrawable(multiwallet.coin);
@@ -145,6 +144,13 @@ public class DetailActivity extends AppCompatActivity {
         setTaskDescription(new ActivityManager.TaskDescription(coin.getName(), bitmap, color));
 
         refreshPending = true;
+    }
+
+    void hideKeyboard() {
+        View view = getCurrentFocus();
+        if (view == null) view = new View(this);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private Bitmap getBitmap(int drawableId) {

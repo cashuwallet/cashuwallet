@@ -1,6 +1,7 @@
 package com.cashuwallet.android.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import com.raugfer.crypto.binint;
@@ -108,6 +110,7 @@ public class WelcomeActivity extends AppCompatActivity {
         accessButton.setTextColor(0xffffffff);
         accessButton.setBackgroundColor(colorPrimary);
         accessButton.setOnClickListener((View view) -> {
+            hideKeyboard();
             rootView.setVisibility(View.GONE);
             String words = mnemonicView.getText().toString().trim().replaceAll(" +", " ").toLowerCase();
             String password = passwordView.getText().toString();
@@ -132,6 +135,13 @@ public class WelcomeActivity extends AppCompatActivity {
             .setMessage(R.string.warning_untested_software)
             .setPositiveButton(R.string.ok, null)
             .show();
+    }
+
+    void hideKeyboard() {
+        View view = getCurrentFocus();
+        if (view == null) view = new View(this);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
