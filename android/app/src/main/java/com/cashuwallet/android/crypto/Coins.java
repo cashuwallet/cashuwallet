@@ -35,6 +35,7 @@ public final class Coins {
     private static final Coin augur = new Augur();
     private static final Coin basicattentiontoken = new BasicAttentionToken();
     private static final Coin binancecoin = new BinanceCoin();
+    private static final Coin chainlink = new Chainlink();
     private static final Coin dai = new Dai();
     private static final Coin eos = new EOS();
     private static final Coin golem = new Golem();
@@ -73,6 +74,7 @@ public final class Coins {
         registry.put(augur.getCode(), augur);
         registry.put(basicattentiontoken.getCode(), basicattentiontoken);
         registry.put(binancecoin.getCode(), binancecoin);
+        registry.put(chainlink.getCode(), chainlink);
         registry.put(dai.getCode(), dai);
         registry.put(eos.getCode(), eos);
         registry.put(golem.getCode(), golem);
@@ -1207,6 +1209,28 @@ public final class Coins {
         @Override
         public String getCode() {
             return "BNB";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class Chainlink extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Chainlink";
+        }
+
+        @Override
+        public String getLabel() {
+            return "chainlink";
+        }
+
+        @Override
+        public String getCode() {
+            return "LINK";
         }
 
         @Override

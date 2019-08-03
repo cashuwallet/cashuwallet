@@ -125,6 +125,10 @@
     <color name="binancecoin_dark">#c39526</color>
     <color name="binancecoin_lite">#666666</color>
 
+    <color name="chainlink">#2a5ada</color>
+    <color name="chainlink_dark">#0a258a</color>
+    <color name="chainlink_lite">#feca04</color>
+
     <color name="dai">#febe44</color>
     <color name="dai_dark">#d9a547</color>
     <color name="dai_lite">#30bd9f</color>

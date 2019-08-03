@@ -189,6 +189,12 @@
         <item name="android:statusBarColor">@color/binancecoin_dark</item>
         <item name="colorAccent">@color/binancecoin_lite</item>
     </style>
+    <style name="Chainlink" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/chainlink</item>
+        <item name="colorPrimaryDark">@color/chainlink_dark</item>
+        <item name="android:statusBarColor">@color/chainlink_dark</item>
+        <item name="colorAccent">@color/chainlink_lite</item>
+    </style>
     <style name="Dai" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/dai</item>
         <item name="colorPrimaryDark">@color/dai_dark</item>
