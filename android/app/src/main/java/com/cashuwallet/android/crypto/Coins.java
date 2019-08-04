@@ -340,7 +340,6 @@ public final class Coins {
                 });
             } else {
                 return new Service.Multi(new Service[]{
-                    new CardanoslAPI("https://explorer.adalite.io/api/", "cardano", false),
                     new CardanoslAPI("https://explorer2.adalite.io/api/", "cardano", false),
                     new CardanoslAPI("https://iohk-mainnet.yoroiwallet.com/api/", "cardano", false),
                     new CardanoslAPI("https://cardanoexplorer.com/api/", "cardano", false),
