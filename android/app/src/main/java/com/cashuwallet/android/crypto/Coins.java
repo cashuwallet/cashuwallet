@@ -603,11 +603,16 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new Web3rpcAPI("https://web3.gastracker.io/morden");
+                return new Service.Multi(new Service[]{
+                    new Web3rpcAPI("https://kotti.ethereumclassic.network/"),
+                    //new Web3rpcAPI("https://web3.gastracker.io/morden"),
+                });
             } else {
                 return new Service.Multi(new Service[]{
                     new GastrackerAPI("https://api.gastracker.io/v1/"),
+                    new Web3rpcAPI("https://ethereumclassic.network/"),
                     new Web3rpcAPI("https://etc-geth.0xinfra.com/"),
+                    new Web3rpcAPI("https://etc-parity.0xinfra.com/"),
                     new Web3rpcAPI("https://web3.gastracker.io/"),
                 });
             }
