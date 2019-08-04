@@ -724,8 +724,8 @@ public class Sync {
             if (confirmed) {
                 transaction.confirmed = true;
                 dao.saveTransaction(transaction);
-                addresses.add(transaction.address);
             }
+            addresses.add(transaction.address);
         }
         for (String address : addresses) {
             boolean confirmed = dao.pendingTransactionCount(chain.coin, address) == 0;
