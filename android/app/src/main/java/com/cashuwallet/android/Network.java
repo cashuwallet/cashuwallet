@@ -93,6 +93,15 @@ public class Network {
             out.close();
         }
         int status = connection.getResponseCode();
+        boolean error = status < 200 || status >= 300;
+        StringBuilder sb = new StringBuilder();
+        BufferedReader in = new BufferedReader(new InputStreamReader(error ? connection.getErrorStream() : connection.getInputStream()));
+        try {
+            String line;
+            while ((line = in.readLine()) != null) sb.append(line).append('\n');
+        } finally {
+            in.close();
+        }
         if (status == 429) {
             String header = connection.getHeaderField("Retry-After");
             if (header.matches("\\d+")) {
@@ -104,15 +113,6 @@ public class Network {
                 }
                 return _urlFetch(url, method, content, contentType, timeout);
             }
-        }
-        boolean error = status < 200 || status >= 300;
-        StringBuilder sb = new StringBuilder();
-        BufferedReader in = new BufferedReader(new InputStreamReader(error ? connection.getErrorStream() : connection.getInputStream()));
-        try {
-            String line;
-            while ((line = in.readLine()) != null) sb.append(line).append('\n');
-        } finally {
-            in.close();
         }
         if (error) throw new IOException(sb.toString());
         return sb.toString();
