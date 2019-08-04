@@ -53,6 +53,8 @@ public class UseFragment extends Fragment {
     private View rootView;
     private Runnable cont;
     private ProgressDialog signingDialog;
+    private TextInputLayout targetAddressLayout;
+    private TextInputLayout amountLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,7 +85,7 @@ public class UseFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_detail_use, container, false);
 
-        TextInputLayout targetAddressLayout = rootView.findViewById(R.id.target_address_layout);
+        targetAddressLayout = rootView.findViewById(R.id.target_address_layout);
         AppCompatEditText targetAddressEdit = rootView.findViewById(R.id.target_address);
         targetAddressEdit.addTextChangedListener(new TextValidator() {
             @Override
@@ -133,7 +135,7 @@ public class UseFragment extends Fragment {
 
         TextView feeView = rootView.findViewById(R.id.network_fee_value);
 
-        TextInputLayout amountLayout = rootView.findViewById(R.id.amount_layout);
+        amountLayout = rootView.findViewById(R.id.amount_layout);
         AppCompatEditText amountEdit = rootView.findViewById(R.id.amount);
         char separator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
         char nonseparator = separator == '.' ? ',' : '.';
@@ -186,6 +188,9 @@ public class UseFragment extends Fragment {
         buttonSendPayment.setTextColor(0xffffffff);
         buttonSendPayment.setBackgroundColor(colorPrimary);
         buttonSendPayment.setOnClickListener((View v) -> {
+            getActivity().setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            targetAddressLayout.setEnabled(false);
+            amountLayout.setEnabled(false);
             ((DetailActivity) getActivity()).hideKeyboard();
             boolean hasErrors = false;
             String address = targetAddressEdit.getText().toString();
@@ -207,7 +212,12 @@ public class UseFragment extends Fragment {
             } else {
                 amountLayout.setError(null);
             }
-            if (hasErrors) return;
+            if (hasErrors) {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                targetAddressLayout.setEnabled(true);
+                amountLayout.setEnabled(true);
+                return;
+            }
             amount = amount.replace(',', '.');
             if (amount.charAt(amount.length()-1) == '.') amount += "0";
             BigInteger amt = new BigDecimal(amount).multiply(BigDecimal.TEN.pow(coin.getDecimals())).toBigInteger();
@@ -215,11 +225,13 @@ public class UseFragment extends Fragment {
             try {
                 fee = sync.estimateFee(multiwallet, amt); // TODO apply multiplication factor
             } catch (Exception e) {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                targetAddressLayout.setEnabled(true);
+                amountLayout.setEnabled(true);
                 Snackbar.make(rootView, R.string.unsuccessful_transaction_creation, Snackbar.LENGTH_LONG).show();
                 return;
             }
             feeView.setText(activity.formatAmount(coin, fee));
-            getActivity().setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             ProgressDialog creatingDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.creating_transaction), true);
             new Handler().postDelayed(() -> {
                 Object[] txn;
@@ -228,6 +240,8 @@ public class UseFragment extends Fragment {
                 } catch (Exception e) {
                     if (creatingDialog.isShowing()) creatingDialog.dismiss();
                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                    targetAddressLayout.setEnabled(true);
+                    amountLayout.setEnabled(true);
                     Snackbar.make(rootView, R.string.unsuccessful_transaction_creation, Snackbar.LENGTH_LONG).show();
                     return;
                 }
@@ -239,45 +253,63 @@ public class UseFragment extends Fragment {
                         //.setTitle(R.string.action_send_payment)
                         .setView(dialogView)
                         .setMessage(R.string.action_send_payment_confirmation)
+                        .setOnCancelListener((DialogInterface dialog) -> {
+                            new Handler().postDelayed(() -> {
+                                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                                targetAddressLayout.setEnabled(true);
+                                amountLayout.setEnabled(true);
+                                ((DetailActivity) getActivity()).hideKeyboard();
+                            }, 250);
+                        })
                         .setNegativeButton(R.string.cancel, (DialogInterface dialog, int which) -> {
-                            ((DetailActivity) getActivity()).hideKeyboard();
-                            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                            new Handler().postDelayed(() -> {
+                                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                                targetAddressLayout.setEnabled(true);
+                                amountLayout.setEnabled(true);
+                                ((DetailActivity) getActivity()).hideKeyboard();
+                            }, 250);
                         })
                         .setPositiveButton(R.string.ok, (DialogInterface dialog, int which) -> {
-                            ((DetailActivity) getActivity()).hideKeyboard();
-                            String[] wordlist = getResources().getStringArray(R.array.mnemonic_english);
-                            String password = passwordView.getText().toString();
-                            signingDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.signing_transaction), true);
-                            MainApplication.app().authenticate(wordlist, password, coin, (secrets) -> {
-                                if (secrets != null) {
-                                    Object[] signedTxn = sync.signTransaction(multiwallet, txn, secrets);
-                                    if (signingDialog.isShowing()) signingDialog.dismiss();
-                                    ProgressDialog broadcastDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.broadcasting_transaction), true);
-                                    boolean[] success = { false };
-                                    sync.broadcastTransaction(multiwallet, signedTxn, success, () -> {
-                                        if (broadcastDialog.isShowing()) broadcastDialog.dismiss();
+                            new Handler().postDelayed(() -> {
+                                ((DetailActivity) getActivity()).hideKeyboard();
+                                String[] wordlist = getResources().getStringArray(R.array.mnemonic_english);
+                                String password = passwordView.getText().toString();
+                                signingDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.signing_transaction), true);
+                                MainApplication.app().authenticate(wordlist, password, coin, (secrets) -> {
+                                    if (secrets != null) {
+                                        Object[] signedTxn = sync.signTransaction(multiwallet, txn, secrets);
+                                        if (signingDialog.isShowing()) signingDialog.dismiss();
+                                        ProgressDialog broadcastDialog = ProgressDialog.show(getActivity(), "", getResources().getString(R.string.broadcasting_transaction), true);
+                                        boolean[] success = { false };
+                                        sync.broadcastTransaction(multiwallet, signedTxn, success, () -> {
+                                            if (broadcastDialog.isShowing()) broadcastDialog.dismiss();
+                                            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                                            targetAddressLayout.setEnabled(true);
+                                            amountLayout.setEnabled(true);
+                                            if (success[0]) {
+                                                activity.refreshPending = true;
+                                                ViewPager viewPager = activity.findViewById(R.id.container);
+                                                viewPager.setCurrentItem(2);
+                                                Snackbar snackbar = Snackbar.make(rootView, R.string.successful_broadcast, Snackbar.LENGTH_INDEFINITE);
+                                                snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
+                                            } else {
+                                                Snackbar snackbar = Snackbar.make(rootView, R.string.unsuccessful_broadcast, Snackbar.LENGTH_INDEFINITE);
+                                                snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
+                                            }
+                                        });
+                                    } else {
+                                        if (signingDialog.isShowing()) signingDialog.dismiss();
                                         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                                        if (success[0]) {
-                                            activity.refreshPending = true;
-                                            ViewPager viewPager = activity.findViewById(R.id.container);
-                                            viewPager.setCurrentItem(2);
-                                            Snackbar snackbar = Snackbar.make(rootView, R.string.successful_broadcast, Snackbar.LENGTH_INDEFINITE);
-                                            snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
-                                        } else {
-                                            Snackbar snackbar = Snackbar.make(rootView, R.string.unsuccessful_broadcast, Snackbar.LENGTH_INDEFINITE);
-                                            snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
-                                        }
-                                    });
-                                } else {
-                                    if (signingDialog.isShowing()) signingDialog.dismiss();
-                                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                                    Snackbar snackbar = Snackbar.make(rootView, R.string.password_mismatch, Snackbar.LENGTH_INDEFINITE);
-                                    snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
-                                }
-                            }, handler);
+                                        targetAddressLayout.setEnabled(true);
+                                        amountLayout.setEnabled(true);
+                                        Snackbar snackbar = Snackbar.make(rootView, R.string.password_mismatch, Snackbar.LENGTH_INDEFINITE);
+                                        snackbar.setAction(R.string.dismiss, (View view) -> snackbar.dismiss()).show();
+                                    }
+                                }, handler);
+                            }, 250);
                         })
                         .show();
-            }, 500);
+            }, 250);
         });
 
         return rootView;
@@ -295,6 +327,8 @@ public class UseFragment extends Fragment {
             {
                 if (signingDialog.isShowing()) signingDialog.dismiss();
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                targetAddressLayout.setEnabled(true);
+                amountLayout.setEnabled(true);
             }
         }
         if (requestCode == CAPTURE_SCREEN_REQUEST_CODE && resultCode == RESULT_OK && data != null) {

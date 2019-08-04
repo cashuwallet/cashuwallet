@@ -178,19 +178,24 @@ public class MainActivity extends AppCompatActivity
             //case R.id.nav_about:
             //    return true;
             case R.id.nav_exit:
+                setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 new AlertDialog.Builder(this)
                     //.setTitle(R.string.action_exit)
                     .setMessage(R.string.action_exit_confirmation)
-                    .setNegativeButton(R.string.cancel, null)
+                    .setOnCancelListener((DialogInterface dialog) -> {
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                    })
+                    .setNegativeButton(R.string.cancel, (DialogInterface dialog, int which) -> {
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                    })
                     .setPositiveButton(R.string.ok, (DialogInterface dialog, int which) -> {
-                        setRequestedOrientation(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         ProgressDialog progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.shutting_wallet), true);
                         new Handler().postDelayed(() -> {
                             MainApplication.app().logout();
-                            progressDialog.dismiss();
+                            if (progressDialog.isShowing()) progressDialog.dismiss();
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                             finishAndRemoveTask();
-                        }, 500);
+                        }, 250);
                     })
                     .show();
                 return true;
