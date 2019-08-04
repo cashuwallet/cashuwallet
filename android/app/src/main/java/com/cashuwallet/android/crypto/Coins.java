@@ -560,11 +560,15 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new EtherscanAPI("https://api-ropsten.etherscan.io/api");
+                return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://api-ropsten.etherscan.io/api"),
+                    new EtherscanAPI("https://blockscout.com/eth/ropsten/api", true),
+                });
             } else {
                 return new Service.Multi(new Service[]{
-                        new EtherscanAPI("https://api.etherscan.io/api"),
-                        new BlockcypherAPI("https://api.blockcypher.com/v1/eth/main"),
+                    new EtherscanAPI("https://api.etherscan.io/api"),
+                    new EtherscanAPI("https://blockscout.com/eth/mainnet/api", true),
+                    new BlockcypherAPI("https://api.blockcypher.com/v1/eth/main"),
                 });
             }
         }
@@ -604,11 +608,13 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://kottiexplorer.ethernode.io/api", true),
                     new Web3rpcAPI("https://kotti.ethereumclassic.network/"),
                     //new Web3rpcAPI("https://web3.gastracker.io/morden"),
                 });
             } else {
                 return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://blockscout.com/etc/mainnet/api", true),
                     new GastrackerAPI("https://api.gastracker.io/v1/"),
                     new Web3rpcAPI("https://ethereumclassic.network/"),
                     new Web3rpcAPI("https://etc-geth.0xinfra.com/"),
@@ -621,7 +627,8 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://mordenexplorer.ethertrack.io/addr/" + hash;
+                return "https://kottiexplorer.ethernode.io/tx/" + hash;
+                //return "https://mordenexplorer.ethertrack.io/addr/" + hash;
             } else {
                 return "https://etherhub.io/tx/" + hash;
             }
@@ -1112,9 +1119,15 @@ public final class Coins {
         public Service getService(boolean testnet) {
             String contractAddress = coins.attr("contract.address", getLabel(), testnet);
             if (testnet) {
-                return new EtherscanAPI("https://api-ropsten.etherscan.io/api", contractAddress);
+                return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://api-ropsten.etherscan.io/api", contractAddress),
+                    new EtherscanAPI("https://blockscout.com/eth/ropsten/api", contractAddress, true),
+                });
             } else {
-                return new EtherscanAPI("https://api.etherscan.io/api", contractAddress);
+                return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://api.etherscan.io/api", contractAddress),
+                    new EtherscanAPI("https://blockscout.com/eth/mainnet/api", contractAddress, true),
+                });
             }
         }
     }

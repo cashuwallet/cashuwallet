@@ -13,18 +13,29 @@ public class EtherscanAPI implements Service {
 
     private final String baseUrl;
     private final String contractAddress;
+    private final boolean proxyDisabled;
 
     public EtherscanAPI(String baseUrl) {
         this(baseUrl, null);
     }
 
     public EtherscanAPI(String baseUrl, String contractAddress) {
+        this(baseUrl, contractAddress, false);
+    }
+
+    public EtherscanAPI(String baseUrl, boolean proxyDisabled) {
+        this(baseUrl, null, proxyDisabled);
+    }
+
+    public EtherscanAPI(String baseUrl, String contractAddress, boolean proxyDisabled) {
         this.baseUrl = baseUrl;
         this.contractAddress = contractAddress;
+        this.proxyDisabled = proxyDisabled;
     }
 
     @Override
     public long getHeight() {
+        if (proxyDisabled) return -1;
         try {
             String url = baseUrl + "?module=proxy&action=eth_blockNumber";
             JSONObject data = new JSONObject(Network.urlFetch(url));
@@ -37,6 +48,7 @@ public class EtherscanAPI implements Service {
 
     @Override
     public BigInteger getFeeEstimate() {
+        if (proxyDisabled) return null;
         try {
             String url = baseUrl + "?module=proxy&action=eth_gasPrice";
             JSONObject data = new JSONObject(Network.urlFetch(url));
@@ -110,6 +122,7 @@ public class EtherscanAPI implements Service {
 
     @Override
     public long getSequence(String address) {
+        if (proxyDisabled) return -1;
         try {
             String url = baseUrl + "?module=proxy&action=eth_getTransactionCount&address=" + address + "&tag=latest";
             JSONObject data = new JSONObject(Network.urlFetch(url));
@@ -122,6 +135,7 @@ public class EtherscanAPI implements Service {
 
     @Override
     public String broadcast(String transaction) {
+        if (proxyDisabled) return null;
         try {
             String url = baseUrl + "?module=proxy&action=eth_sendRawTransaction&hex=0x" + transaction;
             JSONObject data = new JSONObject(Network.urlFetch(url));
