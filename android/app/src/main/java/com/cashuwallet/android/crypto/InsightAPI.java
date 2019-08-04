@@ -30,7 +30,8 @@ public class InsightAPI implements Service {
         try {
             String url = baseUrl + "status?q=getInfo";
             JSONObject data = new JSONObject(Network.urlFetch(url));
-            data = data.getJSONObject("info");
+            JSONObject info = data.optJSONObject("info");
+            if (info != null) data = info;
             return data.getLong("blocks");
         } catch (Exception e) {
             return -1;

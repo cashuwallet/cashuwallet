@@ -429,9 +429,15 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new InsightAPI("https://testnet.decred.org/api/", getMinConf(), "decred", true);
+                return new Service.Multi(new Service[]{
+                    new InsightAPI("https://testnet.decred.org/insight/api/", getMinConf(), "decred", true),
+                    new InsightAPI("https://testnet.dcrdata.org/insight/api/", getMinConf(), "decred", true),
+                });
             } else {
-                return new InsightAPI("https://mainnet.decred.org/api/", getMinConf(), "decred", false);
+                return new Service.Multi(new Service[]{
+                    new InsightAPI("https://mainnet.decred.org/api/", getMinConf(), "decred", false),
+                    new InsightAPI("https://explorer.dcrdata.org/insight/api/", getMinConf(), "decred", false),
+                });
             }
         }
 
