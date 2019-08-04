@@ -518,6 +518,7 @@ public final class Coins {
                 return new SochainAPI("https://chain.so/api/v2/*/DOGETEST");
             } else {
                 return new Service.Multi(new Service[]{
+                        new InsightAPI("https://dogeblocks.com/api/", 0/*getMinConf()*/, "dogecoin", false),
                         new DogechainAPI("https://dogechain.info/api/v1/"),
                         new BlockcypherAPI("https://api.blockcypher.com/v1/doge/main", getMinConf()),
                         new SochainAPI("https://chain.so/api/v2/*/DOGE"),
