@@ -62,6 +62,12 @@ public interface AppDao {
     @Query("SELECT * FROM `wallet` WHERE `coin` = :coin AND `account` = :account")
     List<Wallet> findWallets(String coin, int account);
 
+    @Query("SELECT COUNT(*) FROM `wallet` WHERE `coin` = :coin AND `account` = :account")
+    int walletCount(String coin, int account);
+
+    @Query("SELECT MIN(`index`) FROM `wallet` WHERE `coin` = :coin AND `account` = :account AND `change` = :change AND `txn_count` = 0")
+    int nextAccountIndex(String coin, int account, boolean change);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void createTransaction(Transaction transaction);
 
@@ -79,9 +85,6 @@ public interface AppDao {
 
     @Query("SELECT * FROM `transaction` WHERE `coin` = :coin AND NOT `confirmed`")
     List<Transaction> findPendingTransactions(String coin);
-
-    @Query("SELECT MIN(`index`) FROM `wallet` WHERE `coin` = :coin AND `account` = :account AND `change` = :change AND `txn_count` = 0")
-    int nextAccountIndex(String coin, int account, boolean change);
 
     @Query("SELECT COUNT(*) FROM `transaction` WHERE `coin` = :coin AND `address` = :address AND NOT `confirmed`")
     int pendingTransactionCount(String coin, String address);

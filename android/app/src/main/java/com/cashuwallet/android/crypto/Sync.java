@@ -441,12 +441,16 @@ public class Sync {
         for (;;) {
             int count = multiwallet.txnCount;
             BigInteger balance = multiwallet.getBalance();
+            int total = dao.walletCount(multiwallet.coin, multiwallet.account);
             success = syncBalance(multiwallet) && success;
             success = syncSequence(multiwallet) && success;
             success = syncUTXOs(multiwallet) && success;
             success = syncHistory(multiwallet) && success;
-            if (count == multiwallet.txnCount && balance.equals(multiwallet.getBalance())) break;
             triggerAddresses(multiwallet);
+            int _count = multiwallet.txnCount;
+            BigInteger _balance = multiwallet.getBalance();
+            int _total = dao.walletCount(multiwallet.coin, multiwallet.account);
+            if (_count == count && _balance.equals(balance) && _total == total) break;
             success = true;
         };
         success = syncHeight(chain) && success;
@@ -751,7 +755,6 @@ public class Sync {
     }
 
     private void triggerAddresses(Multiwallet multiwallet, int limit1, int limit2) {
-        //triggerAddresses(); // TODO remove
         Coin coin = multiwallet.getCoin();
         String address = multiwallet.address;
         int account = multiwallet.account;
@@ -799,67 +802,6 @@ public class Sync {
                 baseIndex += gap;
                 gap = 0;
             }
-        }
-    }
-
-    // TODO remove
-    private void triggerAddresses() {
-        if (testnet) {
-            // temporary testnet test set
-            dao.createWallet(new Wallet("BTC", "mjwp1hAVuX7UCcQydk4RXEsTLjg48di5No", 0, false, 0));
-            dao.createWallet(new Wallet("BCH", "mjwp1hAVuX7UCcQydk4RXEsTLjg48di5No", 0, false, 0));
-            dao.createWallet(new Wallet("BTG", "mjwp1hAVuX7UCcQydk4RXEsTLjg48di5No", 0, false, 0));
-            dao.createWallet(new Wallet("DASH", "yQkJZqorVkYsvBTVLuifasmGbN9QjXVNHm", 0, false, 0));
-            dao.createWallet(new Wallet("DOGE", "nYd1yum5Kt3DqUh9gaj4VVR2bkBwWpjczm", 0, false, 0));
-            dao.createWallet(new Wallet("ETH", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("ETC", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("LSK", "3897910504949673529L", 0, false, 0));
-            dao.createWallet(new Wallet("LTC", "mjwp1hAVuX7UCcQydk4RXEsTLjg48di5No", 0, false, 0));
-            dao.createWallet(new Wallet("NANO", "xrb_1distrseo9yp7nzq48ktywx7yme9txsgmjjorubau69rddonkmxpm68rgkco", 0, false, 0));
-            dao.createWallet(new Wallet("NEO", "AaVahEQ8TD5gugUYMZpWrnLUpssaJdKHzv", 0, false, 0));
-            dao.createWallet(new Wallet("GAS", "AaVahEQ8TD5gugUYMZpWrnLUpssaJdKHzv", 0, false, 0));
-            dao.createWallet(new Wallet("QTUM", "qeKn9hTqktwBRNGthi7YTfr8W7VKvZSgU2", 0, false, 0));
-            dao.createWallet(new Wallet("XRP", "r3qVZNhPRhoLwHdbiVZS5W31uxb6R7HCZK", 0, false, 0));
-            dao.createWallet(new Wallet("XLM", "GCTS32RGWRH6RJM62UVZ4UT5ZN5L6B2D3LPGO6Z2NM2EOGVQA7TA6SKO", 0, false, 0));
-            dao.createWallet(new Wallet("WAVES", "3Mt8opGkwBrJMAGV8ZbyQ1RfKFv7WL84nBj", 0, false, 0));
-            dao.createWallet(new Wallet("ZEC", "tmE9D3oz4TUyKAPBhXLCugoRoLPMFVjSwaw", 0, false, 0));
-            dao.createWallet(new Wallet("ZRX", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("AE", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("REP", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("BAT", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("BNB", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("EOS", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("GNT", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("OMG", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-            dao.createWallet(new Wallet("SNT", "0xe261273E34e866F2706b47BaeFB34aFF848B46a4", 0, false, 0));
-        } else {
-            // temporary mainnet test set
-            dao.createWallet(new Wallet("BTC", "3BMEXcNCNATGpCbXzNSuDk4XQgJZ4QwCEG", 0, false, 0));
-            dao.createWallet(new Wallet("BCH", "1BqKKjq54wHeuvty8ySUpxmCvU3HHjsk3W", 0, false, 0));
-            dao.createWallet(new Wallet("BTG", "GWPUdPCyDXRMxCGVbjDRkShSajAtMf5S9D", 0, false, 0));
-            dao.createWallet(new Wallet("DASH", "XcyPrTw135iu29Ej5s88zZvxvW88exuF8U", 0, false, 0));
-            dao.createWallet(new Wallet("DOGE", "DTpzrjNQrDjxpuK43F1cr2SbSgPDyynpPS", 0, false, 0));
-            dao.createWallet(new Wallet("ETH", "0xce1154A9d3cd631933E116DbA980FCb64f2bdEB2", 0, false, 0));
-            dao.createWallet(new Wallet("ETC", "0xD399099fb8843b1010686005993c7Ed15E205E35", 0, false, 0));
-            dao.createWallet(new Wallet("LSK", "2797034409072178585L", 0, false, 0));
-            dao.createWallet(new Wallet("LTC", "LLMRAtr3qBje2ySEa3CnZ55LA4TQMWnRY3", 0, false, 0));
-            dao.createWallet(new Wallet("NANO", "xrb_1tig1rio7iskejqgy6ap75rima35f9mexjazdqqquthmyu48118jiewny7zo", 0, false, 0));
-            dao.createWallet(new Wallet("NEO", "AYmQHgGV4BA3UVqJBKfA75ngggqnCTdTvb", 0, false, 0));
-            dao.createWallet(new Wallet("GAS", "AYmQHgGV4BA3UVqJBKfA75ngggqnCTdTvb", 0, false, 0));
-            dao.createWallet(new Wallet("QTUM", "QNbKAqD7RCjqdR3wq77XvhVYovn8L3beA7", 0, false, 0));
-            dao.createWallet(new Wallet("XRP", "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59", 0, false, 0));
-            dao.createWallet(new Wallet("XLM", "GCNSGHUCG5VMGLT5RIYYZSO7VQULQKAJ62QA33DBC5PPBSO57LFWVV6P", 0, false, 0));
-            dao.createWallet(new Wallet("WAVES", "3PJkLKqfaX8x62CM3GMUHwK16Vn5fdcocCs", 0, false, 0));
-            dao.createWallet(new Wallet("ZEC", "t1VpYecBW4UudbGcy4ufh61eWxQCoFaUrPs", 0, false, 0));
-            dao.createWallet(new Wallet("ZRX", "0x4fE60acf0df115B0c40897bC09841E18955EdEC5", 0, false, 0));
-            dao.createWallet(new Wallet("AE", "0x4fE60acf0df115B0c40897bC09841E18955EdEC5", 0, false, 0));
-            dao.createWallet(new Wallet("REP", "0x7a096befba0f83ae475b65c27e78d5fa2b83a186", 0, false, 0));
-            dao.createWallet(new Wallet("BAT", "0x67fa2c06c9c6d4332f330e14a66bdf1873ef3d2b", 0, false, 0));
-            dao.createWallet(new Wallet("BNB", "0x67fa2c06c9c6d4332f330e14a66bdf1873ef3d2b", 0, false, 0));
-            dao.createWallet(new Wallet("EOS", "0x4d468cf47eb6df39618dc9450be4b56a70a520c1", 0, false, 0));
-            dao.createWallet(new Wallet("GNT", "0x876eabf441b2ee5b5b0554fd502a8e0600950cfa", 0, false, 0));
-            dao.createWallet(new Wallet("OMG", "0x123020f9ab5e8f58ba08ca486578a2cb9dcc4549", 0, false, 0));
-            dao.createWallet(new Wallet("SNT", "0xe3031c1bfaa7825813c562cbdcc69d96fcad2087", 0, false, 0));
         }
     }
 
