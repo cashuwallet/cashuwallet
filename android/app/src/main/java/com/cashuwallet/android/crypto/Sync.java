@@ -764,8 +764,12 @@ public class Sync {
                 triggerAddress(coin, address, account, false, 0);
                 break;
             case UTXO:
-                triggerAddresses(coin, address, account, false, limit1);
-                triggerAddresses(coin, address, account, true, limit2);
+                if (xlimited(coin.getLabel())) {
+                    triggerAddress(coin, address, account, false, 0);
+                } else {
+                    triggerAddresses(coin, address, account, false, limit1);
+                    triggerAddresses(coin, address, account, true, limit2);
+                }
                 break;
         }
     }
