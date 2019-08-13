@@ -714,6 +714,7 @@ public final class Coins {
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://insight.litecore.io/api/", getMinConf(), "litecoin", false),
+                    new InsightAPI("https://litecoinblockexplorer.net/api/", getMinConf(), "litecoin", false),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/ltc/main", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/LTC"),
                 });
