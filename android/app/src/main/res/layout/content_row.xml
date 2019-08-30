@@ -66,9 +66,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="6dp"
+                android:layout_marginTop="1sp"
                 android:text="●"
                 android:maxLines="1"
-                android:textSize="12sp" />
+                android:textSize="6sp" />
 
         </LinearLayout>
 
