@@ -1,76 +1,97 @@
 <resources>
-  <string name="app_name" translatable="false">Cashu</string>
-  <string name="app_tagline">移动加密钱包</string>
-  <string name="title_activity_main">主面板</string>
-  <string name="title_activity_settings" translatable="false">@string/action_settings</string>
-  <string name="title_activity_splash" translatable="false">@string/app_name</string>
-  <string name="error_secure_random">随机化出错</string>
-  <string name="error_accessing_wallet">访问钱包时出错</string>
-  <string name="access_wallet_button">进入钱包</string>
-  <string name="navigation_drawer_open">打开导航栏</string>
-  <string name="navigation_drawer_close">关闭导航栏</string>
-  <string name="nav_wallet">钱包</string>
-  <string name="nav_portfolio">Portfolio</string>
-  <string name="nav_converter">Converter</string>
-  <string name="nav_markets">Markets</string>
-  <string name="title_drawer_submenu">其他选项</string>
-  <string name="action_settings">设置</string>
-  <string name="action_share">分享</string>
-  <string name="action_about">关于</string>
-  <string name="action_exit">退出</string>
-  <string name="action_exit_confirmation">您确定要断开钱包吗?</string>
-  <string name="shutting_wallet">正在断开钱包。 请耐心等待。</string>
-  <string name="action_copy">复制</string>
-  <string name="action_paste">粘贴</string>
-  <string name="action_capture">扫码</string>
-  <string name="action_generate">生成</string>
-  <string name="address_qrcode">地址二维码</string>
-  <string name="hint_target_address">收款地址</string>
-  <string name="error_empty_target_address">请输入收款地址</string>
-  <string name="error_invalid_target_address">抱歉，此地址无效或不受支持</string>
-  <string name="error_empty_amount">请输入付款金额</string>
-  <string name="network_fee">手续费</string>
-  <string name="action_send_payment">发送付款</string>
-  <string name="action_send_payment_confirmation">请提供您的钱包密码以签名并广播此交易:</string>
-  <string name="read_with_attention">请注意阅读</string>
-  <string name="warning_untested_software">"该软件正在开发中，尚未经过全面测试。 它按原样提供，可能会造成资金损失。 不要大量交易。
 
-Cashu与BIP39/BIP44兼容. 请阅读我们的隐私政策，网址为https://cashu.cc/privacy/，以获取有关安全性如何运作的摘要。
+    <string name="app_tagline">移动加密钱包</string>
 
-请将报告发送到 bugs@cashu.cc"</string>
-  <string name="new_version_installed">已安装新版本</string>
-  <string name="info_newcoins_reset">您已升级Cashu并且可以使用新币种。 请断开连接并重新连接钱包以启用它们。</string>
-  <string name="mnemonic_label">通知钱包助记词</string>
-  <string name="mnemonic_help">如果要创建新钱包，请按"生成"按钮。 记下助记词和密码(如果你有设置密码)，助记词和密码在恢复钱包时候需要使用到。确保助记词保存在安全的位置。</string>
-  <string name="password_label">通知钱包密码</string>
-  <string name="password_help">记住您的钱包密码，密码无法更改或恢复</string>
-  <string name="preparing_wallet">正在为首次访问钱包做准备。 请耐心等待。</string>
-  <string name="unsuccessful_transaction_creation">准备交易时出现问题。 检查余额是否足够。</string>
-  <string name="creating_transaction">正在准备构建付款交易。 请耐心等待。</string>
-  <string name="signing_transaction">正在对交易进行签名。 请耐心等待。</string>
-  <string name="broadcasting_transaction">正在将交易广播到区块链网络。 请耐心等待。</string>
-  <string name="successful_broadcast">该交易广播成功</string>
-  <string name="unsuccessful_broadcast">广播交易存在问题。 在再次发送付款之前，请等待并仔细检查</string>
-  <string name="password_mismatch">提供的密码不匹配</string>
-  <string name="address_copied_to_clipboard">地址已复制到剪贴板</string>
-  <string name="clipboard_unavailable">剪贴板不可用</string>
-  <string name="empty_clipboard">剪贴板是空的</string>
-  <string name="incompatible_clipboard_type">不兼容的剪贴板内容</string>
-  <string name="network_not_available">网络不可用</string>
-  <string name="camera_not_available">没有相机可用</string>
-  <string name="camera_permission_denied">访问相机的权限被拒绝</string>
-  <string name="camera_initialization_error">初始化相机时出错</string>
-  <string name="no_recorded_transactions">没有交易记录</string>
-  <string name="transaction_url_not_available">未找到公共区块链浏览器服务来展示此交易</string>
-  <string name="failure_open_url_activity">没有应用程序可以处理此请求。 请安装Web浏览器。</string>
-  <string name="pref_title_testnet_mode">启用Testnet模式</string>
-  <string name="pref_description_testnet_mode">在测试模式下使用您的钱包，其中所有交易和余额都没有价值。</string>
-  <string name="splash_content" translatable="false">@string/app_name</string>
-  <string name="title_activity_detail" translatable="false">@string/app_name</string>
-  <string name="tab_text_1">收款</string>
-  <string name="tab_text_2">付款</string>
-  <string name="tab_text_3">交易记录</string>
-  <string name="ok">确定</string>
-  <string name="cancel">取消</string>
-  <string name="dismiss">关闭(不再显示)</string>
+    <string name="title_activity_main">主面板</string>
+
+    <string name="error_secure_random">随机化出错</string>
+    <string name="error_accessing_wallet">访问钱包时出错</string>
+    <string name="access_wallet_button">进入钱包</string>
+
+    <string name="navigation_drawer_open">打开导航栏</string>
+    <string name="navigation_drawer_close">关闭导航栏</string>
+
+    <string name="nav_wallet">钱包</string>
+    <string name="nav_portfolio">Portfolio</string>
+    <string name="nav_converter">Converter</string>
+    <string name="nav_markets">Markets</string>
+
+    <string name="title_drawer_submenu">其他选项</string>
+
+    <string name="action_settings">设置</string>
+    <string name="action_share">分享</string>
+    <string name="action_about">关于</string>
+    <string name="action_exit">退出</string>
+
+    <string name="action_exit_confirmation">您确定要断开钱包吗?</string>
+    <string name="shutting_wallet">正在断开钱包。 请耐心等待。</string>
+
+    <string name="action_copy">复制</string>
+    <string name="action_paste">粘贴</string>
+    <string name="action_capture">扫码</string>
+    <string name="action_generate">生成</string>
+
+    <string name="address_qrcode">地址二维码</string>
+
+    <string name="hint_target_address">收款地址</string>
+    <string name="error_empty_target_address">请输入收款地址</string>
+    <string name="error_invalid_target_address">抱歉，此地址无效或不受支持</string>
+    <string name="error_empty_amount">请输入付款金额</string>
+    <string name="network_fee">手续费</string>
+    <string name="action_send_payment">发送付款</string>
+    <string name="action_send_payment_confirmation">请提供您的钱包密码以签名并广播此交易:</string>
+
+    <string name="read_with_attention">请注意阅读</string>
+    <string name="warning_untested_software">
+        该软件正在开发中，尚未经过全面测试。 它按原样提供，可能会造成资金损失。 不要大量交易。
+        \n\nCashu与BIP39/BIP44兼容. 请阅读我们的隐私政策，网址为https://cashu.cc/privacy/，以获取有关安全性如何运作的摘要。
+        \n\n请将报告发送到 bugs@cashu.cc
+    </string>
+
+    <string name="new_version_installed">已安装新版本</string>
+    <string name="info_newcoins_reset">
+      您已升级Cashu并且可以使用新币种。
+      请断开连接并重新连接钱包以启用它们。
+    </string>
+
+    <string name="mnemonic_label">通知钱包助记词</string>
+    <string name="mnemonic_help">如果要创建新钱包，请按"生成"按钮。 记下助记词和密码(如果你有设置密码)，助记词和密码在恢复钱包时候需要使用到。确保助记词保存在安全的位置。</string>
+    <string name="password_label">通知钱包密码</string>
+    <string name="password_help">记住您的钱包密码，密码无法更改或恢复</string>
+
+    <string name="preparing_wallet">正在为首次访问钱包做准备。 请耐心等待。</string>
+    <string name="unsuccessful_transaction_creation">准备交易时出现问题。 检查余额是否足够。</string>
+    <string name="creating_transaction">正在准备构建付款交易。 请耐心等待。</string>
+    <string name="signing_transaction">正在对交易进行签名。 请耐心等待。</string>
+    <string name="broadcasting_transaction">正在将交易广播到区块链网络。 请耐心等待。</string>
+    <string name="successful_broadcast">该交易广播成功</string>
+    <string name="unsuccessful_broadcast">广播交易存在问题。 在再次发送付款之前，请等待并仔细检查</string>
+    <string name="password_mismatch">提供的密码不匹配</string>
+
+    <string name="address_copied_to_clipboard">地址已复制到剪贴板</string>
+    <string name="clipboard_unavailable">剪贴板不可用</string>
+    <string name="empty_clipboard">剪贴板是空的</string>
+    <string name="incompatible_clipboard_type">不兼容的剪贴板内容</string>
+
+    <string name="network_not_available">网络不可用</string>
+
+    <string name="camera_not_available">没有相机可用</string>
+    <string name="camera_permission_denied">访问相机的权限被拒绝</string>
+    <string name="camera_initialization_error">初始化相机时出错</string>
+
+    <string name="no_recorded_transactions">没有交易记录</string>
+    <string name="transaction_url_not_available">未找到公共区块链浏览器服务来展示此交易</string>
+    <string name="failure_open_url_activity">没有应用程序可以处理此请求。 请安装Web浏览器。</string>
+
+    <string name="pref_title_testnet_mode">启用Testnet模式</string>
+    <string name="pref_description_testnet_mode">在测试模式下使用您的钱包，其中所有交易和余额都没有价值。</string>
+
+    <string name="tab_text_1">收款</string>
+    <string name="tab_text_2">付款</string>
+    <string name="tab_text_3">交易记录</string>
+
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="dismiss">关闭(不再显示)</string>
+
 </resources>
