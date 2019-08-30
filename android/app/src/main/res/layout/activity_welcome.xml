@@ -46,6 +46,13 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <Button
+            android:id="@+id/button_generate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/action_generate" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_height="wrap_content"
@@ -61,13 +68,13 @@
                 android:text="@string/action_capture" />
 
             <Button
-                android:id="@+id/button_generate"
+                android:id="@+id/button_paste"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="0dp"
-                android:text="@string/action_generate" />
+                android:text="@string/action_paste" />
 
         </LinearLayout>
 

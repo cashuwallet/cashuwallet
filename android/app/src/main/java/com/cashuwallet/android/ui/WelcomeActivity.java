@@ -1,6 +1,8 @@
 package com.cashuwallet.android.ui;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +34,8 @@ import com.cashuwallet.android.UserAuthenticationLocker;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+
+import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -71,6 +75,29 @@ public class WelcomeActivity extends AppCompatActivity {
         passwordLayout = rootView.findViewById(R.id.password_layout);
         AppCompatEditText mnemonicView = rootView.findViewById(R.id.mnemonic);
         AppCompatEditText passwordView = rootView.findViewById(R.id.password);
+
+        Button buttonPaste = rootView.findViewById(R.id.button_paste);
+        buttonPaste.setTextColor(0xffffffff);
+        buttonPaste.setBackgroundColor(colorPrimary);
+        buttonPaste.setOnClickListener((View v) -> {
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboard == null) {
+                Snackbar.make(rootView, R.string.clipboard_unavailable, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            if (!(clipboard.hasPrimaryClip())) {
+                Snackbar.make(rootView, R.string.empty_clipboard, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            ClipData clip = clipboard.getPrimaryClip();
+            if (!(clip.getDescription().hasMimeType(MIMETYPE_TEXT_PLAIN))) {
+                // since the clipboard has data but it is not plain text
+                Snackbar.make(rootView, R.string.incompatible_clipboard_type, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            ClipData.Item item = clip.getItemAt(0);
+            mnemonicView.setText(item.getText());
+        });
 
         Button buttonCapture = rootView.findViewById(R.id.button_capture);
         buttonCapture.setTextColor(0xffffffff);
