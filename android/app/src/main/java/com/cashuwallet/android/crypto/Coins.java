@@ -41,6 +41,7 @@ public final class Coins {
     private static final Coin golem = new Golem();
     private static final Coin maker = new Maker();
     private static final Coin omisego = new OmiseGO();
+    private static final Coin sai = new Sai();
     private static final Coin status = new Status();
     private static final Coin zilliqa = new Zilliqa();
 
@@ -80,6 +81,7 @@ public final class Coins {
         registry.put(golem.getCode(), golem);
         registry.put(maker.getCode(), maker);
         registry.put(omisego.getCode(), omisego);
+        registry.put(sai.getCode(), sai);
         registry.put(status.getCode(), status);
         registry.put(zilliqa.getCode(), zilliqa);
     }
@@ -1366,6 +1368,28 @@ public final class Coins {
         @Override
         public String getCode() {
             return "OMG";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class Sai extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Sai";
+        }
+
+        @Override
+        public String getLabel() {
+            return "sai";
+        }
+
+        @Override
+        public String getCode() {
+            return "SAI";
         }
 
         @Override

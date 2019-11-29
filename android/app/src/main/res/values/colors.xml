@@ -129,7 +129,7 @@
     <color name="chainlink_dark">#0a258a</color>
     <color name="chainlink_lite">#feca04</color>
 
-    <color name="dai">#febe44</color>
+    <color name="dai">#f9b339</color>
     <color name="dai_dark">#d9a547</color>
     <color name="dai_lite">#30bd9f</color>
 
@@ -148,6 +148,10 @@
     <color name="omisego">#1a53f0</color>
     <color name="omisego_dark">#1543c1</color>
     <color name="omisego_lite">#4fcdfb</color>
+
+    <color name="sai">#febe44</color>
+    <color name="sai_dark">#d9a547</color>
+    <color name="sai_lite">#30bd9f</color>
 
     <color name="status">#505db7</color>
     <color name="status_dark">#404b93</color>

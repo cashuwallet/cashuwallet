@@ -225,6 +225,12 @@
         <item name="android:statusBarColor">@color/omisego_dark</item>
         <item name="colorAccent">@color/omisego_lite</item>
     </style>
+    <style name="Sai" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/sai</item>
+        <item name="colorPrimaryDark">@color/sai_dark</item>
+        <item name="android:statusBarColor">@color/sai_dark</item>
+        <item name="colorAccent">@color/sai_lite</item>
+    </style>
     <style name="Status" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/status</item>
         <item name="colorPrimaryDark">@color/status_dark</item>

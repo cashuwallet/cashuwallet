@@ -83,6 +83,7 @@ public final class MainApplication extends Application {
         themes.put("GNT", R.style.Golem);
         themes.put("MKR", R.style.Maker);
         themes.put("OMG", R.style.OmiseGO);
+        themes.put("SAI", R.style.Sai);
         themes.put("SNT", R.style.Status);
         themes.put("ZIL", R.style.Zilliqa);
 
@@ -119,6 +120,7 @@ public final class MainApplication extends Application {
         drawable.put("GNT", R.drawable.golem);
         drawable.put("MKR", R.drawable.maker);
         drawable.put("OMG", R.drawable.omisego);
+        drawable.put("SAI", R.drawable.sai);
         drawable.put("SNT", R.drawable.status);
         drawable.put("ZIL", R.drawable.zilliqa);
 
