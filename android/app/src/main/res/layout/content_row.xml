@@ -69,7 +69,7 @@
                 android:layout_marginTop="1sp"
                 android:text="●"
                 android:maxLines="1"
-                android:textSize="6sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
