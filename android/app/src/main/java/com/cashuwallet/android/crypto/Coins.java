@@ -1144,8 +1144,7 @@ public final class Coins {
                 return new InsightAPI("https://explorer.testnet.z.cash/api/", getMinConf(), "zcash", true);
             } else {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://zcash.blockexplorer.com/api/", getMinConf(), "zcash", false),
-                    new InsightAPI("https://zcashnetwork.info/api/", getMinConf(), "zcash", false),
+                    new InsightAPI("https://explorer.z.cash/api/", getMinConf(), "zcash", false),
                     new InsightAPI("https://explorer.zcashfr.io/insight-api-zcash/", getMinConf(), "zcash", false),
                     new BlockBookAPI("https://zec.nownodes.io/api/", getMinConf(), "zcash", false),
                     new BlockBookAPI("https://zec5.trezor.io/api/", getMinConf(), "zcash", false),
@@ -1153,6 +1152,9 @@ public final class Coins {
                     new BlockBookAPI("https://zec3.trezor.io/api/", getMinConf(), "zcash", false),
                     new BlockBookAPI("https://zec2.trezor.io/api/", getMinConf(), "zcash", false),
                     new BlockBookAPI("https://zec1.trezor.io/api/", getMinConf(), "zcash", false),
+                    // Obsolete
+                    // new InsightAPI("https://zcash.blockexplorer.com/api/", getMinConf(), "zcash", false),
+                    // new InsightAPI("https://zcashnetwork.info/api/", getMinConf(), "zcash", false),
                 });
             }
         }
@@ -1162,7 +1164,7 @@ public final class Coins {
             if (testnet) {
                 return "https://explorer.testnet.z.cash/tx/" + hash;
             } else {
-                return "https://zcashnetwork.info/tx/" + hash;
+                return "https://explorer.z.cash/tx/" + hash;
             }
         }
     }
