@@ -510,6 +510,7 @@ public final class Coins {
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://digiexplorer.info/api/", 0/*getMinConf()*/, "digibyte", false),
+                    new BlockBookAPI("https://digibyteblockexplorer.com/api/", getMinConf(), "digibyte", false),
                     new BlockBookAPI("https://dgb2.trezor.io/api/", getMinConf(), "digibyte", false),
                     new BlockBookAPI("https://dgb1.trezor.io/api/", getMinConf(), "digibyte", false),
                 });
