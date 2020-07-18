@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -138,7 +139,10 @@ public class Network {
                 return _urlFetch(url, method, content, headers, timeout);
             }
         }
-        if (error) throw new IOException(sb.toString());
+        if (error) {
+            if (status == 404) throw new FileNotFoundException(sb.toString());
+            throw new IOException(sb.toString());
+        }
         return sb.toString();
     }
 
