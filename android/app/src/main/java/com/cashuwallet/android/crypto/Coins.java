@@ -667,6 +667,7 @@ public final class Coins {
                     new Web3rpcAPI("https://blockscout.com/etc/mainnet/api/eth_rpc"),
                     new EtherscanAPI("https://blockscout.com/etc/mainnet/api", true),
                     new Web3rpcAPI("https://www.ethercluster.com/etc"),
+                    new BlockBookAPI("https://etcblockexplorer.com/api/"),
                     new BlockBookAPI("https://etc2.trezor.io/api/"),
                     new BlockBookAPI("https://etc1.trezor.io/api/"),
                     // Obsolete

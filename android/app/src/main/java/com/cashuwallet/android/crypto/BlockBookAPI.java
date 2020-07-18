@@ -56,7 +56,7 @@ public class BlockBookAPI implements Service {
 
     @Override
     public BigInteger getFeeEstimate() {
-        if (accountBased) return null;
+        if (accountBased) return null; // TODO work around this limitation
         try {
             BigInteger fee = BigInteger.valueOf(coins.attr("default_fee", 0, label, testnet));
             if (confirmations > 0) {
