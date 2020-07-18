@@ -990,9 +990,9 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return null; // no known public service available
+                return "https://test.bithomp.com/explorer/" + hash;
             } else {
-                return "https://xrpcharts.ripple.com/#/transactions/" + hash;
+                return "https://bithomp.com/explorer/" + hash;
             }
         }
     }
