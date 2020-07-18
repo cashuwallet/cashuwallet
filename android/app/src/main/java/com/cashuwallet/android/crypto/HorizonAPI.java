@@ -86,7 +86,7 @@ public class HorizonAPI implements Service {
                 JSONObject item = items.getJSONObject(i);
                 String hash = item.getString("hash");
                 long block = item.getLong("ledger");
-                BigInteger fee = BigInteger.valueOf(item.getLong("fee_paid"));
+                BigInteger fee = new BigInteger(item.getString("fee_charged"));
                 String timestamp = item.getString("created_at");
                 int time = (int) (dateFormat.parse(timestamp).getTime() / 1000);
                 String source = item.getString("source_account");
