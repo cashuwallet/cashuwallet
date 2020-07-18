@@ -1101,7 +1101,7 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new WavesnodesAPI("https://pool.testnet.wavesnodes.com/", true);
+                return new WavesnodesAPI("https://nodes-testnet.wavesnodes.com/", true);
             } else {
                 return new WavesnodesAPI("https://nodes.wavesnodes.com/", false);
             }
@@ -1110,7 +1110,7 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://testnet.wavesexplorer.com/tx/" + hash;
+                return "https://wavesexplorer.com/testnet/tx/" + hash;
             } else {
                 return "https://wavesexplorer.com/tx/" + hash;
             }
