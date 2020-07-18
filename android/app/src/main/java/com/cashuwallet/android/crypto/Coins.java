@@ -465,8 +465,9 @@ public final class Coins {
                 });
             } else {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://mainnet.decred.org/api/", getMinConf(), "decred", false),
-                    new InsightAPI("https://explorer.dcrdata.org/insight/api/", getMinConf(), "decred", false),
+                    new InsightAPI("https://mainnet.decred.org/insight/api/", getMinConf(), "decred", false),
+                    new InsightAPI("https://mainnet.dcrdata.org/insight/api/", getMinConf(), "decred", false),
+                    new BlockBookAPI("https://dcrblockexplorer.com/api/", getMinConf(), "decred", false),
                     new BlockBookAPI("https://dcr.nownodes.io/api/", getMinConf(), "decred", false),
                 });
             }
