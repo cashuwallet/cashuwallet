@@ -184,9 +184,9 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://test-insight.bitpay.com/tx/" + hash;
+                return "https://www.blockchain.com/btc-testnet/tx/" + hash;
             } else {
-                return "https://insight.bitpay.com/tx/" + hash;
+                return "https://www.blockchain.com/btc/tx/" + hash;
             }
         }
     }
@@ -236,9 +236,9 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://tbch.blockdozer.com/tx/" + hash;
+                return "https://www.blockchain.com/bch-testnet/tx/" + hash;
             } else {
-                return "https://bch.blockdozer.com/tx/" + hash;
+                return "https://www.blockchain.com/bch/tx/" + hash;
             }
         }
     }
