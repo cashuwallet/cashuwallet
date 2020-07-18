@@ -271,6 +271,7 @@ public final class Coins {
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://explorer.bitcoingold.org/insight-api/", getMinConf(), "bitcoingold", false),
+                    new BlockBookAPI("https://btgexplorer.com/api/", getMinConf(), "bitcoingold", false),
                     new BlockBookAPI("https://btg.nownodes.io/api/", getMinConf(), "bitcoingold", false),
                     new BlockBookAPI("https://btg5.trezor.io/api/", getMinConf(), "bitcoingold", false),
                     new BlockBookAPI("https://btg4.trezor.io/api/", getMinConf(), "bitcoingold", false),
