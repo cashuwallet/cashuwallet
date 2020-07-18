@@ -1,7 +1,5 @@
 package com.cashuwallet.android.crypto;
 
-import android.util.Log;
-
 import com.cashuwallet.android.Network;
 import com.raugfer.crypto.coins;
 
@@ -52,7 +50,6 @@ public class BlockBookAPI implements Service {
             data = data.getJSONObject("blockbook");
             return data.getLong("bestHeight");
         } catch (Exception e) {
-            Log.d(">>>>> getHeight", "error", e);
             return -1;
         }
     }
@@ -72,7 +69,6 @@ public class BlockBookAPI implements Service {
             }
             return fee;
         } catch (Exception e) {
-            Log.d(">>>>> getFeeEstimate", "error", e);
             return null;
         }
     }
@@ -101,7 +97,6 @@ public class BlockBookAPI implements Service {
                 return BigInteger.ZERO;
             }
         } catch (Exception e) {
-            Log.d(">>>>> getBalance", "error", e);
             return null;
         }
     }
@@ -194,7 +189,6 @@ public class BlockBookAPI implements Service {
             }
             return list;
         } catch (Exception e) {
-            Log.d(">>>>> getHistory error", address, e);
             return null;
         }
     }
@@ -219,7 +213,6 @@ public class BlockBookAPI implements Service {
             }
             return list;
         } catch (Exception e) {
-            Log.d(">>>>> getUTXOs", "error", e);
             return null;
         }
     }
@@ -232,7 +225,6 @@ public class BlockBookAPI implements Service {
             JSONObject data = new JSONObject(Network.urlFetch(url));
             return Long.parseLong(data.getString("nonce"));
         } catch (Exception e) {
-            Log.d(">>>>> getSequence", url, e);
             return -1;
         }
     }
@@ -245,7 +237,6 @@ public class BlockBookAPI implements Service {
             JSONObject data = new JSONObject(Network.urlFetch(url, "POST", content, "text/plain"));
             return data.getString("result");
         } catch (Exception e) {
-            Log.d(">>>>> broadcast", transaction, e);
             return null;
         }
     }
