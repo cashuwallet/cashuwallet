@@ -57,7 +57,7 @@ public class Web3rpcAPI implements Service {
 
     @Override
     public List<HistoryItem> getHistory(String address, long height) {
-        return new ArrayList<>(); // TODO return null
+        return null;
     }
 
     @Override

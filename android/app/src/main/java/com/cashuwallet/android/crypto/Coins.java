@@ -602,16 +602,19 @@ public final class Coins {
             if (testnet) {
                 return new Service.Multi(new Service[]{
                     new EtherscanAPI("https://api-ropsten.etherscan.io/api"),
-                    new EtherscanAPI("https://blockscout.com/eth/ropsten/api", true),
+                    // Obsolete
+                    // new EtherscanAPI("https://blockscout.com/eth/ropsten/api", true),
                 });
             } else {
                 return new Service.Multi(new Service[]{
                     new EtherscanAPI("https://api.etherscan.io/api"),
-                    new EtherscanAPI("https://blockscout.com/eth/mainnet/api", true),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/eth/main"),
                     new Web3rpcAPI("https://eth.nownodes.io/"),
                     new BlockBookAPI("https://eth2.trezor.io/api/"),
                     new BlockBookAPI("https://eth1.trezor.io/api/"),
+                    // Obsolete
+                    // new Web3rpcAPI("https://blockscout.com/eth/mainnet/api/eth_rpc"),
+                    // new EtherscanAPI("https://blockscout.com/eth/mainnet/api", true),
                 });
             }
         }
@@ -651,20 +654,25 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
-                    new EtherscanAPI("https://kottiexplorer.ethernode.io/api", true),
+                    new Web3rpcAPI("https://blockscout.com/etc/kotti/api/eth_rpc"),
+                    new EtherscanAPI("https://blockscout.com/etc/kotti/api", true),
                     new Web3rpcAPI("https://www.ethercluster.com/kotti"),
-                    //new Web3rpcAPI("https://web3.gastracker.io/morden"),
+                    // Obsolete
+                    // new EtherscanAPI("https://kottiexplorer.ethernode.io/api", true),
+                    // new Web3rpcAPI("https://web3.gastracker.io/morden"),
                 });
             } else {
                 return new Service.Multi(new Service[]{
+                    new Web3rpcAPI("https://blockscout.com/etc/mainnet/api/eth_rpc"),
                     new EtherscanAPI("https://blockscout.com/etc/mainnet/api", true),
-                    new GastrackerAPI("https://api.gastracker.io/v1/"),
                     new Web3rpcAPI("https://www.ethercluster.com/etc"),
-                    new Web3rpcAPI("https://etc-geth.0xinfra.com/"),
-                    new Web3rpcAPI("https://etc-parity.0xinfra.com/"),
-                    new Web3rpcAPI("https://web3.gastracker.io/"),
                     new BlockBookAPI("https://etc2.trezor.io/api/"),
                     new BlockBookAPI("https://etc1.trezor.io/api/"),
+                    // Obsolete
+                    // new Web3rpcAPI("https://etc-geth.0xinfra.com/"),
+                    // new Web3rpcAPI("https://etc-parity.0xinfra.com/"),
+                    // new GastrackerAPI("https://api.gastracker.io/v1/"),
+                    // new Web3rpcAPI("https://web3.gastracker.io/"),
                 });
             }
         }
@@ -672,10 +680,12 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://kottiexplorer.ethernode.io/tx/" + hash;
-                //return "https://mordenexplorer.ethertrack.io/addr/" + hash;
+                return "https://blockscout.com/etc/kotti/tx/" + hash;
+                // Obsolete
+                // return "https://kottiexplorer.ethernode.io/tx/" + hash;
+                // return "https://mordenexplorer.ethertrack.io/addr/" + hash;
             } else {
-                return "https://etherhub.io/tx/" + hash;
+                return "https://blockscout.com/etc/mainnet/tx/" + hash;
             }
         }
     }
@@ -1188,7 +1198,8 @@ public final class Coins {
             if (testnet) {
                 return new Service.Multi(new Service[]{
                     new EtherscanAPI("https://api-ropsten.etherscan.io/api", contractAddress),
-                    new EtherscanAPI("https://blockscout.com/eth/ropsten/api", contractAddress, true),
+                    // Obsolete
+                    // new EtherscanAPI("https://blockscout.com/eth/ropsten/api", contractAddress, true),
                 });
             } else {
                 return new Service.Multi(new Service[]{
