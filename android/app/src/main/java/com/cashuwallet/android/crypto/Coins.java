@@ -941,18 +941,25 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new InsightAPI("https://testnet.qtum.org/insight-api/", getMinConf(), "qtum", true);
+                return new Service.Multi(new Service[]{
+                    new QtuminfoAPI("https://testnet.qtum.info/api/"),
+                    new InsightAPI("https://testnet.qtum.org/insight-api/", getMinConf(), "qtum", true),
+                });
             } else {
-                return new InsightAPI("https://explorer.qtum.org/insight-api/", getMinConf(), "qtum", false);
+                return new Service.Multi(new Service[]{
+                    new QtuminfoAPI("https://qtum.info/api/"),
+                    new InsightAPI("https://explorer.qtum.org/insight-api/", getMinConf(), "qtum", false),
+                    new InsightAPI("https://qtumblockexplorer.com/api/", getMinConf(), "qtum", false),
+                });
             }
         }
 
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://testnet.qtum.org/tx/" + hash;
+                return "https://testnet.qtum.info/tx/" + hash;
             } else {
-                return "https://explorer.qtum.org/tx/" + hash;
+                return "https://qtum.info/tx/" + hash;
             }
         }
     }
