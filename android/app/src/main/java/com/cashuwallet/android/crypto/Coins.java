@@ -156,13 +156,14 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://test-insight.bitpay.com/api/", getMinConf(), "bitcoin", true),
-                    new InsightAPI("https://testnet.blockexplorer.com/api/", getMinConf(), "bitcoin", true),
                     new InsightAPI("https://tbtc.blockdozer.com/insight-api/", getMinConf(), "bitcoin", true),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/btc/test3", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/BTCTEST"),
                     new BlockBookAPI("https://tbtc2.trezor.io/api/", getMinConf(), "bitcoin", true),
                     new BlockBookAPI("https://tbtc1.trezor.io/api/", getMinConf(), "bitcoin", true),
+                    // Obsolete
+                    // new InsightAPI("https://testnet.blockexplorer.com/api/", getMinConf(), "bitcoin", true),
+                    // new InsightAPI("https://test-insight.bitpay.com/api/", getMinConf(), "bitcoin", true),
                 });
             } else {
                 return new Service.Multi(new Service[]{
@@ -329,9 +330,9 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return null;
+                return "https://test.whatsonchain.com/tx/" + hash;
             } else {
-                return "https://bchsvexplorer.com/tx/" + hash;
+                return "https://main.whatsonchain.com/tx/" + hash;
             }
         }
     }
