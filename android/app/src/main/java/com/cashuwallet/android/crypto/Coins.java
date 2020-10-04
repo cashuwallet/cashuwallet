@@ -159,6 +159,7 @@ public final class Coins {
                     new InsightAPI("https://tbtc.blockdozer.com/insight-api/", getMinConf(), "bitcoin", true),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/btc/test3", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/BTCTEST"),
+                    new BlockBookAPI("https://btcbook-testnet.guarda.co/api/", getMinConf(), "bitcoin", true),
                     new BlockBookAPI("https://tbtc2.trezor.io/api/", getMinConf(), "bitcoin", true),
                     new BlockBookAPI("https://tbtc1.trezor.io/api/", getMinConf(), "bitcoin", true),
                     // Obsolete
@@ -167,17 +168,19 @@ public final class Coins {
                 });
             } else {
                 return new Service.Multi(new Service[]{
-                    new InsightAPI("https://insight.bitpay.com/api/", getMinConf(), "bitcoin", false),
-                    new InsightAPI("https://blockexplorer.com/api/", getMinConf(), "bitcoin", false),
                     new InsightAPI("https://btc.blockdozer.com/insight-api/", getMinConf(), "bitcoin", false),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/btc/main", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/BTC"),
                     new BlockBookAPI("https://btc.nownodes.io/api/", getMinConf(), "bitcoin", false),
+                    new BlockBookAPI("https://btcbook.guarda.co/api/", getMinConf(), "bitcoin", false),
                     new BlockBookAPI("https://btc5.trezor.io/api/", getMinConf(), "bitcoin", false),
                     new BlockBookAPI("https://btc4.trezor.io/api/", getMinConf(), "bitcoin", false),
                     new BlockBookAPI("https://btc3.trezor.io/api/", getMinConf(), "bitcoin", false),
                     new BlockBookAPI("https://btc2.trezor.io/api/", getMinConf(), "bitcoin", false),
                     new BlockBookAPI("https://btc1.trezor.io/api/", getMinConf(), "bitcoin", false),
+                    // Obsolete
+                    // new InsightAPI("https://insight.bitpay.com/api/", getMinConf(), "bitcoin", false),
+                    // new InsightAPI("https://blockexplorer.com/api/", getMinConf(), "bitcoin", false),
                 });
             }
         }
@@ -223,13 +226,15 @@ public final class Coins {
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://bch.blockdozer.com/insight-api/", getMinConf(), "bitcoincash", false),
-                    new InsightAPI("https://bitcoincash.blockexplorer.com/api/", getMinConf(), "bitcoincash", false),
-                    new InsightAPI("https://bch-insight.bitpay.com/api/", getMinConf(), "bitcoincash", false),
+                    new BlockBookAPI("https://bchbook.guarda.co/api/", getMinConf(), "bitcoincash", false),
                     new BlockBookAPI("https://bch5.trezor.io/api/", getMinConf(), "bitcoincash", false),
                     new BlockBookAPI("https://bch4.trezor.io/api/", getMinConf(), "bitcoincash", false),
                     new BlockBookAPI("https://bch3.trezor.io/api/", getMinConf(), "bitcoincash", false),
                     new BlockBookAPI("https://bch2.trezor.io/api/", getMinConf(), "bitcoincash", false),
                     new BlockBookAPI("https://bch1.trezor.io/api/", getMinConf(), "bitcoincash", false),
+                    // Obsolete
+                    // new InsightAPI("https://bitcoincash.blockexplorer.com/api/", getMinConf(), "bitcoincash", false),
+                    // new InsightAPI("https://bch-insight.bitpay.com/api/", getMinConf(), "bitcoincash", false),
                 });
             }
         }
@@ -274,6 +279,7 @@ public final class Coins {
                     new InsightAPI("https://explorer.bitcoingold.org/insight-api/", getMinConf(), "bitcoingold", false),
                     new BlockBookAPI("https://btgexplorer.com/api/", getMinConf(), "bitcoingold", false),
                     new BlockBookAPI("https://btg.nownodes.io/api/", getMinConf(), "bitcoingold", false),
+                    new BlockBookAPI("https://btgbook.guarda.co/api/", getMinConf(), "bitcoingold", false),
                     new BlockBookAPI("https://btg5.trezor.io/api/", getMinConf(), "bitcoingold", false),
                     new BlockBookAPI("https://btg4.trezor.io/api/", getMinConf(), "bitcoingold", false),
                     new BlockBookAPI("https://btg3.trezor.io/api/", getMinConf(), "bitcoingold", false),
@@ -318,11 +324,13 @@ public final class Coins {
         public Service getService(boolean testnet) {
             if (testnet) {
                 return new Service.Multi(new Service[]{
+                    new BlockBookAPI("https://bsvtestnetbook.guarda.co/api/", getMinConf(), "bitcoinsv", true),
                 });
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://bchsvexplorer.com/api/", getMinConf(), "bitcoinsv", false),
                     new BlockBookAPI("https://bsv.nownodes.io/api/", getMinConf(), "bitcoinsv", false),
+                    new BlockBookAPI("https://bsvbook.guarda.co/api/", getMinConf(), "bitcoinsv", false),
                 });
             }
         }
@@ -417,6 +425,7 @@ public final class Coins {
                     new BlockcypherAPI("https://api.blockcypher.com/v1/dash/main", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/DASH"),
                     new BlockBookAPI("https://dash.nownodes.io/api/", getMinConf(), "dash", false),
+                    new BlockBookAPI("https://dashbook.guarda.co/api/", getMinConf(), "dash", false),
                     new BlockBookAPI("https://dash5.trezor.io/api/", getMinConf(), "dash", false),
                     new BlockBookAPI("https://dash4.trezor.io/api/", getMinConf(), "dash", false),
                     new BlockBookAPI("https://dash3.trezor.io/api/", getMinConf(), "dash", false),
@@ -470,6 +479,7 @@ public final class Coins {
                     new InsightAPI("https://mainnet.dcrdata.org/insight/api/", getMinConf(), "decred", false),
                     new BlockBookAPI("https://dcrblockexplorer.com/api/", getMinConf(), "decred", false),
                     new BlockBookAPI("https://dcr.nownodes.io/api/", getMinConf(), "decred", false),
+                    new BlockBookAPI("https://dcrbook.guarda.co/api/", getMinConf(), "decred", false),
                 });
             }
         }
@@ -513,6 +523,7 @@ public final class Coins {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://digiexplorer.info/api/", 0/*getMinConf()*/, "digibyte", false),
                     new BlockBookAPI("https://digibyteblockexplorer.com/api/", getMinConf(), "digibyte", false),
+                    new BlockBookAPI("https://dgbbook.guarda.co/api/", getMinConf(), "digibyte", false),
                     new BlockBookAPI("https://dgb2.trezor.io/api/", getMinConf(), "digibyte", false),
                     new BlockBookAPI("https://dgb1.trezor.io/api/", getMinConf(), "digibyte", false),
                 });
@@ -561,6 +572,7 @@ public final class Coins {
                     new BlockcypherAPI("https://api.blockcypher.com/v1/doge/main", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/DOGE"),
                     new BlockBookAPI("https://doge.nownodes.io/api/", getMinConf(), "dogecoin", false),
+                    new BlockBookAPI("https://dogebook.guarda.co/api/", getMinConf(), "dogecoin", false),
                     new BlockBookAPI("https://doge5.trezor.io/api/", getMinConf(), "dogecoin", false),
                     new BlockBookAPI("https://doge4.trezor.io/api/", getMinConf(), "dogecoin", false),
                     new BlockBookAPI("https://doge3.trezor.io/api/", getMinConf(), "dogecoin", false),
@@ -614,6 +626,7 @@ public final class Coins {
                     new EtherscanAPI("https://api.etherscan.io/api"),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/eth/main"),
                     new Web3rpcAPI("https://eth.nownodes.io/"),
+                    new BlockBookAPI("https://ethbook.guarda.co/api/"),
                     new BlockBookAPI("https://eth2.trezor.io/api/"),
                     new BlockBookAPI("https://eth1.trezor.io/api/"),
                     // Obsolete
@@ -671,6 +684,7 @@ public final class Coins {
                     new EtherscanAPI("https://blockscout.com/etc/mainnet/api", true),
                     new Web3rpcAPI("https://www.ethercluster.com/etc"),
                     new BlockBookAPI("https://etcblockexplorer.com/api/"),
+                    new BlockBookAPI("https://etcbook.guarda.co/api/"),
                     new BlockBookAPI("https://etc2.trezor.io/api/"),
                     new BlockBookAPI("https://etc1.trezor.io/api/"),
                     // Obsolete
@@ -779,6 +793,7 @@ public final class Coins {
                     new BlockcypherAPI("https://api.blockcypher.com/v1/ltc/main", getMinConf()),
                     new SochainAPI("https://chain.so/api/v2/*/LTC"),
                     new BlockBookAPI("https://ltc.nownodes.io/api/", getMinConf(), "litecoin", false),
+                    new BlockBookAPI("https://ltcbook.guarda.co/api/", getMinConf(), "litecoin", false),
                     new BlockBookAPI("https://ltc5.trezor.io/api/", getMinConf(), "litecoin", false),
                     new BlockBookAPI("https://ltc4.trezor.io/api/", getMinConf(), "litecoin", false),
                     new BlockBookAPI("https://ltc3.trezor.io/api/", getMinConf(), "litecoin", false),
@@ -965,6 +980,7 @@ public final class Coins {
                     new QtuminfoAPI("https://qtum.info/api/"),
                     new InsightAPI("https://explorer.qtum.org/insight-api/", getMinConf(), "qtum", false),
                     new InsightAPI("https://qtumblockexplorer.com/api/", getMinConf(), "qtum", false),
+                    new BlockBookAPI("https://qtumbook.guarda.co/api/", getMinConf(), "qtum", false),
                 });
             }
         }
@@ -1163,12 +1179,16 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new InsightAPI("https://explorer.testnet.z.cash/api/", getMinConf(), "zcash", true);
+                return new Service.Multi(new Service[]{
+                    new InsightAPI("https://explorer.testnet.z.cash/api/", getMinConf(), "zcash", true),
+                    new BlockBookAPI("https://zecbook-testnet.guarda.co/api/", getMinConf(), "zcash", true),
+                });
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://explorer.z.cash/api/", getMinConf(), "zcash", false),
                     new InsightAPI("https://explorer.zcashfr.io/insight-api-zcash/", getMinConf(), "zcash", false),
                     new BlockBookAPI("https://zec.nownodes.io/api/", getMinConf(), "zcash", false),
+                    new BlockBookAPI("https://zecbook.guarda.co/api/", getMinConf(), "zcash", false),
                     new BlockBookAPI("https://zec5.trezor.io/api/", getMinConf(), "zcash", false),
                     new BlockBookAPI("https://zec4.trezor.io/api/", getMinConf(), "zcash", false),
                     new BlockBookAPI("https://zec3.trezor.io/api/", getMinConf(), "zcash", false),
@@ -1210,6 +1230,7 @@ public final class Coins {
                 return new Service.Multi(new Service[]{
                     new EtherscanAPI("https://api.etherscan.io/api", contractAddress),
                     new EtherscanAPI("https://blockscout.com/eth/mainnet/api", contractAddress, true),
+                    new BlockBookAPI("https://ethbook.guarda.co/api/", contractAddress),
                     new BlockBookAPI("https://eth2.trezor.io/api/", contractAddress),
                     new BlockBookAPI("https://eth1.trezor.io/api/", contractAddress),
                 });
