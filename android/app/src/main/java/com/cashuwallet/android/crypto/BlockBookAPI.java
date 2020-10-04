@@ -59,7 +59,7 @@ public class BlockBookAPI implements Service {
         if (accountBased) return null; // TODO work around this limitation
         try {
             BigInteger fee = BigInteger.valueOf(coins.attr("default_fee", 0, label, testnet));
-            if (confirmations > 0) {
+            if (confirmations > 0 && !label.equals("bitcoinsv")) {
                 String url = baseUrl + "v1/estimatefee/" + confirmations;
                 JSONObject data = new JSONObject(Network.urlFetch(url));
                 BigDecimal value = new BigDecimal(data.getString("result"));

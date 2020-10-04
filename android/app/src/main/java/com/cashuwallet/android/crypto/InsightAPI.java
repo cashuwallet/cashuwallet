@@ -42,7 +42,7 @@ public class InsightAPI implements Service {
     public BigInteger getFeeEstimate() {
         try {
             BigInteger fee = BigInteger.valueOf(coins.attr("default_fee", 0, label, testnet));
-            if (confirmations > 0) {
+            if (confirmations > 0 && !label.equals("bitcoinsv")) {
                 String url = baseUrl + "utils/estimatefee?nbBlocks=" + confirmations;
                 JSONObject data = new JSONObject(Network.urlFetch(url));
                 BigDecimal value = new BigDecimal(data.getString("" + confirmations));
