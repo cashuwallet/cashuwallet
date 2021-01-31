@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.cashuwallet.android"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 23
         versionName "1.0.22-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
