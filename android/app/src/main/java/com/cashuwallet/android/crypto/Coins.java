@@ -38,11 +38,15 @@ public final class Coins {
     private static final Coin chainlink = new Chainlink();
     private static final Coin dai = new Dai();
     private static final Coin eos = new EOS();
+    private static final Coin geminidollar = new GeminiDollar();
     private static final Coin golem = new Golem();
     private static final Coin maker = new Maker();
     private static final Coin omisego = new OmiseGO();
     private static final Coin sai = new Sai();
     private static final Coin status = new Status();
+    private static final Coin tether = new Tether();
+    private static final Coin usdcoin = new USDCoin();
+    private static final Coin wrappedbitcoin = new WrappedBitcoin();
     private static final Coin zilliqa = new Zilliqa();
 
     private static final Map<String, Coin> registry = new HashMap<>();
@@ -78,11 +82,15 @@ public final class Coins {
         registry.put(chainlink.getCode(), chainlink);
         registry.put(dai.getCode(), dai);
         registry.put(eos.getCode(), eos);
+        registry.put(geminidollar.getCode(), geminidollar);
         registry.put(golem.getCode(), golem);
         registry.put(maker.getCode(), maker);
         registry.put(omisego.getCode(), omisego);
         registry.put(sai.getCode(), sai);
         registry.put(status.getCode(), status);
+        registry.put(tether.getCode(), tether);
+        registry.put(usdcoin.getCode(), usdcoin);
+        registry.put(wrappedbitcoin.getCode(), wrappedbitcoin);
         registry.put(zilliqa.getCode(), zilliqa);
     }
 
@@ -1414,6 +1422,28 @@ public final class Coins {
         }
     }
 
+    private static class GeminiDollar extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Gemini Dollar";
+        }
+
+        @Override
+        public String getLabel() {
+            return "geminidollar";
+        }
+
+        @Override
+        public String getCode() {
+            return "GUSD";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
     private static class Golem extends ERC20Token {
         @Override
         public String getName() {
@@ -1516,6 +1546,72 @@ public final class Coins {
         @Override
         public String getCode() {
             return "SNT";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class Tether extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Tether";
+        }
+
+        @Override
+        public String getLabel() {
+            return "tether";
+        }
+
+        @Override
+        public String getCode() {
+            return "USDT";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class USDCoin extends ERC20Token {
+        @Override
+        public String getName() {
+            return "USD Coin";
+        }
+
+        @Override
+        public String getLabel() {
+            return "usdcoin";
+        }
+
+        @Override
+        public String getCode() {
+            return "USDC";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class WrappedBitcoin extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Wrapped Bitcoin";
+        }
+
+        @Override
+        public String getLabel() {
+            return "wrappedbitcoin";
+        }
+
+        @Override
+        public String getCode() {
+            return "WBTC";
         }
 
         @Override

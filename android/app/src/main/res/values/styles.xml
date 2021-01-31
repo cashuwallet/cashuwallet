@@ -207,6 +207,12 @@
         <item name="android:statusBarColor">@color/eos_dark</item>
         <item name="colorAccent">@color/eos_lite</item>
     </style>
+    <style name="Gemini.Dollar" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/geminidollar</item>
+        <item name="colorPrimaryDark">@color/geminidollar_dark</item>
+        <item name="android:statusBarColor">@color/geminidollar_dark</item>
+        <item name="colorAccent">@color/geminidollar_lite</item>
+    </style>
     <style name="Golem" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/golem</item>
         <item name="colorPrimaryDark">@color/golem_dark</item>
@@ -236,6 +242,24 @@
         <item name="colorPrimaryDark">@color/status_dark</item>
         <item name="android:statusBarColor">@color/status_dark</item>
         <item name="colorAccent">@color/status_lite</item>
+    </style>
+    <style name="Tether" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/tether</item>
+        <item name="colorPrimaryDark">@color/tether_dark</item>
+        <item name="android:statusBarColor">@color/tether_dark</item>
+        <item name="colorAccent">@color/tether_lite</item>
+    </style>
+    <style name="USD.Coin" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/usdcoin</item>
+        <item name="colorPrimaryDark">@color/usdcoin_dark</item>
+        <item name="android:statusBarColor">@color/usdcoin_dark</item>
+        <item name="colorAccent">@color/usdcoin_lite</item>
+    </style>
+    <style name="Wrapped.Bitcoin" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/wrappedbitcoin</item>
+        <item name="colorPrimaryDark">@color/wrappedbitcoin_dark</item>
+        <item name="android:statusBarColor">@color/wrappedbitcoin_dark</item>
+        <item name="colorAccent">@color/wrappedbitcoin_lite</item>
     </style>
     <style name="Zilliqa" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/zilliqa</item>

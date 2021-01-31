@@ -137,6 +137,10 @@
     <color name="eos_dark">#373343</color>
     <color name="eos_lite">#bcd1cc</color>
 
+    <color name="geminidollar">#00dcfa</color>
+    <color name="geminidollar_dark">#021224</color>
+    <color name="geminidollar_lite">#909397</color>
+
     <color name="golem">#002d64</color>
     <color name="golem_dark">#002450</color>
     <color name="golem_lite">#b0ec00</color>
@@ -156,6 +160,18 @@
     <color name="status">#505db7</color>
     <color name="status_dark">#404b93</color>
     <color name="status_lite">#7dc4b0</color>
+
+    <color name="tether">#53ae94</color>
+    <color name="tether_dark">#005944</color>
+    <color name="tether_lite">#999999</color>
+
+    <color name="usdcoin">#2775ca</color>
+    <color name="usdcoin_dark">#003d89</color>
+    <color name="usdcoin_lite">#4da7ff</color>
+
+    <color name="wrappedbitcoin">#282138</color>
+    <color name="wrappedbitcoin_dark">#191228</color>
+    <color name="wrappedbitcoin_lite">#f09242</color>
 
     <color name="zilliqa">#02172d</color>
     <color name="zilliqa_dark">#021224</color>

@@ -1,7 +1,7 @@
 package com.cashuwallet.android;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -80,11 +80,15 @@ public final class MainApplication extends Application {
         themes.put("LINK", R.style.Chainlink);
         themes.put("DAI", R.style.Dai);
         themes.put("EOS", R.style.EOS);
+        themes.put("GUSD", R.style.Gemini_Dollar);
         themes.put("GNT", R.style.Golem);
         themes.put("MKR", R.style.Maker);
         themes.put("OMG", R.style.OmiseGO);
         themes.put("SAI", R.style.Sai);
         themes.put("SNT", R.style.Status);
+        themes.put("USDT", R.style.Tether);
+        themes.put("USDC", R.style.USD_Coin);
+        themes.put("WBTC", R.style.Wrapped_Bitcoin);
         themes.put("ZIL", R.style.Zilliqa);
 
         drawable.put("BTC", R.drawable.bitcoin);
@@ -117,11 +121,15 @@ public final class MainApplication extends Application {
         drawable.put("LINK", R.drawable.chainlink);
         drawable.put("DAI", R.drawable.dai);
         drawable.put("EOS", R.drawable.eos);
+        drawable.put("GUSD", R.drawable.geminidollar);
         drawable.put("GNT", R.drawable.golem);
         drawable.put("MKR", R.drawable.maker);
         drawable.put("OMG", R.drawable.omisego);
         drawable.put("SAI", R.drawable.sai);
         drawable.put("SNT", R.drawable.status);
+        drawable.put("USDT", R.drawable.tether);
+        drawable.put("USDC", R.drawable.usdcoin);
+        drawable.put("WBTC", R.drawable.wrappedbitcoin);
         drawable.put("ZIL", R.drawable.zilliqa);
 
         exec = createExec();
