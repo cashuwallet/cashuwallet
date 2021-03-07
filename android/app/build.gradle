@@ -10,8 +10,8 @@ android {
         applicationId "com.cashuwallet.android"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 23
-        versionName "1.0.22-beta"
+        versionCode 24
+        versionName "1.0.23-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

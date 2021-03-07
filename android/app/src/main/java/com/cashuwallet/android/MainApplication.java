@@ -61,6 +61,7 @@ public final class MainApplication extends Application {
         themes.put("DOGE", R.style.Dogecoin);
         themes.put("ETH", R.style.Ethereum);
         themes.put("ETC", R.style.Ethereum_Classic);
+        themes.put("FTM", R.style.Fantom);
         themes.put("LSK", R.style.Lisk);
         themes.put("LTC", R.style.Litecoin);
         themes.put("NANO", R.style.Nano);
@@ -102,6 +103,7 @@ public final class MainApplication extends Application {
         drawable.put("DOGE", R.drawable.dogecoin);
         drawable.put("ETH", R.drawable.ethereum);
         drawable.put("ETC", R.drawable.ethereumclassic);
+        drawable.put("FTM", R.drawable.fantom);
         drawable.put("LSK", R.drawable.lisk);
         drawable.put("LTC", R.drawable.litecoin);
         drawable.put("NANO", R.drawable.nano);

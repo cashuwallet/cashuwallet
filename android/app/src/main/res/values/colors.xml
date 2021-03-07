@@ -61,6 +61,10 @@
     <color name="ethereumclassic_dark">#309530</color>
     <color name="ethereumclassic_lite">#309530</color>
 
+    <color name="fantom">#1969ff</color>
+    <color name="fantom_dark">#0043cf</color>
+    <color name="fantom_lite">#19e1ff</color>
+
     <color name="lisk">#04183d</color>
     <color name="lisk_dark">#031331</color>
     <color name="lisk_lite">#ff6236</color>

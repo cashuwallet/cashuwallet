@@ -93,6 +93,12 @@
         <item name="android:statusBarColor">@color/ethereumclassic_dark</item>
         <item name="colorAccent">@color/ethereumclassic_lite</item>
     </style>
+    <style name="Fantom" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/fantom</item>
+        <item name="colorPrimaryDark">@color/fantom_dark</item>
+        <item name="android:statusBarColor">@color/fantom_dark</item>
+        <item name="colorAccent">@color/fantom_lite</item>
+    </style>
     <style name="Lisk" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/lisk</item>
         <item name="colorPrimaryDark">@color/lisk_dark</item>

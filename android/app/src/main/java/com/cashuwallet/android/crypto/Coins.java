@@ -19,6 +19,7 @@ public final class Coins {
     private static final Coin dogecoin = new Dogecoin();
     private static final Coin ethereum = new Ethereum();
     private static final Coin ethereumclassic = new EthereumClassic();
+    private static final Coin fantom = new Fantom();
     private static final Coin lisk = new Lisk();
     private static final Coin litecoin = new Litecoin();
     private static final Coin nano = new Nano();
@@ -63,6 +64,7 @@ public final class Coins {
         registry.put(dogecoin.getCode(), dogecoin);
         registry.put(ethereum.getCode(), ethereum);
         registry.put(ethereumclassic.getCode(), ethereumclassic);
+        registry.put(fantom.getCode(), fantom);
         registry.put(lisk.getCode(), lisk);
         registry.put(litecoin.getCode(), litecoin);
         registry.put(nano.getCode(), nano);
@@ -713,6 +715,51 @@ public final class Coins {
                 // return "https://mordenexplorer.ethertrack.io/addr/" + hash;
             } else {
                 return "https://blockscout.com/etc/mainnet/tx/" + hash;
+            }
+        }
+    }
+
+    private static class Fantom extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Fantom";
+        }
+
+        @Override
+        public String getLabel() {
+            return "fantom";
+        }
+
+        @Override
+        public String getCode() {
+            return "FTM";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new Service.Multi(new Service[]{
+                    new Web3rpcAPI("https://rpc.testnet.fantom.network/"),
+                });
+            } else {
+                return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://api.ftmscan.com/api"),
+                    new Web3rpcAPI("https://rpcapi.fantom.network/"),
+                });
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return "https://testnet.fantom.network/transactions/" + hash;
+            } else {
+                return "https://ftmscan.com/tx/" + hash;
             }
         }
     }
