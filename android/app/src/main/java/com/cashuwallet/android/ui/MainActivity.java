@@ -263,6 +263,7 @@ public class MainActivity extends AppCompatActivity
             if (refreshing.contains(multiwallet)) color = Color.LTGRAY;
 
             String tag = "";
+            if (coin instanceof Coins.BEP20Token) tag = "BEP-20";
             if (coin instanceof Coins.ERC20Token) tag = "ERC-20";
             if (coin instanceof Coins.WavesToken) tag = "Waves";
 

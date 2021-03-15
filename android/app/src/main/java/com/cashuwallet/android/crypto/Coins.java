@@ -8,6 +8,7 @@ import java.util.Map;
 
 public final class Coins {
 
+    private static final Coin binancecoin = new BinanceCoin();
     private static final Coin bitcoin = new Bitcoin();
     private static final Coin bitcoincash = new BitcoinCash();
     private static final Coin bitcoingold = new BitcoinGold();
@@ -31,28 +32,45 @@ public final class Coins {
     private static final Coin tron = new Tron();
     private static final Coin waves = new Waves();
     private static final Coin zcash = new Zcash();
-    private static final Coin _0x = new _0x();
-    private static final Coin aeternity = new Aeternity();
-    private static final Coin augur = new Augur();
-    private static final Coin basicattentiontoken = new BasicAttentionToken();
-    private static final Coin binancecoin = new BinanceCoin();
-    private static final Coin chainlink = new Chainlink();
-    private static final Coin dai = new Dai();
-    private static final Coin eos = new EOS();
-    private static final Coin geminidollar = new GeminiDollar();
-    private static final Coin golem = new Golem();
-    private static final Coin maker = new Maker();
-    private static final Coin omisego = new OmiseGO();
-    private static final Coin sai = new Sai();
-    private static final Coin status = new Status();
-    private static final Coin tether = new Tether();
-    private static final Coin usdcoin = new USDCoin();
-    private static final Coin wrappedbitcoin = new WrappedBitcoin();
-    private static final Coin zilliqa = new Zilliqa();
+    private static final Coin erc20_0x = new ERC20_0x();
+    private static final Coin erc20_aeternity = new ERC20_Aeternity();
+    private static final Coin erc20_augur = new ERC20_Augur();
+    private static final Coin erc20_basicattentiontoken = new ERC20_BasicAttentionToken();
+    private static final Coin erc20_binancecoin = new ERC20_BinanceCoin();
+    private static final Coin erc20_chainlink = new ERC20_Chainlink();
+    private static final Coin erc20_dai = new ERC20_Dai();
+    private static final Coin erc20_eos = new ERC20_EOS();
+    private static final Coin erc20_geminidollar = new ERC20_GeminiDollar();
+    private static final Coin erc20_golem = new ERC20_Golem();
+    private static final Coin erc20_maker = new ERC20_Maker();
+    private static final Coin erc20_omisego = new ERC20_OmiseGO();
+    private static final Coin erc20_sai = new ERC20_Sai();
+    private static final Coin erc20_status = new ERC20_Status();
+    private static final Coin erc20_tether = new ERC20_Tether();
+    private static final Coin erc20_usdcoin = new ERC20_USDCoin();
+    private static final Coin erc20_wrappedbitcoin = new ERC20_WrappedBitcoin();
+    private static final Coin erc20_zilliqa = new ERC20_Zilliqa();
+    private static final Coin bep20_basicattentiontoken = new BEP20_BasicAttentionToken();
+    private static final Coin bep20_bitcoin = new BEP20_Bitcoin();
+    private static final Coin bep20_bitcoincash = new BEP20_BitcoinCash();
+    private static final Coin bep20_cardano = new BEP20_Cardano();
+    private static final Coin bep20_chainlink = new BEP20_Chainlink();
+    private static final Coin bep20_dai = new BEP20_Dai();
+    private static final Coin bep20_dogecoin = new BEP20_Dogecoin();
+    private static final Coin bep20_eos = new BEP20_EOS();
+    private static final Coin bep20_ethereum = new BEP20_Ethereum();
+    private static final Coin bep20_ethereumclassic = new BEP20_EthereumClassic();
+    private static final Coin bep20_litecoin = new BEP20_Litecoin();
+    private static final Coin bep20_maker = new BEP20_Maker();
+    private static final Coin bep20_ripple = new BEP20_Ripple();
+    private static final Coin bep20_tether = new BEP20_Tether();
+    private static final Coin bep20_usdcoin = new BEP20_USDCoin();
+    private static final Coin bep20_zcash = new BEP20_Zcash();
 
     private static final Map<String, Coin> registry = new HashMap<>();
 
     static {
+        registry.put(binancecoin.getCode(), binancecoin);
         registry.put(bitcoin.getCode(), bitcoin);
         registry.put(bitcoincash.getCode(), bitcoincash);
         registry.put(bitcoingold.getCode(), bitcoingold);
@@ -76,24 +94,40 @@ public final class Coins {
         registry.put(tron.getCode(), tron);
         registry.put(waves.getCode(), waves);
         registry.put(zcash.getCode(), zcash);
-        registry.put(_0x.getCode(), _0x);
-        registry.put(aeternity.getCode(), aeternity);
-        registry.put(augur.getCode(), augur);
-        registry.put(basicattentiontoken.getCode(), basicattentiontoken);
-        registry.put(binancecoin.getCode(), binancecoin);
-        registry.put(chainlink.getCode(), chainlink);
-        registry.put(dai.getCode(), dai);
-        registry.put(eos.getCode(), eos);
-        registry.put(geminidollar.getCode(), geminidollar);
-        registry.put(golem.getCode(), golem);
-        registry.put(maker.getCode(), maker);
-        registry.put(omisego.getCode(), omisego);
-        registry.put(sai.getCode(), sai);
-        registry.put(status.getCode(), status);
-        registry.put(tether.getCode(), tether);
-        registry.put(usdcoin.getCode(), usdcoin);
-        registry.put(wrappedbitcoin.getCode(), wrappedbitcoin);
-        registry.put(zilliqa.getCode(), zilliqa);
+        registry.put(erc20_0x.getCode(), erc20_0x);
+        registry.put(erc20_aeternity.getCode(), erc20_aeternity);
+        registry.put(erc20_augur.getCode(), erc20_augur);
+        registry.put(erc20_basicattentiontoken.getCode(), erc20_basicattentiontoken);
+        registry.put(erc20_binancecoin.getCode(), erc20_binancecoin);
+        registry.put(erc20_chainlink.getCode(), erc20_chainlink);
+        registry.put(erc20_dai.getCode(), erc20_dai);
+        registry.put(erc20_eos.getCode(), erc20_eos);
+        registry.put(erc20_geminidollar.getCode(), erc20_geminidollar);
+        registry.put(erc20_golem.getCode(), erc20_golem);
+        registry.put(erc20_maker.getCode(), erc20_maker);
+        registry.put(erc20_omisego.getCode(), erc20_omisego);
+        registry.put(erc20_sai.getCode(), erc20_sai);
+        registry.put(erc20_status.getCode(), erc20_status);
+        registry.put(erc20_tether.getCode(), erc20_tether);
+        registry.put(erc20_usdcoin.getCode(), erc20_usdcoin);
+        registry.put(erc20_wrappedbitcoin.getCode(), erc20_wrappedbitcoin);
+        registry.put(erc20_zilliqa.getCode(), erc20_zilliqa);
+        registry.put(bep20_basicattentiontoken.getCode(), bep20_basicattentiontoken);
+        registry.put(bep20_bitcoin.getCode(), bep20_bitcoin);
+        registry.put(bep20_bitcoincash.getCode(), bep20_bitcoincash);
+        registry.put(bep20_cardano.getCode(), bep20_cardano);
+        registry.put(bep20_chainlink.getCode(), bep20_chainlink);
+        registry.put(bep20_dai.getCode(), bep20_dai);
+        registry.put(bep20_dogecoin.getCode(), bep20_dogecoin);
+        registry.put(bep20_eos.getCode(), bep20_eos);
+        registry.put(bep20_ethereum.getCode(), bep20_ethereum);
+        registry.put(bep20_ethereumclassic.getCode(), bep20_ethereumclassic);
+        registry.put(bep20_litecoin.getCode(), bep20_litecoin);
+        registry.put(bep20_maker.getCode(), bep20_maker);
+        registry.put(bep20_ripple.getCode(), bep20_ripple);
+        registry.put(bep20_tether.getCode(), bep20_tether);
+        registry.put(bep20_usdcoin.getCode(), bep20_usdcoin);
+        registry.put(bep20_zcash.getCode(), bep20_zcash);
     }
 
     public static Coin findCoin(String code) {
@@ -138,6 +172,69 @@ public final class Coins {
         @Override
         public Coin getFeeCoin() {
             return this;
+        }
+    }
+
+    private static class BinanceCoin extends AbstractCoin {
+        @Override
+        public String getName() {
+            return "Binance Coin";
+        }
+
+        @Override
+        public String getLabel() {
+            return "binancecoin";
+        }
+
+        @Override
+        public String getCode() {
+            return "BNB";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            if (testnet) {
+                return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://api-testnet.bscscan.com/api"),
+                    new Web3rpcAPI("https://data-seed-prebsc-1-s1.binance.org:8545/"),
+                    new Web3rpcAPI("https://data-seed-prebsc-2-s1.binance.org:8545/"),
+                    new Web3rpcAPI("https://data-seed-prebsc-1-s2.binance.org:8545/"),
+                    new Web3rpcAPI("https://data-seed-prebsc-2-s2.binance.org:8545/"),
+                    new Web3rpcAPI("https://data-seed-prebsc-1-s3.binance.org:8545/"),
+                    new Web3rpcAPI("https://data-seed-prebsc-2-s3.binance.org:8545/"),
+                });
+            } else {
+                return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://api.bscscan.com/api"),
+                    new Web3rpcAPI("https://bsc-dataseed.binance.org/"),
+                    new Web3rpcAPI("https://bsc-dataseed1.defibit.io/"),
+                    new Web3rpcAPI("https://bsc-dataseed1.ninicoin.io/"),
+                    new Web3rpcAPI("https://bsc-dataseed2.defibit.io/"),
+                    new Web3rpcAPI("https://bsc-dataseed3.defibit.io/"),
+                    new Web3rpcAPI("https://bsc-dataseed4.defibit.io/"),
+                    new Web3rpcAPI("https://bsc-dataseed2.ninicoin.io/"),
+                    new Web3rpcAPI("https://bsc-dataseed3.ninicoin.io/"),
+                    new Web3rpcAPI("https://bsc-dataseed4.ninicoin.io/"),
+                    new Web3rpcAPI("https://bsc-dataseed1.binance.org/"),
+                    new Web3rpcAPI("https://bsc-dataseed2.binance.org/"),
+                    new Web3rpcAPI("https://bsc-dataseed3.binance.org/"),
+                    new Web3rpcAPI("https://bsc-dataseed4.binance.org/"),
+                });
+            }
+        }
+
+        @Override
+        public String getTransactionUrl(String hash, boolean testnet) {
+            if (testnet) {
+                return "https://explorer.testnet.fantom.network/transactions/" + hash;
+            } else {
+                return "https://ftmscan.com/tx/" + hash;
+            }
         }
     }
 
@@ -1293,7 +1390,7 @@ public final class Coins {
         }
     }
 
-    private static class _0x extends ERC20Token {
+    private static class ERC20_0x extends ERC20Token {
         @Override
         public String getName() {
             return "0x";
@@ -1301,12 +1398,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "0x";
+            return "erc20-0x";
         }
 
         @Override
         public String getCode() {
-            return "ZRX";
+            return "ZRX@eth";
         }
 
         @Override
@@ -1315,7 +1412,7 @@ public final class Coins {
         }
     }
 
-    private static class Aeternity extends ERC20Token {
+    private static class ERC20_Aeternity extends ERC20Token {
         @Override
         public String getName() {
             return "Aeternity";
@@ -1323,12 +1420,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "aeternity";
+            return "erc20-aeternity";
         }
 
         @Override
         public String getCode() {
-            return "AE";
+            return "AE@eth";
         }
 
         @Override
@@ -1337,7 +1434,7 @@ public final class Coins {
         }
     }
 
-    private static class Augur extends ERC20Token {
+    private static class ERC20_Augur extends ERC20Token {
         @Override
         public String getName() {
             return "Augur";
@@ -1345,12 +1442,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "augur";
+            return "erc20-augur";
         }
 
         @Override
         public String getCode() {
-            return "REP";
+            return "REP@eth";
         }
 
         @Override
@@ -1359,7 +1456,7 @@ public final class Coins {
         }
     }
 
-    private static class BasicAttentionToken extends ERC20Token {
+    private static class ERC20_BasicAttentionToken extends ERC20Token {
         @Override
         public String getName() {
             return "Basic Attention Token";
@@ -1367,12 +1464,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "basicattentiontoken";
+            return "erc20-basicattentiontoken";
         }
 
         @Override
         public String getCode() {
-            return "BAT";
+            return "BAT@eth";
         }
 
         @Override
@@ -1381,7 +1478,7 @@ public final class Coins {
         }
     }
 
-    private static class BinanceCoin extends ERC20Token {
+    private static class ERC20_BinanceCoin extends ERC20Token {
         @Override
         public String getName() {
             return "Binance Coin";
@@ -1389,12 +1486,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "binancecoin";
+            return "erc20-binancecoin";
         }
 
         @Override
         public String getCode() {
-            return "BNB";
+            return "BNB@eth";
         }
 
         @Override
@@ -1403,7 +1500,7 @@ public final class Coins {
         }
     }
 
-    private static class Chainlink extends ERC20Token {
+    private static class ERC20_Chainlink extends ERC20Token {
         @Override
         public String getName() {
             return "Chainlink";
@@ -1411,12 +1508,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "chainlink";
+            return "erc20-chainlink";
         }
 
         @Override
         public String getCode() {
-            return "LINK";
+            return "LINK@eth";
         }
 
         @Override
@@ -1425,7 +1522,7 @@ public final class Coins {
         }
     }
 
-    private static class Dai extends ERC20Token {
+    private static class ERC20_Dai extends ERC20Token {
         @Override
         public String getName() {
             return "Dai";
@@ -1433,12 +1530,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "dai";
+            return "erc20-dai";
         }
 
         @Override
         public String getCode() {
-            return "DAI";
+            return "DAI@eth";
         }
 
         @Override
@@ -1447,7 +1544,7 @@ public final class Coins {
         }
     }
 
-    private static class EOS extends ERC20Token {
+    private static class ERC20_EOS extends ERC20Token {
         @Override
         public String getName() {
             return "EOS";
@@ -1455,12 +1552,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "eos";
+            return "erc20-eos";
         }
 
         @Override
         public String getCode() {
-            return "EOS";
+            return "EOS@eth";
         }
 
         @Override
@@ -1469,7 +1566,7 @@ public final class Coins {
         }
     }
 
-    private static class GeminiDollar extends ERC20Token {
+    private static class ERC20_GeminiDollar extends ERC20Token {
         @Override
         public String getName() {
             return "Gemini Dollar";
@@ -1477,12 +1574,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "geminidollar";
+            return "erc20-geminidollar";
         }
 
         @Override
         public String getCode() {
-            return "GUSD";
+            return "GUSD@eth";
         }
 
         @Override
@@ -1491,7 +1588,7 @@ public final class Coins {
         }
     }
 
-    private static class Golem extends ERC20Token {
+    private static class ERC20_Golem extends ERC20Token {
         @Override
         public String getName() {
             return "Golem";
@@ -1499,12 +1596,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "golem";
+            return "erc20-golem";
         }
 
         @Override
         public String getCode() {
-            return "GNT";
+            return "GNT@eth";
         }
 
         @Override
@@ -1513,7 +1610,7 @@ public final class Coins {
         }
     }
 
-    private static class Maker extends ERC20Token {
+    private static class ERC20_Maker extends ERC20Token {
         @Override
         public String getName() {
             return "Maker";
@@ -1521,12 +1618,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "maker";
+            return "erc20-maker";
         }
 
         @Override
         public String getCode() {
-            return "MKR";
+            return "MKR@eth";
         }
 
         @Override
@@ -1535,7 +1632,7 @@ public final class Coins {
         }
     }
 
-    private static class OmiseGO extends ERC20Token {
+    private static class ERC20_OmiseGO extends ERC20Token {
         @Override
         public String getName() {
             return "OmiseGO";
@@ -1543,12 +1640,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "omisego";
+            return "erc20-omisego";
         }
 
         @Override
         public String getCode() {
-            return "OMG";
+            return "OMG@eth";
         }
 
         @Override
@@ -1557,7 +1654,7 @@ public final class Coins {
         }
     }
 
-    private static class Sai extends ERC20Token {
+    private static class ERC20_Sai extends ERC20Token {
         @Override
         public String getName() {
             return "Sai";
@@ -1565,12 +1662,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "sai";
+            return "erc20-sai";
         }
 
         @Override
         public String getCode() {
-            return "SAI";
+            return "SAI@eth";
         }
 
         @Override
@@ -1579,7 +1676,7 @@ public final class Coins {
         }
     }
 
-    private static class Status extends ERC20Token {
+    private static class ERC20_Status extends ERC20Token {
         @Override
         public String getName() {
             return "Status";
@@ -1587,12 +1684,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "status";
+            return "erc20-status";
         }
 
         @Override
         public String getCode() {
-            return "SNT";
+            return "SNT@eth";
         }
 
         @Override
@@ -1601,7 +1698,7 @@ public final class Coins {
         }
     }
 
-    private static class Tether extends ERC20Token {
+    private static class ERC20_Tether extends ERC20Token {
         @Override
         public String getName() {
             return "Tether";
@@ -1609,12 +1706,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "tether";
+            return "erc20-tether";
         }
 
         @Override
         public String getCode() {
-            return "USDT";
+            return "USDT@eth";
         }
 
         @Override
@@ -1623,7 +1720,7 @@ public final class Coins {
         }
     }
 
-    private static class USDCoin extends ERC20Token {
+    private static class ERC20_USDCoin extends ERC20Token {
         @Override
         public String getName() {
             return "USD Coin";
@@ -1631,12 +1728,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "usdcoin";
+            return "erc20-usdcoin";
         }
 
         @Override
         public String getCode() {
-            return "USDC";
+            return "USDC@eth";
         }
 
         @Override
@@ -1645,7 +1742,7 @@ public final class Coins {
         }
     }
 
-    private static class WrappedBitcoin extends ERC20Token {
+    private static class ERC20_WrappedBitcoin extends ERC20Token {
         @Override
         public String getName() {
             return "Wrapped Bitcoin";
@@ -1653,12 +1750,12 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "wrappedbitcoin";
+            return "erc20-wrappedbitcoin";
         }
 
         @Override
         public String getCode() {
-            return "WBTC";
+            return "WBTC@eth";
         }
 
         @Override
@@ -1667,7 +1764,7 @@ public final class Coins {
         }
     }
 
-    private static class Zilliqa extends ERC20Token {
+    private static class ERC20_Zilliqa extends ERC20Token {
         @Override
         public String getName() {
             return "Zilliqa";
@@ -1675,12 +1772,385 @@ public final class Coins {
 
         @Override
         public String getLabel() {
-            return "zilliqa";
+            return "erc20-zilliqa";
         }
 
         @Override
         public String getCode() {
-            return "ZIL";
+            return "ZIL@eth";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    public static abstract class BEP20Token extends BinanceCoin {
+        @Override
+        public Coin getFeeCoin() {
+            return findCoin("BNB");
+        }
+
+        @Override
+        public Service getService(boolean testnet) {
+            String contractAddress = coins.attr("contract.address", getLabel(), testnet);
+            if (testnet) {
+                return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://api-testnet.bscscan.com/api", contractAddress),
+                });
+            } else {
+                return new Service.Multi(new Service[]{
+                    new EtherscanAPI("https://api.bscscan.com/api", contractAddress),
+                });
+            }
+        }
+    }
+
+    private static class BEP20_BasicAttentionToken extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Basic Attention Token";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-basicattentiontoken";
+        }
+
+        @Override
+        public String getCode() {
+            return "BAT@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Bitcoin extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Bitcoin";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-bitcoin";
+        }
+
+        @Override
+        public String getCode() {
+            return "BTC@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return "฿";
+        }
+    }
+
+    private static class BEP20_BitcoinCash extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Bitcoin Cash";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-bitcoincash";
+        }
+
+        @Override
+        public String getCode() {
+            return "BCH@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Cardano extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Cardano";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-cardano";
+        }
+
+        @Override
+        public String getCode() {
+            return "ADA@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Chainlink extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Chainlink";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-chainlink";
+        }
+
+        @Override
+        public String getCode() {
+            return "LINK@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Dai extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Dai";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-dai";
+        }
+
+        @Override
+        public String getCode() {
+            return "DAI@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Dogecoin extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Dogecoin";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-dogecoin";
+        }
+
+        @Override
+        public String getCode() {
+            return "DOGE@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return "Ð";
+        }
+    }
+
+    private static class BEP20_EOS extends BEP20Token {
+        @Override
+        public String getName() {
+            return "EOS";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-eos";
+        }
+
+        @Override
+        public String getCode() {
+            return "EOS@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Ethereum extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Ethereum";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-ethereum";
+        }
+
+        @Override
+        public String getCode() {
+            return "ETH@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return "Ξ";
+        }
+    }
+
+    private static class BEP20_EthereumClassic extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Ethereum Classic";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-ethereumclassic";
+        }
+
+        @Override
+        public String getCode() {
+            return "ETC@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Litecoin extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Litecoin";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-litecoin";
+        }
+
+        @Override
+        public String getCode() {
+            return "LTC@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return "Ł";
+        }
+    }
+
+    private static class BEP20_Maker extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Maker";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-maker";
+        }
+
+        @Override
+        public String getCode() {
+            return "MKR@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Ripple extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Ripple";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-ripple";
+        }
+
+        @Override
+        public String getCode() {
+            return "XRP@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Tether extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Tether";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-tether";
+        }
+
+        @Override
+        public String getCode() {
+            return "USDT@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_USDCoin extends BEP20Token {
+        @Override
+        public String getName() {
+            return "USD Coin";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-usdcoin";
+        }
+
+        @Override
+        public String getCode() {
+            return "USDC@bsc";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Zcash extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Zcash";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-zcash";
+        }
+
+        @Override
+        public String getCode() {
+            return "ZEC@bsc";
         }
 
         @Override

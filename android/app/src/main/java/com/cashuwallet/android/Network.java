@@ -158,6 +158,17 @@ public class Network {
             } catch (URISyntaxException e) { }
         }
         else
+        if (url.contains("bscscan.com")) {
+            try {
+                URI uri = new URI(url);
+                String query = uri.getQuery();
+                String keyval = "apikey=" + BSCSCAN_APIKEY;
+                query = query == null ? keyval : query + "&" + keyval;
+                uri = new URI(uri.getScheme(), uri.getAuthority(), uri.getPath(), query, uri.getFragment());
+                url = uri.toString();
+            } catch (URISyntaxException e) { }
+        }
+        else
         if (url.contains("blockcypher.com")) {
             try {
                 URI uri = new URI(url);
@@ -183,6 +194,7 @@ public class Network {
     }
 
     private static final String ETHERSCAN_APIKEY = "4CZPSU5199IJ5T66YQJRD2X3JW7SUQWP8H";
+    private static final String BSCSCAN_APIKEY = "ZV6XYXGK37PDUPCSIED4K7A63NVWEEJNRF";
     private static final String BLOCKCYPHER_APIKEY = "1acd2d05de634ab7bdce60ee9ba47b99";
     private static final String NOWNODES_APIKEY = "ZwmbBjvevr4JeRgeATb7Y3Ad";
 
