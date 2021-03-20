@@ -231,9 +231,9 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://explorer.testnet.fantom.network/transactions/" + hash;
+                return "https://testnet.bscscan.com/tx/" + hash;
             } else {
-                return "https://ftmscan.com/tx/" + hash;
+                return "https://bscscan.com/tx/" + hash;
             }
         }
     }
