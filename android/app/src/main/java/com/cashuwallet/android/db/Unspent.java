@@ -14,7 +14,7 @@ import java.math.BigInteger;
 @Entity(
         tableName = "unspent",
         indices = {
-            @Index(value = {"coin", "address", "hash", "index"}, unique = true),
+            @Index(value = {"label", "address", "hash", "index"}, unique = true),
         }
 )
 public class Unspent {
@@ -22,8 +22,8 @@ public class Unspent {
     @PrimaryKey(autoGenerate = true)
     protected int id;
 
-    @ColumnInfo(name = "coin") @NonNull
-    public final String coin;
+    @ColumnInfo(name = "label") @NonNull
+    public final String label;
 
     @ColumnInfo(name = "address") @NonNull
     public final String address;
@@ -37,8 +37,8 @@ public class Unspent {
     @ColumnInfo(name = "amount") @NonNull
     protected final BigInteger amount;
 
-    public Unspent(String coin, String address, String hash, int index, BigInteger amount) {
-        this.coin = coin;
+    public Unspent(String label, String address, String hash, int index, BigInteger amount) {
+        this.label = label;
         this.address = address;
         this.hash = hash;
         this.index = index;
@@ -50,7 +50,7 @@ public class Unspent {
     }
 
     public Coin getCoin() {
-        return Coins.findCoin(coin);
+        return Coins.findCoin(label);
     }
 
     public BigInteger getAmount() {

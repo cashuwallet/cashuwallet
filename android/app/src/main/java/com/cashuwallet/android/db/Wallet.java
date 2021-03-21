@@ -14,8 +14,8 @@ import java.math.BigInteger;
 @Entity(
     tableName = "wallet",
     indices = {
-        @Index(value = {"coin", "address"}, unique = true),
-        @Index(value = {"coin", "account", "change", "index"}, unique = true),
+        @Index(value = {"label", "address"}, unique = true),
+        @Index(value = {"label", "account", "change", "index"}, unique = true),
     }
 )
 public class Wallet {
@@ -23,8 +23,8 @@ public class Wallet {
     @PrimaryKey(autoGenerate = true)
     protected int id;
 
-    @ColumnInfo(name = "coin") @NonNull
-    public final String coin;
+    @ColumnInfo(name = "label") @NonNull
+    public final String label;
 
     @ColumnInfo(name = "address") @NonNull
     public final String address;
@@ -74,8 +74,8 @@ public class Wallet {
     @ColumnInfo(name = "seq_last_sync") @NonNull
     public int seqLastSync = 0;
 
-    public Wallet(String coin, String address, int account, boolean change, int index) {
-        this.coin = coin;
+    public Wallet(String label, String address, int account, boolean change, int index) {
+        this.label = label;
         this.address = address;
         this.account = account;
         this.change = change;
@@ -87,7 +87,7 @@ public class Wallet {
     }
 
     public Coin getCoin() {
-        return Coins.findCoin(coin);
+        return Coins.findCoin(label);
     }
 
     public BigInteger getBalance() {

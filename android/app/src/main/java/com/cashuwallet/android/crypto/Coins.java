@@ -70,68 +70,68 @@ public final class Coins {
     private static final Map<String, Coin> registry = new HashMap<>();
 
     static {
-        registry.put(binancecoin.getCode(), binancecoin);
-        registry.put(bitcoin.getCode(), bitcoin);
-        registry.put(bitcoincash.getCode(), bitcoincash);
-        registry.put(bitcoingold.getCode(), bitcoingold);
-        registry.put(bitcoinsv.getCode(), bitcoinsv);
-        registry.put(cardano.getCode(), cardano);
-        registry.put(dash.getCode(), dash);
-        registry.put(decred.getCode(), decred);
-        registry.put(digibyte.getCode(), digibyte);
-        registry.put(dogecoin.getCode(), dogecoin);
-        registry.put(ethereum.getCode(), ethereum);
-        registry.put(ethereumclassic.getCode(), ethereumclassic);
-        registry.put(fantom.getCode(), fantom);
-        registry.put(lisk.getCode(), lisk);
-        registry.put(litecoin.getCode(), litecoin);
-        registry.put(nano.getCode(), nano);
-        registry.put(neo.getCode(), neo);
-        registry.put(neogas.getCode(), neogas);
-        registry.put(qtum.getCode(), qtum);
-        registry.put(ripple.getCode(), ripple);
-        registry.put(stellar.getCode(), stellar);
-        registry.put(tron.getCode(), tron);
-        registry.put(waves.getCode(), waves);
-        registry.put(zcash.getCode(), zcash);
-        registry.put(erc20_0x.getCode(), erc20_0x);
-        registry.put(erc20_aeternity.getCode(), erc20_aeternity);
-        registry.put(erc20_augur.getCode(), erc20_augur);
-        registry.put(erc20_basicattentiontoken.getCode(), erc20_basicattentiontoken);
-        registry.put(erc20_binancecoin.getCode(), erc20_binancecoin);
-        registry.put(erc20_chainlink.getCode(), erc20_chainlink);
-        registry.put(erc20_dai.getCode(), erc20_dai);
-        registry.put(erc20_eos.getCode(), erc20_eos);
-        registry.put(erc20_geminidollar.getCode(), erc20_geminidollar);
-        registry.put(erc20_golem.getCode(), erc20_golem);
-        registry.put(erc20_maker.getCode(), erc20_maker);
-        registry.put(erc20_omisego.getCode(), erc20_omisego);
-        registry.put(erc20_sai.getCode(), erc20_sai);
-        registry.put(erc20_status.getCode(), erc20_status);
-        registry.put(erc20_tether.getCode(), erc20_tether);
-        registry.put(erc20_usdcoin.getCode(), erc20_usdcoin);
-        registry.put(erc20_wrappedbitcoin.getCode(), erc20_wrappedbitcoin);
-        registry.put(erc20_zilliqa.getCode(), erc20_zilliqa);
-        registry.put(bep20_basicattentiontoken.getCode(), bep20_basicattentiontoken);
-        registry.put(bep20_bitcoin.getCode(), bep20_bitcoin);
-        registry.put(bep20_bitcoincash.getCode(), bep20_bitcoincash);
-        registry.put(bep20_cardano.getCode(), bep20_cardano);
-        registry.put(bep20_chainlink.getCode(), bep20_chainlink);
-        registry.put(bep20_dai.getCode(), bep20_dai);
-        registry.put(bep20_dogecoin.getCode(), bep20_dogecoin);
-        registry.put(bep20_eos.getCode(), bep20_eos);
-        registry.put(bep20_ethereum.getCode(), bep20_ethereum);
-        registry.put(bep20_ethereumclassic.getCode(), bep20_ethereumclassic);
-        registry.put(bep20_litecoin.getCode(), bep20_litecoin);
-        registry.put(bep20_maker.getCode(), bep20_maker);
-        registry.put(bep20_ripple.getCode(), bep20_ripple);
-        registry.put(bep20_tether.getCode(), bep20_tether);
-        registry.put(bep20_usdcoin.getCode(), bep20_usdcoin);
-        registry.put(bep20_zcash.getCode(), bep20_zcash);
+        registry.put(binancecoin.getLabel(), binancecoin);
+        registry.put(bitcoin.getLabel(), bitcoin);
+        registry.put(bitcoincash.getLabel(), bitcoincash);
+        registry.put(bitcoingold.getLabel(), bitcoingold);
+        registry.put(bitcoinsv.getLabel(), bitcoinsv);
+        registry.put(cardano.getLabel(), cardano);
+        registry.put(dash.getLabel(), dash);
+        registry.put(decred.getLabel(), decred);
+        registry.put(digibyte.getLabel(), digibyte);
+        registry.put(dogecoin.getLabel(), dogecoin);
+        registry.put(ethereum.getLabel(), ethereum);
+        registry.put(ethereumclassic.getLabel(), ethereumclassic);
+        registry.put(fantom.getLabel(), fantom);
+        registry.put(lisk.getLabel(), lisk);
+        registry.put(litecoin.getLabel(), litecoin);
+        registry.put(nano.getLabel(), nano);
+        registry.put(neo.getLabel(), neo);
+        registry.put(neogas.getLabel(), neogas);
+        registry.put(qtum.getLabel(), qtum);
+        registry.put(ripple.getLabel(), ripple);
+        registry.put(stellar.getLabel(), stellar);
+        registry.put(tron.getLabel(), tron);
+        registry.put(waves.getLabel(), waves);
+        registry.put(zcash.getLabel(), zcash);
+        registry.put(erc20_0x.getLabel(), erc20_0x);
+        registry.put(erc20_aeternity.getLabel(), erc20_aeternity);
+        registry.put(erc20_augur.getLabel(), erc20_augur);
+        registry.put(erc20_basicattentiontoken.getLabel(), erc20_basicattentiontoken);
+        registry.put(erc20_binancecoin.getLabel(), erc20_binancecoin);
+        registry.put(erc20_chainlink.getLabel(), erc20_chainlink);
+        registry.put(erc20_dai.getLabel(), erc20_dai);
+        registry.put(erc20_eos.getLabel(), erc20_eos);
+        registry.put(erc20_geminidollar.getLabel(), erc20_geminidollar);
+        registry.put(erc20_golem.getLabel(), erc20_golem);
+        registry.put(erc20_maker.getLabel(), erc20_maker);
+        registry.put(erc20_omisego.getLabel(), erc20_omisego);
+        registry.put(erc20_sai.getLabel(), erc20_sai);
+        registry.put(erc20_status.getLabel(), erc20_status);
+        registry.put(erc20_tether.getLabel(), erc20_tether);
+        registry.put(erc20_usdcoin.getLabel(), erc20_usdcoin);
+        registry.put(erc20_wrappedbitcoin.getLabel(), erc20_wrappedbitcoin);
+        registry.put(erc20_zilliqa.getLabel(), erc20_zilliqa);
+        registry.put(bep20_basicattentiontoken.getLabel(), bep20_basicattentiontoken);
+        registry.put(bep20_bitcoin.getLabel(), bep20_bitcoin);
+        registry.put(bep20_bitcoincash.getLabel(), bep20_bitcoincash);
+        registry.put(bep20_cardano.getLabel(), bep20_cardano);
+        registry.put(bep20_chainlink.getLabel(), bep20_chainlink);
+        registry.put(bep20_dai.getLabel(), bep20_dai);
+        registry.put(bep20_dogecoin.getLabel(), bep20_dogecoin);
+        registry.put(bep20_eos.getLabel(), bep20_eos);
+        registry.put(bep20_ethereum.getLabel(), bep20_ethereum);
+        registry.put(bep20_ethereumclassic.getLabel(), bep20_ethereumclassic);
+        registry.put(bep20_litecoin.getLabel(), bep20_litecoin);
+        registry.put(bep20_maker.getLabel(), bep20_maker);
+        registry.put(bep20_ripple.getLabel(), bep20_ripple);
+        registry.put(bep20_tether.getLabel(), bep20_tether);
+        registry.put(bep20_usdcoin.getLabel(), bep20_usdcoin);
+        registry.put(bep20_zcash.getLabel(), bep20_zcash);
     }
 
-    public static Coin findCoin(String code) {
-        return registry.get(code);
+    public static Coin findCoin(String label) {
+        return registry.get(label);
     }
 
     public static Iterator<Coin> list() {
@@ -1033,7 +1033,7 @@ public final class Coins {
 
         @Override
         public Coin getFeeCoin() {
-            return findCoin("GAS");
+            return findCoin("neogas");
         }
 
         @Override
@@ -1366,7 +1366,7 @@ public final class Coins {
     public static abstract class ERC20Token extends Ethereum {
         @Override
         public Coin getFeeCoin() {
-            return findCoin("ETH");
+            return findCoin("ethereum");
         }
 
         @Override
@@ -1403,7 +1403,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "ZRX@eth";
+            return "ZRX";
         }
 
         @Override
@@ -1425,7 +1425,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "AE@eth";
+            return "AE";
         }
 
         @Override
@@ -1447,7 +1447,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "REP@eth";
+            return "REP";
         }
 
         @Override
@@ -1469,7 +1469,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "BAT@eth";
+            return "BAT";
         }
 
         @Override
@@ -1491,7 +1491,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "BNB@eth";
+            return "BNB";
         }
 
         @Override
@@ -1513,7 +1513,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "LINK@eth";
+            return "LINK";
         }
 
         @Override
@@ -1535,7 +1535,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "DAI@eth";
+            return "DAI";
         }
 
         @Override
@@ -1557,7 +1557,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "EOS@eth";
+            return "EOS";
         }
 
         @Override
@@ -1579,7 +1579,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "GUSD@eth";
+            return "GUSD";
         }
 
         @Override
@@ -1601,7 +1601,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "GNT@eth";
+            return "GNT";
         }
 
         @Override
@@ -1623,7 +1623,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "MKR@eth";
+            return "MKR";
         }
 
         @Override
@@ -1645,7 +1645,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "OMG@eth";
+            return "OMG";
         }
 
         @Override
@@ -1667,7 +1667,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "SAI@eth";
+            return "SAI";
         }
 
         @Override
@@ -1689,7 +1689,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "SNT@eth";
+            return "SNT";
         }
 
         @Override
@@ -1711,7 +1711,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "USDT@eth";
+            return "USDT";
         }
 
         @Override
@@ -1733,7 +1733,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "USDC@eth";
+            return "USDC";
         }
 
         @Override
@@ -1755,7 +1755,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "WBTC@eth";
+            return "WBTC";
         }
 
         @Override
@@ -1777,7 +1777,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "ZIL@eth";
+            return "ZIL";
         }
 
         @Override
@@ -1789,7 +1789,7 @@ public final class Coins {
     public static abstract class BEP20Token extends BinanceCoin {
         @Override
         public Coin getFeeCoin() {
-            return findCoin("BNB");
+            return findCoin("binancecoin");
         }
 
         @Override
@@ -1820,7 +1820,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "BAT@bsc";
+            return "BAT";
         }
 
         @Override
@@ -1842,7 +1842,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "BTC@bsc";
+            return "BTC";
         }
 
         @Override
@@ -1864,7 +1864,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "BCH@bsc";
+            return "BCH";
         }
 
         @Override
@@ -1886,7 +1886,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "ADA@bsc";
+            return "ADA";
         }
 
         @Override
@@ -1908,7 +1908,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "LINK@bsc";
+            return "LINK";
         }
 
         @Override
@@ -1930,7 +1930,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "DAI@bsc";
+            return "DAI";
         }
 
         @Override
@@ -1952,7 +1952,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "DOGE@bsc";
+            return "DOGE";
         }
 
         @Override
@@ -1974,7 +1974,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "EOS@bsc";
+            return "EOS";
         }
 
         @Override
@@ -1996,7 +1996,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "ETH@bsc";
+            return "ETH";
         }
 
         @Override
@@ -2018,7 +2018,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "ETC@bsc";
+            return "ETC";
         }
 
         @Override
@@ -2040,7 +2040,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "LTC@bsc";
+            return "LTC";
         }
 
         @Override
@@ -2062,7 +2062,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "MKR@bsc";
+            return "MKR";
         }
 
         @Override
@@ -2084,7 +2084,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "XRP@bsc";
+            return "XRP";
         }
 
         @Override
@@ -2106,7 +2106,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "USDT@bsc";
+            return "USDT";
         }
 
         @Override
@@ -2128,7 +2128,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "USDC@bsc";
+            return "USDC";
         }
 
         @Override
@@ -2150,7 +2150,7 @@ public final class Coins {
 
         @Override
         public String getCode() {
-            return "ZEC@bsc";
+            return "ZEC";
         }
 
         @Override
@@ -2162,7 +2162,7 @@ public final class Coins {
     public static abstract class WavesToken extends Waves {
         @Override
         public Coin getFeeCoin() {
-            return findCoin("WAVES");
+            return findCoin("waves");
         }
 
         @Override

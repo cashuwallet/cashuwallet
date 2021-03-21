@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Coin coin = multiwallet.getCoin();
 
-        int theme_res = MainApplication.app().findTheme(multiwallet.coin);
+        int theme_res = MainApplication.app().findTheme(coin.getCode());
         setTheme(theme_res);
 
         setContentView(R.layout.activity_detail);
@@ -131,7 +131,7 @@ public class DetailActivity extends AppCompatActivity {
         });
         viewPager.setCurrentItem(2);
 
-        int res = MainApplication.app().findDrawable(multiwallet.coin);
+        int res = MainApplication.app().findDrawable(coin.getCode());
         ImageView imageView = findViewById(R.id.icon);
         imageView.setImageResource(res);
         Bitmap bitmap = getBitmap(res);

@@ -14,8 +14,8 @@ import java.math.BigInteger;
 @Entity(
     tableName = "multiwallet",
     indices = {
-            @Index(value = {"coin", "address"}, unique = true),
-            @Index(value = {"coin", "account"}, unique = true),
+            @Index(value = {"label", "address"}, unique = true),
+            @Index(value = {"label", "account"}, unique = true),
     }
 )
 public class Multiwallet {
@@ -23,8 +23,8 @@ public class Multiwallet {
     @PrimaryKey(autoGenerate = true)
     protected int id;
 
-    @ColumnInfo(name = "coin") @NonNull
-    public final String coin;
+    @ColumnInfo(name = "label") @NonNull
+    public final String label;
 
     @ColumnInfo(name = "address") @NonNull
     public final String address;
@@ -41,8 +41,8 @@ public class Multiwallet {
     @ColumnInfo(name = "txn_count") @NonNull
     public int txnCount = 0;
 
-    public Multiwallet(String coin, String address, int account) {
-        this.coin = coin;
+    public Multiwallet(String label, String address, int account) {
+        this.label = label;
         this.address = address;
         this.account = account;
     }
@@ -52,7 +52,7 @@ public class Multiwallet {
     }
 
     public Coin getCoin() {
-        return Coins.findCoin(coin);
+        return Coins.findCoin(label);
     }
 
     public BigInteger getBalance() {

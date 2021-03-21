@@ -125,7 +125,7 @@ public class Sync {
         return true;
     }
 
-    public Chain findChain(String coin) { return dao.findChain(coin); }
+    public Chain findChain(String label) { return dao.findChain(label); }
 
     public Chain findChain(int id) { return dao.findChain(id); }
 
@@ -144,7 +144,7 @@ public class Sync {
     }
 
     public List<Wallet> findWallets(Multiwallet multiwallet) {
-        return dao.findWallets(multiwallet.coin, multiwallet.account);
+        return dao.findWallets(multiwallet.label, multiwallet.account);
     }
 
     public Wallet findDepositWallet(Multiwallet multiwallet, boolean change) {
@@ -155,24 +155,24 @@ public class Sync {
             // get always the first address
             case ACCOUNT: change = false; index = 0; break;
             // get the first virgin address
-            case UTXO: index = dao.nextAccountIndex(multiwallet.coin, multiwallet.account, change); break;
+            case UTXO: index = dao.nextAccountIndex(multiwallet.label, multiwallet.account, change); break;
         }
-        return dao.findWallet(multiwallet.coin, multiwallet.account, change, index);
+        return dao.findWallet(multiwallet.label, multiwallet.account, change, index);
     }
 
     public List<Transaction> findTransactions(Multiwallet multiwallet, int offset, int limit) {
-        return dao.findTransactions(multiwallet.coin, multiwallet.address, offset, limit);
+        return dao.findTransactions(multiwallet.label, multiwallet.address, offset, limit);
     }
 
     public List<Transaction> findTransactions(Wallet wallet, int offset, int limit) {
-        return dao.findTransactions(wallet.coin, wallet.address, offset, limit);
+        return dao.findTransactions(wallet.label, wallet.address, offset, limit);
     }
 
     public BigInteger estimateFee(Multiwallet multiwallet, BigInteger amount) {
         Coin coin = multiwallet.getCoin();
         String label = coin.getLabel();
         // TODO should find only addresses with UTXOs
-        List<Wallet> wallets = dao.findWallets(multiwallet.coin, multiwallet.account);
+        List<Wallet> wallets = dao.findWallets(multiwallet.label, multiwallet.account);
         String[] source_addresses = new String[wallets.size()];
         for (int i = 0; i < source_addresses.length; i++) {
             Wallet wallet = wallets.get(i);
@@ -185,7 +185,7 @@ public class Sync {
         Coin coin = multiwallet.getCoin();
         String label = coin.getLabel();
         // TODO should find only addresses with UTXOs
-        List<Wallet> wallets = dao.findWallets(multiwallet.coin, multiwallet.account);
+        List<Wallet> wallets = dao.findWallets(multiwallet.label, multiwallet.account);
         String[] source_addresses = new String[wallets.size()];
         Map<String, String> paths = new HashMap<>();
         for (int i = 0; i < source_addresses.length; i++) {
@@ -264,12 +264,12 @@ public class Sync {
                     Object[] item = (Object[]) _item;
                     String address = (String) item[0];
                     BigInteger amount = (BigInteger) item[1];
-                    Wallet wallet = dao.findWallet(multiwallet.coin, address);
-                    Transaction transaction = dao.findTransaction(wallet.coin, wallet.address, txnid);
+                    Wallet wallet = dao.findWallet(multiwallet.label, address);
+                    Transaction transaction = dao.findTransaction(wallet.label, wallet.address, txnid);
                     if (transaction == null) {
-                        transaction = new Transaction(wallet.coin, wallet.address, txnid, BigInteger.ZERO, fee);
+                        transaction = new Transaction(wallet.label, wallet.address, txnid, BigInteger.ZERO, fee);
                         dao.createTransaction(transaction);
-                        transaction = dao.findTransaction(wallet.coin, wallet.address, txnid);
+                        transaction = dao.findTransaction(wallet.label, wallet.address, txnid);
                     }
                     transaction = transaction.incrementAmount(amount.negate());
                     transaction.setBlock(Long.MAX_VALUE);
@@ -278,7 +278,7 @@ public class Sync {
                     totalAmount = totalAmount.add(amount);
                 }
             }
-            Transaction transaction = new Transaction(multiwallet.coin, multiwallet.address, txnid, totalAmount.negate(), fee);
+            Transaction transaction = new Transaction(multiwallet.label, multiwallet.address, txnid, totalAmount.negate(), fee);
             transaction.setBlock(Long.MAX_VALUE);
             transaction.setTime(time);
             dao.createTransaction(transaction);
@@ -301,8 +301,7 @@ public class Sync {
             @Override
             public BigInteger get_fee(String label, boolean testnet) {
                 if (testnet != Sync.this.testnet) throw new IllegalStateException();
-                Coin coin = findCoin(label);
-                Chain chain = dao.findChain(coin.getCode());
+                Chain chain = dao.findChain(label);
                 return chain.getFee();
             }
 
@@ -310,7 +309,7 @@ public class Sync {
             public BigInteger get_balance(String address, String label, boolean testnet) {
                 if (testnet != Sync.this.testnet) throw new IllegalStateException();
                 Coin coin = findCoin(label);
-                Wallet wallet = dao.findWallet(coin.getCode(), address);
+                Wallet wallet = dao.findWallet(label, address);
                 if (wallet != null) return wallet.getBalance();
                 Service service = coin.getService(testnet);
                 BigInteger balance = service.getBalance(address);
@@ -321,8 +320,7 @@ public class Sync {
             @Override
             public dict[] get_utxos(String address, String label, boolean testnet) {
                 if (testnet != Sync.this.testnet) throw new IllegalStateException();
-                Coin coin = findCoin(label);
-                List<Unspent> unspents = dao.findUnspents(coin.getCode(), address);
+                List<Unspent> unspents = dao.findUnspents(label, address);
                 dict[] utxos = new dict[unspents.size()];
                 for (int i = 0; i < utxos.length; i++) {
                     Unspent unspent = unspents.get(i);
@@ -340,7 +338,7 @@ public class Sync {
             public BigInteger get_txn_count(String address, String label, boolean testnet) {
                 if (testnet != Sync.this.testnet) throw new IllegalStateException();
                 Coin coin = findCoin(label);
-                Wallet wallet = dao.findWallet(coin.getCode(), address);
+                Wallet wallet = dao.findWallet(label, address);
                 if (wallet != null) return BigInteger.valueOf(wallet.sequence);
                 Service service = coin.getService(testnet);
                 long sequence = service.getSequence(address);
@@ -394,7 +392,7 @@ public class Sync {
     private void bootstrapChains() {
         for (Iterator<Coin> i = Coins.list(); i.hasNext(); ) {
             Coin coin = i.next();
-            dao.createChain(new Chain(coin.getCode()));
+            dao.createChain(new Chain(coin.getLabel()));
         }
     }
 
@@ -403,7 +401,7 @@ public class Sync {
         Map<String, String> cache = new HashMap<>();
         List<Chain> chains = dao.findChains();
         for (Chain chain : chains) {
-            Multiwallet multiwallet = dao.findMultiwallet(chain.coin, account);
+            Multiwallet multiwallet = dao.findMultiwallet(chain.label, account);
             if (multiwallet == null) {
                 Coin coin = chain.getCoin();
                 String label = coin.getLabel();
@@ -424,7 +422,7 @@ public class Sync {
                     xpublickey = hdwallet.xpublickey_from_xprivatekey(xprivatekey, label, testnet);
                     cache.put(key, xpublickey);
                 }
-                multiwallet = new Multiwallet(chain.coin, xpublickey, account);
+                multiwallet = new Multiwallet(chain.label, xpublickey, account);
                 dao.createMultiwallet(multiwallet);
                 triggerAddresses(multiwallet, 1, 1);
             }
@@ -435,13 +433,13 @@ public class Sync {
 
     private boolean sync(Multiwallet multiwallet) {
         boolean success = true;
-        Chain chain = dao.findChain(multiwallet.coin);
+        Chain chain = dao.findChain(multiwallet.label);
         long height = chain.getHeight();
         int txnCount = multiwallet.txnCount;
         for (;;) {
             int count = multiwallet.txnCount;
             BigInteger balance = multiwallet.getBalance();
-            int total = dao.walletCount(multiwallet.coin, multiwallet.account);
+            int total = dao.walletCount(multiwallet.label, multiwallet.account);
             success = syncBalance(multiwallet) && success;
             success = syncSequence(multiwallet) && success;
             success = syncUTXOs(multiwallet) && success;
@@ -449,7 +447,7 @@ public class Sync {
             triggerAddresses(multiwallet);
             int _count = multiwallet.txnCount;
             BigInteger _balance = multiwallet.getBalance();
-            int _total = dao.walletCount(multiwallet.coin, multiwallet.account);
+            int _total = dao.walletCount(multiwallet.label, multiwallet.account);
             if (_count == count && _balance.equals(balance) && _total == total) break;
             success = true;
         };
@@ -464,7 +462,7 @@ public class Sync {
 
     private boolean sync(Wallet wallet) {
         boolean success = true;
-        Chain chain = dao.findChain(wallet.coin);
+        Chain chain = dao.findChain(wallet.label);
         long height = chain.getHeight();
         int txnCount = wallet.txnCount;
         success = syncBalance(wallet) && success;
@@ -496,11 +494,11 @@ public class Sync {
         boolean success = true;
         Wallet depositWallet1 = findDepositWallet(multiwallet, false);
         Wallet depositWallet2 = findDepositWallet(multiwallet, true);
-        List<Wallet> wallets = dao.findWallets(multiwallet.coin, multiwallet.account);
+        List<Wallet> wallets = dao.findWallets(multiwallet.label, multiwallet.account);
         Collections.sort(wallets, (Wallet wallet1, Wallet wallet2) -> wallet1.balTime - wallet2.balTime);
         BigInteger balance = BigInteger.ZERO;
         for (Wallet wallet : wallets) {
-            if (wallet.address.equals(depositWallet1.address) || wallet.address.equals(depositWallet2.address) || dao.pendingTransactionCount(wallet.coin, wallet.address) > 0) {
+            if (wallet.address.equals(depositWallet1.address) || wallet.address.equals(depositWallet2.address) || dao.pendingTransactionCount(wallet.label, wallet.address) > 0) {
                 success = syncBalance(wallet) && success;
             }
             balance = balance.add(wallet.getBalance());
@@ -515,14 +513,14 @@ public class Sync {
         boolean success = true;
         Wallet depositWallet1 = findDepositWallet(multiwallet, false);
         Wallet depositWallet2 = findDepositWallet(multiwallet, true);
-        List<Wallet> wallets = dao.findWallets(multiwallet.coin, multiwallet.account);
+        List<Wallet> wallets = dao.findWallets(multiwallet.label, multiwallet.account);
         Collections.sort(wallets, (Wallet wallet1, Wallet wallet2) -> wallet1.txnTime - wallet2.txnTime);
         for (Wallet wallet : wallets) {
-            if (wallet.address.equals(depositWallet1.address) || wallet.address.equals(depositWallet2.address) || dao.pendingTransactionCount(wallet.coin, wallet.address) > 0) {
+            if (wallet.address.equals(depositWallet1.address) || wallet.address.equals(depositWallet2.address) || dao.pendingTransactionCount(wallet.label, wallet.address) > 0) {
                 success = syncHistory(wallet) && success;
             }
         }
-        multiwallet.txnCount = dao.transactionCount(multiwallet.coin, multiwallet.address);
+        multiwallet.txnCount = dao.transactionCount(multiwallet.label, multiwallet.address);
         dao.saveMultiwallet(multiwallet);
         return success;
     }
@@ -532,10 +530,10 @@ public class Sync {
         boolean success = true;
         Wallet depositWallet1 = findDepositWallet(multiwallet, false);
         Wallet depositWallet2 = findDepositWallet(multiwallet, true);
-        List<Wallet> wallets = dao.findWallets(multiwallet.coin, multiwallet.account);
+        List<Wallet> wallets = dao.findWallets(multiwallet.label, multiwallet.account);
         Collections.sort(wallets, (Wallet wallet1, Wallet wallet2) -> wallet1.txnTime - wallet2.txnTime);
         for (Wallet wallet : wallets) {
-            if (wallet.address.equals(depositWallet1.address) || wallet.address.equals(depositWallet2.address) || dao.pendingTransactionCount(wallet.coin, wallet.address) > 0) {
+            if (wallet.address.equals(depositWallet1.address) || wallet.address.equals(depositWallet2.address) || dao.pendingTransactionCount(wallet.label, wallet.address) > 0) {
                 success = syncUTXOs(wallet) && success;
             }
         }
@@ -547,10 +545,10 @@ public class Sync {
         boolean success = true;
         Wallet depositWallet1 = findDepositWallet(multiwallet, false);
         Wallet depositWallet2 = findDepositWallet(multiwallet, true);
-        List<Wallet> wallets = dao.findWallets(multiwallet.coin, multiwallet.account);
+        List<Wallet> wallets = dao.findWallets(multiwallet.label, multiwallet.account);
         Collections.sort(wallets, (Wallet wallet1, Wallet wallet2) -> wallet1.txnTime - wallet2.txnTime);
         for (Wallet wallet : wallets) {
-            if (wallet.address.equals(depositWallet1.address) || wallet.address.equals(depositWallet2.address) || dao.pendingTransactionCount(wallet.coin, wallet.address) > 0) {
+            if (wallet.address.equals(depositWallet1.address) || wallet.address.equals(depositWallet2.address) || dao.pendingTransactionCount(wallet.label, wallet.address) > 0) {
                 success = syncSequence(wallet) && success;
             }
         }
@@ -628,30 +626,30 @@ public class Sync {
         int time = time();
         if (wallet.txnTime + blockTime/4 > time) return true;
         if (wallet.txnLastSync + INTERVAL > time()) return false;
-        long height = dao.transactionHeight(wallet.coin, wallet.address);
+        long height = dao.transactionHeight(wallet.label, wallet.address);
         List<Service.HistoryItem> items = service.getHistory(wallet.address, height);
         time = time();
         boolean success = items != null;
 
         if (success) {
-            Multiwallet multiwallet = dao.findMultiwallet(wallet.coin, wallet.account);
+            Multiwallet multiwallet = dao.findMultiwallet(wallet.label, wallet.account);
             for (Service.HistoryItem item : items) {
                 boolean newrecord = false;
-                Transaction transaction = dao.findTransaction(wallet.coin, wallet.address, item.hash);
+                Transaction transaction = dao.findTransaction(wallet.label, wallet.address, item.hash);
                 if (transaction == null) {
-                    transaction = new Transaction(wallet.coin, wallet.address, item.hash, item.amount, item.fee);
+                    transaction = new Transaction(wallet.label, wallet.address, item.hash, item.amount, item.fee);
                     dao.createTransaction(transaction);
-                    transaction = dao.findTransaction(wallet.coin, wallet.address, item.hash);
+                    transaction = dao.findTransaction(wallet.label, wallet.address, item.hash);
                     newrecord = true;
                 }
                 transaction.setBlock(item.block);
                 transaction.setTime(item.time);
                 dao.saveTransaction(transaction);
-                transaction = dao.findTransaction(multiwallet.coin, multiwallet.address, item.hash);
+                transaction = dao.findTransaction(multiwallet.label, multiwallet.address, item.hash);
                 if (transaction == null) {
-                    transaction = new Transaction(multiwallet.coin, multiwallet.address, item.hash, BigInteger.ZERO, item.fee);
+                    transaction = new Transaction(multiwallet.label, multiwallet.address, item.hash, BigInteger.ZERO, item.fee);
                     dao.createTransaction(transaction);
-                    transaction = dao.findTransaction(multiwallet.coin, multiwallet.address, item.hash);
+                    transaction = dao.findTransaction(multiwallet.label, multiwallet.address, item.hash);
                 }
                 if (newrecord) {
                     transaction = transaction.incrementAmount(item.amount);
@@ -660,7 +658,7 @@ public class Sync {
                 transaction.setTime(item.time);
                 dao.saveTransaction(transaction);
             }
-            wallet.txnCount = dao.transactionCount(wallet.coin, wallet.address);
+            wallet.txnCount = dao.transactionCount(wallet.label, wallet.address);
             wallet.txnTime = time;
         }
         wallet.txnLastSync = time;
@@ -683,9 +681,9 @@ public class Sync {
         if (success) {
             List<Unspent> unspents = new ArrayList<>();
             for (Service.UTXO utxo : utxos) {
-                unspents.add(new Unspent(wallet.coin, wallet.address, utxo.hash, utxo.index, utxo.amount));
+                unspents.add(new Unspent(wallet.label, wallet.address, utxo.hash, utxo.index, utxo.amount));
             }
-            dao.deleteUnspents(wallet.coin, wallet.address);
+            dao.deleteUnspents(wallet.label, wallet.address);
             dao.insertUnspents(unspents);
             wallet.unsTime = time;
         }
@@ -721,7 +719,7 @@ public class Sync {
         long height = chain.getHeight();
         long limit = height - (minConf-1);
         Set<String> addresses = new HashSet<>();
-        List<Transaction> transactions =  dao.findPendingTransactions(chain.coin);
+        List<Transaction> transactions =  dao.findPendingTransactions(chain.label);
         for (Transaction transaction : transactions) {
             long block = transaction.getBlock();
             boolean confirmed = limit >= block;
@@ -732,15 +730,15 @@ public class Sync {
             addresses.add(transaction.address);
         }
         for (String address : addresses) {
-            boolean confirmed = dao.pendingTransactionCount(chain.coin, address) == 0;
-            Wallet wallet = dao.findWallet(chain.coin, address);
+            boolean confirmed = dao.pendingTransactionCount(chain.label, address) == 0;
+            Wallet wallet = dao.findWallet(chain.label, address);
             if (wallet != null) {
                 if (confirmed != wallet.confirmed) {
                     wallet.confirmed = confirmed;
                     dao.saveWallet(wallet);
                 }
             }
-            Multiwallet multiwallet = dao.findMultiwallet(chain.coin, address);
+            Multiwallet multiwallet = dao.findMultiwallet(chain.label, address);
             if (multiwallet != null) {
                 if (confirmed != multiwallet.confirmed) {
                     multiwallet.confirmed = confirmed;
@@ -775,9 +773,8 @@ public class Sync {
     }
 
     private Wallet triggerAddress(Coin coin, String xpublickeyroot, int account, boolean change, int index) {
-        String code = coin.getCode();
         String label = coin.getLabel();
-        Wallet w = dao.findWallet(code, account, change, index);
+        Wallet w = dao.findWallet(label, account, change, index);
         if (w == null) {
             String xpublickey;
             if (xlimited(label)) {
@@ -789,7 +786,7 @@ public class Sync {
             }
             String publickey = hdwallet.publickey_from_xpublickey(xpublickey, true, label, testnet);
             String address = wallet.address_from_publickey(publickey, label, testnet);
-            w = new Wallet(code, address, account, change, index);
+            w = new Wallet(label, address, account, change, index);
             dao.createWallet(w);
         }
         return w;

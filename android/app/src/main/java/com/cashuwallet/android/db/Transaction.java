@@ -14,7 +14,7 @@ import java.math.BigInteger;
 @Entity(
     tableName = "transaction",
     indices = {
-        @Index(value = {"coin", "address", "hash"}, unique = true),
+        @Index(value = {"label", "address", "hash"}, unique = true),
     }
 )
 public class Transaction {
@@ -24,8 +24,8 @@ public class Transaction {
     @PrimaryKey(autoGenerate = true)
     protected int id;
 
-    @ColumnInfo(name = "coin") @NonNull
-    public final String coin;
+    @ColumnInfo(name = "label") @NonNull
+    public final String label;
 
     @ColumnInfo(name = "address") @NonNull
     public final String address;
@@ -48,8 +48,8 @@ public class Transaction {
     @ColumnInfo(name = "confirmed") @NonNull
     public boolean confirmed = false;
 
-    public Transaction(String coin, String address, String hash, BigInteger amount, BigInteger fee) {
-        this.coin = coin;
+    public Transaction(String label, String address, String hash, BigInteger amount, BigInteger fee) {
+        this.label = label;
         this.address = address;
         this.hash = hash;
         this.amount = amount;
@@ -61,7 +61,7 @@ public class Transaction {
     }
 
     public Coin getCoin() {
-        return Coins.findCoin(coin);
+        return Coins.findCoin(label);
     }
 
     public BigInteger getAmount() {
@@ -109,7 +109,7 @@ public class Transaction {
     }
 
     public Transaction incrementAmount(BigInteger amount) {
-        Transaction transaction = new Transaction(coin, address, hash, this.amount.add(amount), fee);
+        Transaction transaction = new Transaction(label, address, hash, this.amount.add(amount), fee);
         transaction.id = id;
         transaction.block = block;
         transaction.time = time;

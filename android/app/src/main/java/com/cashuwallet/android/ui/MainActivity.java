@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity
         private void updateViewHolder(ViewHolder vh, Multiwallet multiwallet) {
             Coin coin = multiwallet.getCoin();
 
-            int res = MainApplication.app().findDrawable(multiwallet.coin);
+            int res = MainApplication.app().findDrawable(coin.getCode());
 
             int color = multiwallet.confirmed ? Color.TRANSPARENT : Color.parseColor("#f7b500");
 
