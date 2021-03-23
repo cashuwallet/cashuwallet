@@ -40,6 +40,7 @@ public final class Coins {
     private static final Coin erc20_chainlink = new ERC20_Chainlink();
     private static final Coin erc20_dai = new ERC20_Dai();
     private static final Coin erc20_eos = new ERC20_EOS();
+    private static final Coin erc20_fantom = new ERC20_Fantom();
     private static final Coin erc20_geminidollar = new ERC20_GeminiDollar();
     private static final Coin erc20_golem = new ERC20_Golem();
     private static final Coin erc20_maker = new ERC20_Maker();
@@ -66,6 +67,7 @@ public final class Coins {
     private static final Coin bep20_tether = new BEP20_Tether();
     private static final Coin bep20_usdcoin = new BEP20_USDCoin();
     private static final Coin bep20_zcash = new BEP20_Zcash();
+    private static final Coin bep20_zilliqa = new BEP20_Zilliqa();
 
     private static final Map<String, Coin> registry = new HashMap<>();
 
@@ -102,6 +104,7 @@ public final class Coins {
         registry.put(erc20_chainlink.getLabel(), erc20_chainlink);
         registry.put(erc20_dai.getLabel(), erc20_dai);
         registry.put(erc20_eos.getLabel(), erc20_eos);
+        registry.put(erc20_fantom.getLabel(), erc20_fantom);
         registry.put(erc20_geminidollar.getLabel(), erc20_geminidollar);
         registry.put(erc20_golem.getLabel(), erc20_golem);
         registry.put(erc20_maker.getLabel(), erc20_maker);
@@ -128,6 +131,7 @@ public final class Coins {
         registry.put(bep20_tether.getLabel(), bep20_tether);
         registry.put(bep20_usdcoin.getLabel(), bep20_usdcoin);
         registry.put(bep20_zcash.getLabel(), bep20_zcash);
+        registry.put(bep20_zilliqa.getLabel(), bep20_zilliqa);
     }
 
     public static Coin findCoin(String label) {
@@ -1566,6 +1570,28 @@ public final class Coins {
         }
     }
 
+    private static class ERC20_Fantom extends ERC20Token {
+        @Override
+        public String getName() {
+            return "Fantom";
+        }
+
+        @Override
+        public String getLabel() {
+            return "erc20-fantom";
+        }
+
+        @Override
+        public String getCode() {
+            return "FTM";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
     private static class ERC20_GeminiDollar extends ERC20Token {
         @Override
         public String getName() {
@@ -2151,6 +2177,28 @@ public final class Coins {
         @Override
         public String getCode() {
             return "ZEC";
+        }
+
+        @Override
+        public String getSymbol() {
+            return null;
+        }
+    }
+
+    private static class BEP20_Zilliqa extends BEP20Token {
+        @Override
+        public String getName() {
+            return "Zilliqa";
+        }
+
+        @Override
+        public String getLabel() {
+            return "bep20-zilliqa";
+        }
+
+        @Override
+        public String getCode() {
+            return "ZIL";
         }
 
         @Override
