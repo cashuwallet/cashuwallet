@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdk 34
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -9,9 +9,9 @@ android {
     defaultConfig {
         applicationId "com.cashuwallet.android"
         minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 24
-        versionName "1.0.23-beta"
+        targetSdkVersion 34
+        versionCode 25
+        versionName "1.0.24-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,16 +24,16 @@ android {
     lint {
         abortOnError false
     }
-    applicationVariants.all { variant ->
+    applicationVariants.configureEach { variant ->
         variant.resValue "string", "app_version", variant.versionName
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

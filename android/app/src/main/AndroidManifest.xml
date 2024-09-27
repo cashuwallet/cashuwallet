@@ -39,6 +39,7 @@
 
         <activity
             android:name=".ui.SplashActivity"
+            android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_splash"
             android:parentActivityName=".ui.MainActivity"
