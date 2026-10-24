@@ -9,10 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SochainAPI implements Service {
 
@@ -36,16 +35,27 @@ public class SochainAPI implements Service {
         } catch (InterruptedException e) {
             throw new IOException(e.getMessage());
         }
-        return Network.urlFetch(url, content);
+        return content == null ? Network.urlFetch(url) : Network.urlFetch(url, content);
+    }
+
+    // SoChain API v3: baseUrl is "https://sochain.com/api/v3/*/<NETWORK>",
+    // where "*" is replaced by the endpoint. Amounts are decimal strings.
+
+    private static BigInteger toUnits(String value) {
+        return new BigDecimal(value).movePointRight(8).toBigIntegerExact();
+    }
+
+    private String endpoint(String name) {
+        return baseUrl.replace("*", name);
     }
 
     @Override
     public long getHeight() {
         try {
-            String url = baseUrl.replace("*", "get_info");
+            String url = endpoint("network_info");
             JSONObject data = new JSONObject(urlFetch(url));
             data = data.getJSONObject("data");
-            long height = data.getLong("blocks");
+            long height = data.getLong("block_count");
             return height;
         } catch (Exception e) {
             return -1;
@@ -55,15 +65,13 @@ public class SochainAPI implements Service {
     @Override
     public BigInteger getFeeEstimate() {
         try {
-            String url1 = baseUrl.replace("*", "get_info");
-            JSONObject data1 = new JSONObject(urlFetch(url1));
-            data1 = data1.getJSONObject("data");
-            long height = data1.getLong("blocks");
-            String url2 = baseUrl.replace("*", "block") + "/" + height;
-            JSONObject data2 = new JSONObject(urlFetch(url2));
-            data2 = data2.getJSONObject("data");
-            BigInteger fees = new BigDecimal(data2.getString("fee")).multiply(BigDecimal.TEN.pow(8)).toBigInteger();
-            BigInteger size = BigInteger.valueOf(data2.getLong("size"));
+            long height = getHeight();
+            if (height == -1) return null;
+            String url = endpoint("block") + "/" + height;
+            JSONObject data = new JSONObject(urlFetch(url));
+            data = data.getJSONObject("data");
+            BigInteger fees = toUnits(data.getString("fees"));
+            BigInteger size = BigInteger.valueOf(data.getLong("size"));
             BigInteger fee = fees.multiply(BigInteger.valueOf(1024)).divide(size);
             return fee.max(BigInteger.valueOf(1024));
         } catch (Exception e) {
@@ -74,14 +82,12 @@ public class SochainAPI implements Service {
     @Override
     public BigInteger getBalance(String address) {
         try {
-            String url = baseUrl.replace("*", "get_address_balance") + "/" + address;
+            String url = endpoint("balance") + "/" + address;
             JSONObject data = new JSONObject(urlFetch(url));
             data = data.getJSONObject("data");
-            BigDecimal confirmed = new BigDecimal(data.getString("confirmed_balance"));
-            BigDecimal unconfirmed = new BigDecimal(data.getString("unconfirmed_balance"));
-            BigDecimal balance = confirmed.add(unconfirmed);
-            balance = balance.multiply(BigDecimal.TEN.pow(8));
-            return balance.toBigIntegerExact();
+            BigInteger confirmed = toUnits(data.getString("confirmed"));
+            BigInteger unconfirmed = toUnits(data.getString("unconfirmed"));
+            return confirmed.add(unconfirmed);
         } catch (Exception e) {
             return null;
         }
@@ -90,72 +96,26 @@ public class SochainAPI implements Service {
     @Override
     public List<HistoryItem> getHistory(String address, long height) {
         try {
-            String url1 = baseUrl.replace("*", "block") + "/" + height;
-            JSONObject data1 = new JSONObject(urlFetch(url1));
-            data1 = data1.getJSONObject("data");
-            JSONArray items1 = data1.getJSONArray("txs");
-            String after = items1.getJSONObject(0).getString("txid");
-            class Data {
-                long confirmations;
-                int time;
-                BigInteger amount = BigInteger.ZERO;
-            };
-            Map<String, Data> map = new HashMap<>();
-            String url2 = baseUrl.replace("*", "get_tx_received") + "/" + address + "/" + after;
-            JSONObject data2 = new JSONObject(urlFetch(url2));
-            data2 = data2.getJSONObject("data");
-            JSONArray items2 = data2.getJSONArray("txs");
-            for (int i = 0; i < items2.length(); i++) {
-                JSONObject item = items2.getJSONObject(i);
-                String hash = item.getString("txid");
-                long confirmations = item.optLong("confirmations", 0);
-                int time = item.optInt("time", 0);
-                BigInteger value = new BigDecimal(item.optString("value", "0")).multiply(BigDecimal.TEN.pow(8)).toBigInteger();
-                Data data = map.get(hash);
-                if (data == null) data = new Data();
-                data.confirmations = confirmations;
-                data.time = time;
-                data.amount = data.amount.add(value);
-                map.put(hash, data);
-            }
-            String url3 = baseUrl.replace("*", "get_tx_spent") + "/" + address + "/" + after;
-            JSONObject data3 = new JSONObject(urlFetch(url3));
-            data3 = data3.getJSONObject("data");
-            JSONArray items3 = data3.getJSONArray("txs");
-            for (int i = 0; i < items3.length(); i++) {
-                JSONObject item = items3.getJSONObject(i);
-                String hash = item.getString("txid");
-                long confirmations = item.optLong("confirmations", 0);
-                int time = item.optInt("time", 0);
-                BigInteger value = new BigDecimal(item.optString("value", "0")).multiply(BigDecimal.TEN.pow(8)).toBigInteger();
-                Data data = map.get(hash);
-                if (data == null) data = new Data();
-                data.confirmations = confirmations;
-                data.time = time;
-                data.amount = data.amount.subtract(value);
-                map.put(hash, data);
-            }
-            String url4 = baseUrl.replace("*", "get_info");
-            JSONObject data4 = new JSONObject(urlFetch(url4));
-            data4 = data4.getJSONObject("data");
-            long blocks = data4.getLong("blocks");
             List<HistoryItem> list = new ArrayList<>();
-            for (Map.Entry<String, Data> entry : map.entrySet()) {
-                String hash = entry.getKey();
-                Data data = entry.getValue();
-                long block = data.confirmations > 0 ? (blocks - (data.confirmations-1)) : Long.MAX_VALUE;
-                int time = data.time;
-                BigInteger fee = BigInteger.ZERO; // TODO information missing
-                BigInteger amount = data.amount;
-                HistoryItem o = new HistoryItem();
-                o.hash = hash;
-                o.time = time;
-                o.block = block;
-                o.amount = amount;
-                o.fee = fee;
-                list.add(o);
+            String url = endpoint("transactions") + "/" + address + "?from_height=" + height + "&page_size=100";
+            for (int page = 0; page < 100; page++) {
+                JSONObject data = new JSONObject(urlFetch(url));
+                data = data.getJSONObject("data");
+                JSONArray items = data.getJSONArray("transactions");
+                for (int i = 0; i < items.length(); i++) {
+                    JSONObject item = items.getJSONObject(i);
+                    HistoryItem o = new HistoryItem();
+                    o.hash = item.getString("hash");
+                    o.time = item.optInt("time", 0);
+                    o.block = item.isNull("block") ? Long.MAX_VALUE : item.getLong("block");
+                    o.amount = toUnits(item.getString("balance_change"));
+                    o.fee = BigInteger.ZERO; // TODO information missing
+                    list.add(o);
+                }
+                if (data.isNull("next_cursor")) return list;
+                url = endpoint("transactions") + "/" + address + "?cursor=" + URLEncoder.encode(data.getString("next_cursor"), "UTF-8");
             }
-            return list;
+            return null; // too many to page through here; leave it to the other services
         } catch (Exception e) {
             return null;
         }
@@ -164,22 +124,21 @@ public class SochainAPI implements Service {
     @Override
     public List<UTXO> getUTXOs(String address) {
         try {
-            String url = baseUrl.replace("*", "get_tx_unspent") + "/" + address;
-            JSONObject data = new JSONObject(urlFetch(url));
-            JSONArray items = data.getJSONObject("data").getJSONArray("txs");
             List<UTXO> list = new ArrayList<>();
-            for (int i = 0; i < items.length(); i++) {
-                JSONObject item = items.getJSONObject(i);
-                String hash = item.getString("txid");
-                int index = (int)item.getLong("output_no");
-                BigInteger amount = new BigDecimal(item.getString("value")).multiply(BigDecimal.TEN.pow(8)).toBigInteger();
-                UTXO o = new UTXO();
-                o.hash = hash;
-                o.index = index;
-                o.amount = amount;
-                list.add(o);
+            for (int page = 1; ; page++) {
+                String url = endpoint("unspent_outputs") + "/" + address + "/" + page;
+                JSONObject data = new JSONObject(urlFetch(url));
+                JSONArray items = data.getJSONObject("data").getJSONArray("outputs");
+                for (int i = 0; i < items.length(); i++) {
+                    JSONObject item = items.getJSONObject(i);
+                    UTXO o = new UTXO();
+                    o.hash = item.getString("hash");
+                    o.index = item.getInt("index");
+                    o.amount = toUnits(item.getString("value"));
+                    list.add(o);
+                }
+                if (items.length() < 10) return list; // ten per page
             }
-            return list;
         } catch (Exception e) {
             return null;
         }
@@ -192,15 +151,7 @@ public class SochainAPI implements Service {
 
     @Override
     public String broadcast(String transaction) {
-        try {
-            String url = baseUrl.replace("*", "send_tx");
-            String content = "{\"tx_hex\":\"" + transaction + "\"}";
-            JSONObject data = new JSONObject(urlFetch(url, content));
-            data = data.getJSONObject("data");
-            return data.getString("txid");
-        } catch (Exception e) {
-            return null;
-        }
+        return null; // SoChain's API has no broadcast; the other services send it
     }
 
     @Override

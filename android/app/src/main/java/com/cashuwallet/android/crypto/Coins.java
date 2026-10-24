@@ -269,7 +269,6 @@ public final class Coins {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://tbtc.blockdozer.com/insight-api/", getMinConf(), "bitcoin", true),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/btc/test3", getMinConf()),
-                    new SochainAPI("https://chain.so/api/v2/*/BTCTEST"),
                     new BlockBookAPI("https://btcbook-testnet.guarda.co/api/", getMinConf(), "bitcoin", true),
                     new BlockBookAPI("https://tbtc2.trezor.io/api/", getMinConf(), "bitcoin", true),
                     new BlockBookAPI("https://tbtc1.trezor.io/api/", getMinConf(), "bitcoin", true),
@@ -281,7 +280,7 @@ public final class Coins {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://btc.blockdozer.com/insight-api/", getMinConf(), "bitcoin", false),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/btc/main", getMinConf()),
-                    new SochainAPI("https://chain.so/api/v2/*/BTC"),
+                    new SochainAPI("https://sochain.com/api/v3/*/BTC"),
                     new BlockBookAPI("https://btc.nownodes.io/api/", getMinConf(), "bitcoin", false),
                     new BlockBookAPI("https://btcbook.guarda.co/api/", getMinConf(), "bitcoin", false),
                     new BlockBookAPI("https://btc5.trezor.io/api/", getMinConf(), "bitcoin", false),
@@ -528,13 +527,11 @@ public final class Coins {
             if (testnet) {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://testnet-insight.dashevo.org/insight-api-dash/", getMinConf(), "dash", true),
-                    new SochainAPI("https://chain.so/api/v2/*/DASHTEST"),
                 });
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://insight.dash.org/insight-api-dash/", getMinConf(), "dash", false),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/dash/main", getMinConf()),
-                    new SochainAPI("https://chain.so/api/v2/*/DASH"),
                     new BlockBookAPI("https://dash.nownodes.io/api/", getMinConf(), "dash", false),
                     new BlockBookAPI("https://dashbook.guarda.co/api/", getMinConf(), "dash", false),
                     new BlockBookAPI("https://dash5.trezor.io/api/", getMinConf(), "dash", false),
@@ -675,13 +672,13 @@ public final class Coins {
         @Override
         public Service getService(boolean testnet) {
             if (testnet) {
-                return new SochainAPI("https://chain.so/api/v2/*/DOGETEST");
+                return new SochainAPI("https://sochain.com/api/v3/*/DOGETEST");
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://dogeblocks.com/api/", 0/*getMinConf()*/, "dogecoin", false),
                     new DogechainAPI("https://dogechain.info/api/v1/"),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/doge/main", getMinConf()),
-                    new SochainAPI("https://chain.so/api/v2/*/DOGE"),
+                    new SochainAPI("https://sochain.com/api/v3/*/DOGE"),
                     new BlockBookAPI("https://doge.nownodes.io/api/", getMinConf(), "dogecoin", false),
                     new BlockBookAPI("https://dogebook.guarda.co/api/", getMinConf(), "dogecoin", false),
                     new BlockBookAPI("https://doge5.trezor.io/api/", getMinConf(), "dogecoin", false),
@@ -696,9 +693,9 @@ public final class Coins {
         @Override
         public String getTransactionUrl(String hash, boolean testnet) {
             if (testnet) {
-                return "https://chain.so/tx/DOGETEST/" + hash;
+                return "https://sochain.com/dogetest/tx/" + hash;
             } else {
-                return "https://chain.so/tx/DOGE/" + hash;
+                return "https://sochain.com/doge/tx/" + hash;
             }
         }
     }
@@ -940,14 +937,14 @@ public final class Coins {
             if (testnet) {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://testnet.litecore.io/api/", getMinConf(), "litecoin", true),
-                    new SochainAPI("https://chain.so/api/v2/*/LTCTEST"),
+                    new SochainAPI("https://sochain.com/api/v3/*/LTCTEST"),
                 });
             } else {
                 return new Service.Multi(new Service[]{
                     new InsightAPI("https://insight.litecore.io/api/", getMinConf(), "litecoin", false),
                     new InsightAPI("https://litecoinblockexplorer.net/api/", getMinConf(), "litecoin", false),
                     new BlockcypherAPI("https://api.blockcypher.com/v1/ltc/main", getMinConf()),
-                    new SochainAPI("https://chain.so/api/v2/*/LTC"),
+                    new SochainAPI("https://sochain.com/api/v3/*/LTC"),
                     new BlockBookAPI("https://ltc.nownodes.io/api/", getMinConf(), "litecoin", false),
                     new BlockBookAPI("https://ltcbook.guarda.co/api/", getMinConf(), "litecoin", false),
                     new BlockBookAPI("https://ltc5.trezor.io/api/", getMinConf(), "litecoin", false),
