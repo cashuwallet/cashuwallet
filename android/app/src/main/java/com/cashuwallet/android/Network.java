@@ -190,6 +190,10 @@ public class Network {
             } catch (JSONException e) { }
             headers.put("api-key", NOWNODES_APIKEY);
         }
+        else
+        if (url.contains("sochain.com")) {
+            if (!SOCHAIN_APIKEY.isEmpty()) headers.put("API-KEY", SOCHAIN_APIKEY);
+        }
         return new String[]{ url, content };
     }
 
@@ -197,5 +201,7 @@ public class Network {
     private static final String BSCSCAN_APIKEY = "ZV6XYXGK37PDUPCSIED4K7A63NVWEEJNRF";
     private static final String BLOCKCYPHER_APIKEY = "1acd2d05de634ab7bdce60ee9ba47b99";
     private static final String NOWNODES_APIKEY = "ZwmbBjvevr4JeRgeATb7Y3Ad";
+    // Optional: SoChain works without a key, up to its keyless daily limit. Keys: https://sochain.com/dashboard
+    private static final String SOCHAIN_APIKEY = "";
 
 }
